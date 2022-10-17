@@ -1,0 +1,75 @@
+<md-dialog aria-label="Mango (Fruit)" flex="30" flex-sm="100" class="heigth:200px; width:200px">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Загрузите фотографию</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+    <div ng-controller="ImageUploadController">
+
+        <div ng-show="imageCropStep == 1">
+            <br />
+            <input type="file" name="fileInput" id="fileInput" onchange="angular.element(this).scope().fileChanged(event)" />
+        </div>
+
+        <div ng-show="imageCropStep == 2">
+            <!-- <image-crop
+                     data-height="200" //shape's height
+                     data-width="150" //shape's width
+                     data-shape="square" //the shape.. square or circle
+                     data-step="imageCropStep"//scope variable that will contain the current step of the crop (1. Waiting for source image; 2. Image loaded, waiting for crop; 3. Crop done)
+                     src="imgSrc" //scope variable that will be the source image for the crop (may be a Blob or base64 string)
+                     data-result-blob="result" //scope variable that will contain the Blob information
+                     data-result="resultDataUrl" //scope variable that will contain the image's base64 string representation
+                     crop="initCrop" //scope variable that must be set to true when the image is ready to be cropped
+                     padding="250" //space, in pixels, rounding the shape
+                     max-size="1024" //max of the image, in pixels></image-crop> -->
+
+            <image-crop data-height="200"
+                        data-width="150"
+                        data-shape="square"
+                        data-step="imageCropStep"
+                        src="imgSrc"
+                        data-result="result"
+                        data-result-blob="resultBlob"
+                        crop="initCrop"
+                        padding="250"
+                        max-size="1024"></image-crop>
+        </div>
+
+        <div ng-show="imageCropStep == 2">
+            <br />
+            <button ng-click="clear()">Cancel</button>
+            <button ng-click="initCrop = true">Crop</button>
+        </div>
+
+        <div ng-show="imageCropStep == 3">
+
+            <h2>Result</h2>
+
+            <p>
+                The data-result-blob property is a Blob object, which is necessary in some upload libraries like <a href="https://github.com/nervgh/angular-file-upload" target="_blank">Angular File Upload</a>
+            </p>
+            <p>Image using the data uri:</p>
+            <img ng-src="{{result}}"></img>
+            <p>The Base64 String used in the image above:</p>
+            <textarea class="result-datauri">{{ result }}</textarea>
+            <button ng-click="clear()">Clear</button>
+
+        </div>
+
+    </div>
+
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="cancel()" class="md-primary">
+            Отмена
+        </md-button>
+        <md-button ng-click="hide()" class="md-primary" ng-disabled="taskForm.$invalid">
+            Принять
+        </md-button>
+    </div>
+</md-dialog>

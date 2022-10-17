@@ -1,0 +1,99 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Статистика гранта">
+
+
+         <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                   <md-card-content>
+
+                    <div layout="row" layout-sm="column" layout-margin>
+                            <widget palette-background="deep-orange:500" content-layout="row" content-layout-align="space-between center" content-padding>
+                                <div>
+                                    <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-bank"></md-icon>
+                                </div>
+                                <div layout="column" layout-align="center end">
+                                    <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis" decimals="0">{{grantStat.Quota}}</p>
+                                    <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0">Квота</p>
+                                </div>
+                            </widget>
+                            <widget palette-background="cyan:500" content-layout="row" content-layout-align="space-between center" content-padding>
+                                <div>
+                                    <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-tasks"></md-icon>
+                                </div>
+                                <div layout="column" layout-align="center end">
+                                    <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis"decimals="0">{{grantStat.UniversutyQuota}}</p>
+                                    <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0">Распределено</p>
+                                </div>
+                            </widget>
+                            <widget palette-background="indigo:500" content-layout="row" content-layout-align="space-between center" content-padding>
+                                <div>
+                                    <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-users"></md-icon>
+                                </div>
+                                <div layout="column" layout-align="center end">
+                                    <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0"  decimals="0">{{grantStat.StudentCount}}</p>
+                                    <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0">Участников</p>
+                                </div>
+                            </widget>
+                            <widget palette-background="teal:500" content-layout="row" content-layout-align="space-between center" content-padding>
+                                <div>
+                                    <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-star"></md-icon>
+                                </div>
+                                <div layout="column" layout-align="center end">
+                                    <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0" decimals="0">{{grantStat.WinnersCount}}</p>
+                                    <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0">Победителей</p>
+                                </div>
+                            </widget>
+                        </div>
+
+                        <div class="grantchart" layout="row" layout-sm="column" layout-margin>
+                         <widget chartjs-line-widget flex title="Регистрация участников" content-padding>
+                            <div flex>
+                                <canvas class="chart-line" data="grantChart.data" labels="grantChart.labels" legend="true" series="grantChart.series" options="grantChart.options"></canvas>
+                            </div>
+                        </widget>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </md-content>
+
+
+           <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                   <md-card-content>
+
+                        <p> Квота: {{grantStat.Quota}} </p>
+                        <p> Распределено: {{grantStat.UniversutyQuota}} </p>
+                        <p> Участников: {{grantStat.StudentCount}}, из них иностранных студентов: {{grantStat.NotRfStudentCount}} </p>
+                        <p> Победителей: {{grantStat.WinnersCount}}, из них иностранных студентов: {{grantStat.NotRfWinnerCount}} </p>
+                        <p> Дополнительных победителей: {{grantStat.AdditionalWinnersCount}}, из них иностранных студентов: {{grantStat.NotRfAddWinnerCount}} </p>
+                 
+                     </md-card-content>
+                </md-card>
+            </md-content>
+
+             <md-content style="padding-left:40px; padding-right:40px; " ng-disabled="inProgress" ng-show="roleInfo">
+                  <md-card>
+                     <md-card-content>
+
+                     <p> Всего зарегистрированных: {{userStat.allCount}} </p>
+                     <p> Не заполнены паспортные данные: {{userStat.passportNotFilledCount}} </p>
+                     <p> Не заполнена зачетная книжка: {{userStat.studentBookNotFilled}} </p>
+                     <p> Паспортные данные верны: {{userStat.validPassportCount}} </p>
+                     <p> Данные зачетной книжки верны: {{userStat.validStudentBookCount}} </p>
+                     <p> Паспортные данные и зачетка верны: {{userStat.fullValidCount}} </p>
+                     <p> Замечания к паспортным данным: {{userStat.invalidPassportCount}} </p>
+                     <p> Замечания к зачетке: {{userStat.invalidStudentBookCount}} </p>
+                     <p> Данные паспорта не проверены: {{userStat.editedPassportCount}} </p>
+                     <p> Данные зачетки не проверены: {{userStat.editedStudentBookCount}} </p>
+                     <p> Данные паспорта исправлены и не проверены: {{userStat.editedPassportCountWaitCheck}} </p>
+                     <p> Данные зачетки исправлены и не проверены: {{userStat.editedStudentBookCountWaitCheck}} </p>
+                     <p> Есть замечания к зачетке или паспортным данным:  {{userStat.invalidPassporOrBookCount}} </p>
+                     <p> Нет замечаний, не проверены паспортные данные или зачетка: {{userStat.notCheckedPassportCount}} </p>
+                        
+                       </md-card-content>
+                  </md-card>
+              </md-content>
+        </md-tab>
+    </md-tabs>
+</div>

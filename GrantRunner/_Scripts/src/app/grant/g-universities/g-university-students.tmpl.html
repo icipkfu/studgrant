@@ -1,0 +1,61 @@
+<div class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+     <md-tab label="Карточка ВУЗа">
+            <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                    <md-card-content ng-show="roleInfo">
+
+                        <md-toolbar class="toolbar-default margin-bottom-30">
+                      
+                          <div layout="row" layout-align="end">
+                              <div style=" width: 110px;">
+                                    <md-button class="md-raised button-red" style="margin-top: 13px;" aria-label="raised button"  ng-show="isAdmin" ng-click="askdeleteUniversity()">Удалить</md-button>
+                              </div>
+                              <div style=" width: 160px;" ng-show="isAdmin" >
+                                    <md-button class="md-raised" style="margin-top: 13px;" aria-label="raised button"  ng-click="goeditUniversity()">Редактировать</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                     <div layout="row" layout-sm="column" layout-align="start center">
+
+                        <div flex="auto" style="margin-left:25px">
+                           <h2 class="md-title"><b>ВУЗ: {{university.Name}}</b></h2>
+                            <div  ng-bind-html="grant.statusAndDate"> </div>
+                           
+                             <div  style="margin-top:25px" ng-show="university.Curator.Name">
+                             <p> Куратор: <p> 
+                                  <div layout="row" layout-sm="column" layout-align="start center">
+                                      <img ng-show="university.Curator.thumb" ng-src="{{::university.Curator.thumb}}" class="avatar-size100"/>
+                                      <p>{{::university.Curator.Name}}  {{::university.Curator.LastName}}  {{::university.Curator.Patronymic}}</p>
+                                  </div>
+                             </div>
+                         </div>
+
+                             <div layout="row"  flex="auto" layout-align="end center">
+                              <img ng-src="{{university.thumb}}" style="max-height: 100%" class="grantImage" alt="Card Image"> 
+                            </div>
+
+                        </div>
+
+                    </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+        <md-tab label="Студенты">
+           <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                 <md-card-content>
+
+                      <md-toolbar class="toolbar-default margin-bottom-30">
+                       </md-toolbar>
+
+                     <md-table class="elements-image-table-example" columns="peopleColumns" contents="students"  page-size="10000"></md-table>
+
+                      <div ng-repeat="item in students" on-finish-render="ngRepeatFinished" > </div>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+       </md-tab>
+     </md-tabs>
+</div>

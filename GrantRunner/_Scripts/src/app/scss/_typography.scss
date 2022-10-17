@@ -1,0 +1,540 @@
+// Typography
+
+
+// set template font family
+button, select, html, textarea, input {
+  font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.5;
+}
+body {
+  font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+h1 {
+  font-size: 3.400rem;
+  font-weight: 400;
+  line-height: 4rem;
+}
+h2 {
+  font-size: 2.400rem;
+  font-weight: 400;
+  line-height: 3.2rem;
+}
+h3 {
+  font-size: 2.000rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+h4 {
+  font-size: 1.600rem;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 2.4rem;
+}
+p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  margin: 1.6rem 0;
+}
+strong {
+  font-weight: 500;
+}
+blockquote {
+  border-left: 3px solid rgba(0, 0, 0, 0.12);
+  font-style: italic;
+  margin-left: 0;
+  padding-left: 16px;
+}
+
+code:not(.hljs) {
+  color: #4285f4;
+  -webkit-font-smoothing: auto;
+  font-weight: bold;
+}
+
+code.hljs.html, code.hljs.javascript {
+  padding: 16px;
+  font-size: 1.400rem;
+}
+
+// - Font Weight Classes
+$i : 100;
+@while $i <= 900 {
+  .font-weight-#{$i} {
+    font-weight: $i !important;
+  }
+  $i : $i + 100;
+}
+
+// - Font Size Classes
+$i : 1;
+@while $i <= 20 {
+  .font-size-#{$i} {
+    font-size: #{$i}rem !important;
+    min-width: 1em;
+    line-height: 1;
+  }
+  $i : $i + 1;
+}
+
+// Line height classes
+.line-height-normal {
+  line-height: 1em;
+}
+.line-height-medium {
+  line-height: 1.2em;
+}
+.line-height-big {
+  line-height: 1.5em;
+}
+.line-height-bigger {
+  line-height: 1.75em;
+}
+
+// - Font Icons
+md-icon[md-font-icon] {
+  height: auto;
+  font-size: 2rem;
+}
+
+// - Text Ellipsis
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+// - Text align classes
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+
+// - Font styles
+.font-style-normal {
+  font-style: normal;
+}
+.font-style-italic {
+  font-style: italic;
+}
+
+// Text light
+.text-light {
+  color: rgba(255, 255, 255, 1);
+}
+.text-dark {
+  color: rgba(0, 0, 0, 1);
+}
+.text-gray {
+  color: rgba(0, 0, 0, .78);
+}
+
+md-toast.md-error-toast-theme {
+    background-color: red;
+}
+
+.button-warn{
+   background-color: red;
+}
+
+.ta-editor {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Параметры тени */
+    padding: 10px;
+   }
+
+.button-gray:hover {
+  background-color : #949494 !important
+}
+
+.button-red:hover
+{
+   background-color: rgb(255,87,34)  !important;
+}
+
+.button-blue:hover
+{
+   color: white !important;
+   background-color: rgb(0,188,212)  !important;
+}
+
+.avatar-size
+{
+  width : 40 px;
+  height: 40px;
+  margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+}
+
+.gray-background
+{
+   background: rgba(100, 100, 100, 0.1);
+}
+
+#upload-file-container input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+}
+
+.grantImage {
+
+}
+
+.crop-div {
+  overflow: hidden;
+  height: 272px;
+}
+
+.grant-step-label {
+    border: 2px solid rgb(0,188,212) !important;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 2px solid rgba(255,255,255,.4);
+}
+
+.validation{
+    color: rgb(255,87,34);
+    font-size: 12px;
+}
+
+.badge {
+   position: absolute;
+   display: none;
+}
+
+.badge img {
+    max-height:50px;
+  max-width: 50px;
+  border-radius: 50%;
+}
+
+.badgeUser img {
+  max-height:50px;
+  max-width: 50px;
+  border-radius: 50%;
+}
+
+.grant-timeline-img img {
+  object-fit: cover;
+}
+
+.fill {
+
+}
+.fill img {
+    flex-shrink:0;
+    min-width:100%;
+    min-height:100%
+}
+
+.avatar-size100 {
+    width: 100px;
+    height: 100px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+}
+
+.avatar-size40 {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}
+
+.badge-year {
+   background-color: white;
+   border-radius: 50%;
+   border-style: solid;
+   border-width: 3px;
+   border-color: #02ADFF;
+    width: 47px;
+    height: 47px;
+}
+
+.badge-year h3 {
+      font-size: 120% !important;
+}
+
+.datepicker-noclear [ng-click="select(null)"] {
+      display: none;
+}
+
+.graytext {
+  color: rgba(0,0,0,0.26) !important;
+
+
+}
+
+.md-ipnut-focused .graytext {
+
+}
+
+
+.left10px {
+  margin-left: 10px;
+}
+
+.imgtimeline img {
+  height:30%;
+  width:50%;
+}
+
+
+.redText{
+  color: rgb(255,87,34);
+}
+
+.grantlabel{
+    color: gray;
+    font-size: 12px;
+}
+
+
+.grayborder {
+  border-color: rgba(0,0,0,0.12) !important;
+}
+
+.hiddenbadge{
+  display:none !important;
+}
+
+.thumb100 {
+
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.elements-image-table-example .thumb-cell {
+    max-width: 40px !important;
+    width: 40px !important;
+}
+
+.quota-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.studentCount-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.winnerCount-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.Name-cell{
+  text-align: left !important;
+   max-width: 400px;
+}
+
+
+.UniversityName-cell {
+  text-align: left !important;
+  max-width: 400px;
+}
+
+.univerlink-cell {
+  text-align: left !important;
+  max-width: 300px;
+}
+
+.univerType-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.city-cell{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.town-cell{
+  text-align: center;
+  vertical-align: middle;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.desk
+{
+    width: 50%;
+    height: 400px;
+    margin: 5em auto;
+    border: solid 1px #000;
+    overflow: visible;
+}
+.desk img
+{
+    behavior:url(-ms-transform.htc);
+    /* Firefox */
+    -moz-transform:rotate(90deg);
+    /* Safari and Chrome */
+    -webkit-transform:rotate(90deg);
+    /* Opera */
+    -o-transform:rotate(90deg);
+    /* IE9 */
+    -ms-transform:rotate(90deg);
+    /* IE6,IE7 */
+    filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476);
+    /* IE8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)";
+
+}
+
+.elements-image-table-example .PassportStateLink-cell div {
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+}
+
+.elements-image-table-example .StudentBookStateLink-cell div {
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+}
+
+
+.nomarginleft.md-icon-float > label {
+    margin-left: 0px !important;
+}
+
+.grantchart md-menu {
+  display: none;
+}
+
+.email-dialog-editor-toolbar button{
+    margin-right: 10px !important;
+    margin-bottom: 10px !important;
+    background-color: white !important;
+    border-width: 0px !important;
+}
+
+#toolbarWC {
+  display: none !important;
+}
+
+#toolbarCC {
+  display: none !important;
+}
+
+.elements-image-table-example .thumb-cell div {
+    overflow: hidden;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 30px !important;
+    border: 0px solid rgba(0, 0, 0, 0.2) !important;
+    background-size: cover;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.rotate90{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate180{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate270{
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.rotate360{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+.rotatebtn{
+    position: absolute;
+    opacity: 0.5;
+}
+
+
+.numberCircle {
+  border-radius: 50%;
+  behavior: url(PIE.htc);
+  /* remove if you don't care about IE8 */
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+}

@@ -1,0 +1,73 @@
+<div ng-controller="GrantsController" class="padded-content-page" style="min-width: 540px;">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Карточка конкурса">
+            <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                    <md-card-content>
+
+                     <md-toolbar class="toolbar-default margin-bottom-30">
+                      
+                          <div layout="row" layout-align="end">
+                             <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Мой статус : {{::MyGrantStatus}}</span>
+                                </h2>
+                            </div>
+                              <div  ng-show="isAdmin || isGrantAdmin" style=" width: 160px;">
+                                    <md-button class="md-raised" style="margin-top: 13px;" aria-label="raised button"  ng-click="goeditGrant()">Редактировать</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                     <div layout="row" layout-sm="column" layout-align="start">
+
+                        <div class="crop-div">
+                          <img ng-src="{{grant.thumb}}" style="max-height: 100%" class="grantImage" alt="Card Image"> 
+                        </div>
+
+                        <div style="margin-left:25px">
+                         <h2 class="md-title"><b>{{grant.name}}</b></h2>
+                          <div  ng-bind-html="grant.statusAndDate"> </div>
+                         
+                         
+                          <div ng-show="IsParticipant &&  grant.status == 2"  style=" width: 215px;">
+                              <md-button class="md-raised"  style="margin-top: 13px;" aria-label="raised button"  ng-click="askDeclineGrant()">Отказаться от участия</md-button>
+                        </div>
+                        
+                      <div layout="row" layout-align="start">
+                       <div  ng-hide="IsParticipant ||  grant.status != 2" style=" width: 330px;">
+                        <md-button class="md-primary md-raised md-hue-2"  style="margin-top: 13px; margin-left: 0px" aria-label="raised button"  ng-click="participateGrant('a')">Участвовать как социально-активный</md-button>
+                       </div>
+
+                       <div  ng-hide="IsParticipant ||  grant.status != 2" style=" width: 375px;">
+                        <md-button class="md-accent md-raised md-hue-2"  style="margin-top: 13px;" aria-label="raised button"  ng-click="participateGrant('h')">Участвовать как социально-нуждающийся</md-button>
+                       </div>
+                      </div>
+
+                         </div>
+                      </div>
+                      <div style="word-wrap: break-word;">
+                         <md-icon md-font-icon="icon-description"> </md-icon>  <b>Описание</b>
+                          <div ng-bind-html="grant.description"></div>
+                           <md-icon md-font-icon="icon-check"></md-icon> <b>Условия</b> 
+                            <div ng-bind-html="grant.conditions"></div>
+                           <md-icon md-font-icon="icon-attach-file"> </md-icon> <b>Приложения</b>
+
+                            <div ng-show="grant.AttachmentsLinks" >
+                                      <md-list>
+                                          <md-list-item ng-repeat="item in grant.AttachmentsLinks">
+                                              <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                          </md-list-item>
+                                      </md-list>
+                          </div>
+
+                     
+
+                      </div> 
+                        </form>
+                </md-card>
+            </md-content>
+           
+        </md-tab>
+    </md-tabs>
+</div>

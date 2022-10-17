@@ -1,0 +1,1734 @@
+﻿<div class="padding-20 padding-top-120 overlay-gradient-30" layout="row" layout-align="start center"
+     style="background: url(../../../assets/images/backgrounds/bg-7.jpg) no-repeat; background-size: cover; ">
+    <div  ng-show="user.ImageLink" class="margin-right-20">
+        <div class="thumb100" ng-if="user.ImageLink" style="background-image: url('{{user.ImageLink}}');"></div>
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{user.Name}} {{user.LastName}} {{user.Patronymic}}</h3>
+        <h4 ng-show="myRoleStatus" class="font-weight-600 margin-bottom-0 text-light">  {{::myRoleStatus}} </h4>
+        <!-- <h4 ng-show="MyGrantStatus" class="margin-top:7px; font-weight-600 margin-bottom-0 text-light">  <div ng-bind-html="MyGrantStatus"> </div>  </h4> -->
+    </div>
+
+
+
+    </div>
+</div>
+
+<div layout="row" class="profile">
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height  md-border-bottom>
+
+        <md-tab label="Общая информация" >
+                <md-content class="md-padding">
+
+                 Добро пожаловать! <br>
+
+                 <br><br>
+
+                 1. Cайт оптимизирован для работы в Google Chrome. Если есть какие либо проблемы с сайтом, откройте, пожалуйста, его в Chrome. <br>
+
+                 2. Заполните разделы "Профиль", "Персональные данные", "Достижения"  <br>
+
+                 3. Ограничения длины полей на форме персональных данных продиктованы банком. Если информация не умещается в поле - используйте сокращения.  <br>
+
+                 4. В разделе 'Достижения' можно вносить Ваши достижения за 2018-2019 годы. К каждому прикрепляется одно фото - грамоты/диплома/документа, подтверждающего Ваше участие.  <br>
+
+                 5. При загрузке фотографий/сканов убедитесь, что они в формате .jpg или .png, для дипломов/грамот и зачетки подойдут фото, для паспорта и ИНН - ТОЛЬКО сканы  <br>
+
+                 6. Если у Вас дом без квартир (частный, к примеру) - в поле Квартира ставьте прочерк <br>
+
+                 7. Если Вы на первом курсе, то вместо зачетки приложите справку из деканата о том, что учитесь на очном отделении
+
+              </md-content>
+        </md-tab>
+
+
+            <md-tab label="Профиль" >
+                <md-content class="md-padding">
+                    <div ng-controller="UserProfileController as ctrl">
+
+                       <md-toolbar class="toolbar-default margin-bottom-30" ng-hide="usersCantEditOption && user.PassValidationComment == null">
+                          <div layout="row" layout-align="end center">
+
+                            <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-hide="(user.Name && user.LastName && user.Patronymic) || profileEdit">
+                                  Заполните информацию о себе, нажав "Редактировать"
+                            </div>
+
+                              <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-show=" (user.Name && user.LastName && user.Patronymic) && !profileEdit">
+                                  Дата последнего изменения: {{user.EditDateText}}
+                            </div>
+
+
+
+                            <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-show="profileEdit">
+                                 После заполнения полей, нажмите "Сохранить"
+                            </div>
+
+                             <div style=" width: 140px;">
+                                       <md-button style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="profileEdit = true" ng-hide="profileEdit" >{{'Редактировать' | translate}}</md-button>
+                              </div>
+
+                                <div   ng-show="profileEdit" style=" width: 100px;">
+                                       <md-button style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="profileEdit = false" >{{'Отмена' | translate}}</md-button>
+                              </div>
+
+                              <div ng-show="profileEdit"  style=" width: 120px;">
+                                       <md-button style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="askUpdateUserProfileClick()" ng-disabled="profile.$invalid || inProgress  || user.UniversityId == null">{{'Сохранить' | translate}}</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                       <md-toolbar ng-if="isprofileFilled == false" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Информация профиля не заполнена!</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                      <md-toolbar ng-if="usersCantEditOption == true" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Изменение данных приостановлено</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                             <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+
+
+                        <form name="profile">
+                            <md-input-container >
+                                 <p class="grantlabel" >Фамилия</p>
+                                <input id="name" maxlength="35" label="name" name="name" class="grayborder" type="text" required ng-readonly="!profileEdit" ng-focus="validateName=profileEdit;" ng-model="user.Name"/>
+                                <div ng-show="validateName && profileEdit " ng-messages="profile.name.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container>
+                                <p class="grantlabel" >Имя</p>
+                                <input id="lastname" maxlength="20" label="lastname" class="grayborder" name="lastname" required ng-readonly="!profileEdit" ng-focus="validateLastname=profileEdit;"  type="text" ng-model="user.LastName" />
+
+                                <div  ng-show="validateLastname && profileEdit" ng-messages="profile.lastname.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container>
+                                  <p class="grantlabel" >Отчество</p>
+                                <input id="patronymic" maxlength="30" label="patronymic" class="grayborder" name="patronymic" required ng-readonly="!profileEdit" ng-focus="validatePatronymic=profileEdit;" type="text" ng-model="user.Patronymic"/>
+                                <div ng-show="validatePatronymic && profileEdit" ng-messages="profile.patronymic.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <div ng-show="profileEdit">
+                                 <label ng-show="profileEdit" style="color:rgba(0,0,0,0.26) !important;" for="university">Университет (<b>вводить название без сокращений, выбрать из выпадающего списка!</b>)</label>
+                                <md-autocomplete ng-readonly="!profileEdit" id="university"  required name="university" class="margin-bottom-20"
+                                                 md-selected-item="ctrl.selectedItem"
+                                                 ng-disabled="ctrl.isDisabled"
+                                                 md-no-cache="ctrl.noCache"
+                                                 md-selected-item="ctrl.selectedItem"
+                                                 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                                                 md-search-text="ctrl.searchText"
+                                                 md-selected-item-change="ctrl.selectedItemChange(item)"
+                                                 md-items="item in ctrl.querySearch(ctrl.searchText)"
+                                                 md-item-text="item.display"
+                                                 md-min-length="0"
+                                                 >
+                                    <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-autocomplete>
+                                <div  class="validation" ng-hide="!validateUniver || user.UniversityId">Это поле обязательно для заполнения. Выбрать ВУЗ из выпадающего списка, название вводить без сокращений</div>
+                            </div>
+
+                            <md-input-container ng-show="!profileEdit">
+                                <p class="grantlabel">Образовательная организация</p>
+                                <input id="univer" label="univer" class="grayborder" name="univer" type="text" ng-model="user.University.Name" ng-readonly="true"/>
+                            </md-input-container>
+
+
+                            <md-input-container>
+                                 <p class="grantlabel">Факультет, группа</p>
+                                <input id="user.department" class="grayborder" label="user.department" ng-readonly="!profileEdit" name="user.department" type="text" ng-model="user.Departament"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <p class="grantlabel" >О себе</p>
+                                <textarea id="self" label="self" ng-readonly="!profileEdit" name="self" class="grayborder" ng-model="user.AboutSelf"/>
+                            </md-input-container>
+
+                             <md-input-container>
+                                <p class="grantlabel" >Адрес страницы ВКонтакте</p>
+                                <textarea id="self" label="self" ng-readonly="!profileEdit" name="self" class="grayborder" ng-model="user.SocialNetworkLinks"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                    <p class="grantlabel">Номер телефона</p>
+
+                                     <div layout="row" layout-align="bottom">
+                                       <div style="margin-top: 3px;"> +7 </div>
+                                        <input id="Phone" label="Phone"  ng-readonly="!profileEdit" class="grayborder" ng-focus="validatePhone=true;" name="Phone" required minlength="10" maxlength="10" type="text" valid-number ng-model="user.Phone" />
+                                     </div>
+
+                                    <div  ng-show="validatePhone && profileEdit" ng-messages="profile.Phone.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            {{'Телефон должен содержать 10 цифр' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'Телефон должен содержать 10 цифр' | translate}}
+                                        </div>
+                                    </div>
+                            </md-input-container>
+
+                            <md-input-container md-no-float ng-show="profileEdit">
+                                <label ng-show="profileEdit" for="image">{{'Фото профиля' | translate}}</label>
+                            </md-input-container>
+                            <div padding="0px 0px 300px 0px" ng-controller="UserProfileController" ng-show="profileEdit">
+                                <div id="upload-scan-container" layout="row">
+                                    <input id="avatarFileInput" type="file" nv-file-select=""  uploader="uploader" ng-model="user.Avatar" multiple ng-show="0" />
+
+                            <div ng-repeat="item in uploader.queue">
+                                 <div>
+                                     <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                  </div>
+                                   <div ng-show="uploader.isHTML5" nowrap><strong>{{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                               </div>
+                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="avatarClick()" type="file">
+                                        <md-tooltip md-direction="right">Загрузите фотографию профиля (в формате .JPG или .PNG)</md-tooltip>
+                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                    </md-button>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+
+                          <div layout="row" layout-align="end center">
+
+                              <div ng-show="profileEdit"  style=" width: 120px;">
+                                       <md-button style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="updateUserProfileClick()" ng-disabled="profile.$invalid || inProgress  || user.UniversityId == null">{{'Сохранить' | translate}}</md-button>
+                              </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </md-content>
+
+            </md-tab>
+
+            <md-tab label="Персональные данные">
+                <md-content class="md-padding">
+                    <div ng-controller="StudentPersonalInfoController as ctrl">
+
+                      <md-toolbar ng-show="ispassportFilled && !user.PassValidationComment && false"  class="toolbar-default margin-bottom-30">
+
+                          <div layout="row" layout-align="start center">
+                              <div class="md-toolbar-tools">
+                                <h2> Корректность заполнения: {{user.paspValidStateName}} </h2>
+                              </div>
+                            </div>
+                      </md-toolbar>
+
+                    <md-toolbar ng-show="user.PassValidationComment && user.PassportState!=0 && false" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Замечания к исправлению: {{user.PassValidationComment}}</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                       <md-toolbar ng-show="user.PassValidationComment && user.PassportState==0 && false"  class="margin-bottom-30" style="background-color: rgb(76,194,37) !important;">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Ожидает проверки: {{user.PassValidationComment}}</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                      <md-toolbar ng-if="usersCantEditOption == true && user.PassValidationComment == null" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Изменение данных приостановлено</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                      <md-toolbar class="toolbar-default margin-bottom-30" ng-hide="usersCantEditOption && user.PassValidationComment == null">
+
+                          <div layout="row" layout-align="end center">
+
+                            <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-show="infoEdit">
+                                 После заполнения полей, нажмите "Сохранить"
+                            </div>
+
+                            <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-show="!infoEdit">
+                                  Дата последнего изменения: {{user.PersonalDataEditDate}}
+                            </div>
+
+
+
+
+                              <div style=" width: 140px;" ng-hide="infoEdit" >
+                                       <md-button style="margin-top: 13px;" ng-hide="usersCantEditOption && user.PassValidationComment == null" class="md-raised margin-left-0" ng-click="infoEdit = true" >{{'Редактировать' | translate}}</md-button>
+                              </div>
+
+                              <div   ng-show="infoEdit" style=" width: 100px;">
+                                       <md-button style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="infoEdit = false" >{{'Отмена' | translate}}</md-button>
+                              </div>
+
+                              <div style=" width: 120px;" ng-show="infoEdit">
+                                     <md-button ng-if="pinfo.Citizenship==0" class="md-raised margin-left-0" style="margin-top: 13px;" ng-click="askUpdateUserPersonalInfoClick()" ng-disabled="inProgress || personal.$invalid || pinfo.BirthdayInvalid || pinfo.passportIssuedByCodeInvalid || pinfo.PassportPage3==null || pinfo.PassportPage2==null || pinfo.PassportPage1==null || pinfo.PassportPage1==null || pinfo.PassportPage9==null || pinfo.Agreement == false ">{{'Сохранить' | translate}}</md-button>
+
+
+                                     <md-button ng-if="pinfo.Citizenship==1" class="md-raised margin-left-0" style="margin-top: 13px;" ng-click="askUpdateUserPersonalInfoClick()" ng-disabled="inProgress || personal.$invalid || pinfo.BirthdayInvalid  || pinfo.PassportPage1==null  || pinfo.PassportPage4==null  || pinfo.PassportPage5==null  || pinfo.PassportPage7==null || pinfo.PassportPage10==null || pinfo.Agreement == false    ">{{'Сохранить' | translate}}</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                      <md-toolbar ng-show="!ispassportFilled" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Персональные данные не заполнены!</span>
+                                </h2>
+                                 <div style="margin-left:5px" ng-show="pinfo.PassportPage9==null && pinfo.Citizenship==0"> Отсутствует скан 19 страницы паспорта </div>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+
+
+
+
+
+
+                        <form name="personal">
+
+                             <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+                         <b> Гражданство </b>
+
+
+                               <md-input-container style="width:200px" ng-show="infoEdit">
+                                 <p class="grantlabel">Гражданство</p>
+                                <md-select id="CitizenShip" placeholder="Гражданство" ng-model="pinfo.Citizenship" >
+                                  <md-option value="0">РФ</md-option>
+                                  <md-option value="1">Иное</md-option>
+                                </md-select>
+                              </md-input-container>
+
+                            <md-input-container  style="width:100px" ng-show="!infoEdit">
+                               <p class="grantlabel">Гражданство*</p>
+                               <input id="CitizenShipText" name="CitizenShipText" type="text"  ng-readonly="true" ng-model="pinfo.CitizenshipText" />
+                            </md-input-container>
+
+                         <b> Паспортные данные </b>
+
+
+                          <div layout="row" style="margin-top: 20px;">
+
+                               <md-input-container  ng-show="infoEdit">
+                                 <p class="grantlabel">Пол*</p>
+                                <md-select id="sex" placeholder="Пол" ng-model="pinfo.Sex" >
+                                  <md-option value="1">Мужской</md-option>
+                                  <md-option value="0">Женский</md-option>
+                                </md-select>
+                              </md-input-container>
+
+                           <md-input-container ng-show="!infoEdit">
+                              <label for="sex">{{'Пол*' | translate}}</label>
+                               <input id="sex" label="sex" name="sex" type="text"  ng-readonly="true" ng-model="pinfo.SexName" />
+                            </md-input-container>
+
+                                   <md-input-container style="margin-left: 25px;">
+                                        <p class="grantlabel">Дата рождения*</p>
+                                        <input id="birthday" class="grayborder" valid-date label="birthplace"  ng-change="birthdayChanged()"  ng-readonly="!infoEdit" ng-focus="validatebirthday=true;"  name="Birthday" type="text" required ng-model="pinfo.BirthdayText" />
+                                     <div ng-show="pinfo.BirthdayInvalid && validatebirthday && infoEdit">
+                                           <div  class="validation">Введите корректную дату в формате ДД.ММ.ГГГГ</div>
+                                    </div>
+                                      <div  ng-show="validatebirthday && profileEdit" ng-messages="profile.birthday.$error">
+                                </div>
+                                    </md-input-container>
+
+                          </div>
+
+              <div ng-if="pinfo.Citizenship==0">
+
+                           <md-input-container  style="margin-top: 20px;">
+                                <p class="grantlabel">Место рождения по паспорту*</p>
+                                 <p ng-show="infoEdit" class="grantlabel">  (макс. 32 символа, используйте сокращения)</p>
+                                <input id="birthplace" class="grayborder" label="birthplace" maxlength="32" ng-readonly="!infoEdit" ng-focus="validatebirthplace=true;"  name="birthplace" type="text" required ng-model="pinfo.Birthplace" />
+                                <div ng-show="validatebirthplace && infoEdit" ng-messages="personal.birthplace.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                    <div ng-message when="birthplace">
+                                        {{'Некорректный формат' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                             <div layout="row" >
+                                <md-input-container>
+                                    <p class="grantlabel">Серия паспорта* (4 цифры)</p>
+                                    <input id="passportSeries" class="grayborder" show-button-bar="false"  ng-readonly="!infoEdit"   ng-focus="validatepassportSeries=true;" label="passportSeries" name="passportSeries" required minlength="4" maxlength="4" type="text" valid-number  ng-model="pinfo.PassportSeries" />
+                                    <div  ng-show="validatepassportSeries && infoEdit" ng-messages="personal.passportSeries.$error">
+                                        <div ng-message when="required">
+                                            {{'Обязательно для заполнения' | translate}}
+                                        </div>
+                                          <div ng-message when="minlength">
+                                            {{'Серия должна содержать 4 цифры' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'Серия должна содержать 4 цифры' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:40px">
+                                    <p class="grantlabel">Номер паспорта* (6 цифр)</p>
+                                    <input id="passportNumber" class="grayborder" label="passportNumber" ng-readonly="!infoEdit" valid-number ng-focus="validatepassportNumber=true;" name="passportNumber" required minlength="6" maxlength="6" type="text" ng-model="pinfo.PassportNumber" />
+                                    <div ng-show="validatepassportNumber && infoEdit" ng-messages="personal.passportNumber.$error">
+                                        <div ng-message when="required">
+                                            {{'Обязательно для заполнения' | translate}}
+                                        </div>
+                                           <div ng-message when="minlength">
+                                            {{'Номер должен содержать 6 цифр' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'Номер должен содержать 6 цифр' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <md-input-container style="margin-top: 25px; max-width:600px">
+                                <p class="grantlabel">Кем выдан паспорт*</p>
+                                <p ng-show="infoEdit" class="grantlabel">(макс. 50 символов, используйте сокращения)</p>
+                                <textarea id="passportIssuedBy" maxlength="50"  class="grayborder" label="passportIssuedBy" rows="2" ng-readonly="!infoEdit" ng-focus="validatepassportIssuedBy=true;"  name="passportIssuedBy" required ng-model="pinfo.PassportIssuedBy"/>
+                                <div  ng-show=" validatepassportIssuedBy && infoEdit"ng-messages="personal.passportIssuedBy.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                    <div ng-message when="passportIssuedBy">
+                                        {{'Некорректный формат' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+
+                           <div layout="row" layout-align="top" layout-sm="column">
+
+                              <div>
+                                <md-input-container>
+                                    <p class="grantlabel">Дата выдачи*</p>
+                                    <input id="passportIssueDate" class="grayborder"  valid-date  label="passportIssueDate" ng-change="passportIssueDateChanged()"  ng-readonly="!infoEdit" required ng-focus="validatepassportIssueDate=true;" name="passportIssueDate" required type="text" ng-model="pinfo.PassportIssueDateText" />
+                                  <div ng-show="pinfo.PassportIssueDateInvalid && validatepassportIssueDate && infoEdit">
+                                       <div  class="validation">Введите корректную дату в формате ДД.ММ.ГГГГ</div>
+                                  </div>
+                                </md-input-container>
+                             </div>
+
+                              <div >
+
+                                  <md-input-container>
+                                      <p class="grantlabel">Код подразделения* (в формате XXX-XXX)</p>
+                                      <input id="passportIssuedByCode"  class="grayborder" ng-change="issuedByCodeChanged()"  label="passportIssuedByCode" ng-focus="validatepassportIssuedByCode=true;" ng-readonly="!infoEdit" valid-code  required name="passportIssuedByCode" type="text" ng-model="pinfo.PassportIssuedByCode" />
+                                      <div ng-show="validatepassportIssuedByCode && infoEdit" ng-messages="personal.passportIssuedByCode.$error">
+                                          <div ng-message when="required">
+                                              {{'Это поле обязательно для заполнения' | translate}}
+                                          </div>
+                                          <div ng-message when="pattern">
+                                              {{'Код в формате XXX-XXX' | translate}}
+                                          </div>
+                                          <div ng-message when="passportIssuedByCode">
+                                              {{'Некорректный формат' | translate}}
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                            </div>
+
+                           </div>
+
+                           <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+                                 <md-input-container md-no-float>
+                                   <p class="grantlabel">Скан разворота с фотографией* (2 и 3 страница в формате .JPG или .PNG)</p>
+                                       <div ng-show="infoEdit">
+                                            <div id="upload-scan-container">
+                                                <input id="passportScanFileInput" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader" ng-model="pinfo.PassportScan" multiple ng-show="0" />
+
+                                                <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick()" type="file">
+                                                    <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                </md-button>
+                                            </div>
+                                        </div>
+                                  </md-input-container md-no-float>
+
+
+                                   <div style="margin-top: 25px;">
+                                        <img style="max-width:300px" ng-src="{{pinfo.PassportPage1.VirtualPath}}"/>
+                                        <p><a href={{pinfo.PassportPage1.VirtualPath}} download={{pinfo.PassportPage1.VirtualPath}}> {{::pinfo.PassportPage1.FileName}} </a></p>
+                                   </div>
+
+                            <div style="margin-top: 30px">
+                             <b> Адрес прописки</b>
+                            </div>
+
+                              <div layout="row">
+
+                                 <md-input-container>
+                                    <p class="grantlabel">Субъект РФ* (Республика / Край /Область) </p>
+                                    <input id="republic" label="republic"  class="grayborder" name="republic" type="text" ng-readonly="!infoEdit" ng-focus="validaterepublic=true;"  ng-model="pinfo.RegistrationRepublic" required />
+                                    <div ng-show="validaterepublic && infoEdit" ng-messages="personal.republic.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Район*</p>
+                                    <input id="RegistrationZone" label="RegistrationZone" class="grayborder" ng-readonly="!infoEdit" ng-focus="validateRegistrationZone=true;" name="RegistrationZone" type="text" ng-model="pinfo.RegistrationzZone" />
+                                    <div ng-show="validateRegistrationZone && infoEdit" ng-messages="personal.RegistrationZone.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                              <div layout="row" style="margin-top: 20px;">
+
+                                 <md-input-container>
+                                    <p class="grantlabel">Город</p>
+                                    <input id="RegistrationCity" label="RegistrationCity" class="grayborder" ng-readonly="!infoEdit" ng-focus="validateRegistrationCity=true;"  name="RegistrationCity" ng-required="!(pinfo.RegistrationCity.length || pinfo.RegistrationPlace.length)" type="text" ng-model="pinfo.RegistrationCity" />
+                                    <div ng-show="validateRegistrationCity  && infoEdit" ng-messages="personal.RegistrationCity.$error">
+                                        <div ng-message when="required">
+                                            {{'Необходимо заполнить только Город либо только Нас. пункт' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Населенный пункт</p>
+                                    <input id="RegistrationPlace" label="RegistrationPlace" class="grayborder" ng-readonly="!infoEdit"  ng-focus="validateRegistrationPlace=true;"   name="RegistrationPlace" type="text" ng-required="!(pinfo.RegistrationCity.length || pinfo.RegistrationPlace.length)" ng-model="pinfo.RegistrationPlace" />
+                                    <div ng-show="validateRegistrationPlace && infoEdit" ng-messages="personal.RegistrationPlace.$error">
+                                        <div ng-message when="required">
+                                               {{'Необходимо заполнить либо только Город либо только Нас. пункт' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                                <md-input-container style="width:500px;">
+                                    <p class="grantlabel">Улица*</p>
+                                    <input id="RegistrationStreet" maxlength="50" label="RegistrationStreet" class="grayborder" ng-readonly="!infoEdit" required ng-focus="validateRegistrationStreet=true;" name="RegistrationStreet" type="text" ng-model="pinfo.RegistrationStreet" />
+                                    <div  ng-show="validateRegistrationStreet && infoEdit" ng-messages="personal.RegistrationStreet.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              <div layout="row" style="margin-top: 20px;">
+
+                                <md-input-container>
+                                    <p class="grantlabel">Дом*</p>
+                                    <input id="RegistrationHouse" label="RegistrationHouse" class="grayborder" ng-readonly="!infoEdit"  required ng-focus="validateRegistrationHouse=true;" name="RegistrationHouse" type="text" ng-model="pinfo.RegistrationHouse" />
+                                    <div ng-show="validateRegistrationHouse && infoEdit" ng-messages="personal.RegistrationHouse.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Корпус</p>
+                                    <input id="RegistrationHousing" label="RegistrationHousing" class="grayborder" ng-readonly="!infoEdit" name="RegistrationHousing" type="text" ng-model="pinfo.RegistrationHousing" />
+                                    <div  ng-show="infoEdit" ng-messages="personal.RegistrationHousing.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Квартира</p>
+                                    <input id="RegistrationFlat" label="RegistrationFlat" class="grayborder"  ng-readonly="!infoEdit"  ng-focus="validateRegistrationFlat=true;" name="RegistrationFlat" type="text" ng-model="pinfo.RegistrationFlat" />
+                                    <div  ng-show="validateRegistrationFlat && infoEdit" ng-messages="personal.RegistrationFlat.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                                <md-input-container style="max-width:150px">
+                                    <p class="grantlabel">Почтовый индекс*</p>
+                                    <input id="RegistrationIndex" label="RegistrationIndex" class="grayborder" ng-readonly="!infoEdit"  ng-focus="validateRegistrationIndex=true;" name="RegistrationIndex" required required minlength="4" maxlength="6" type="text" valid-number ng-model="pinfo.RegistrationIndex" />
+                                    <div  ng-show="validateRegistrationIndex && infoEdit" ng-messages="personal.RegistrationIndex.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            {{'Индекс должен содержать 6 цифр' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'Индекс должен содержать 6 цифр' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+
+                              <md-input-container  md-no-float>
+                                      <p class="grantlabel">Скан страницы с пропиской* (5 страница в формате .JPG или .PNG)</p>
+                                         <div ng-show="infoEdit">
+                                              <div id="upload-scan-container">
+                                                  <input id="passportScanFileInput2" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader2"  ng-show="0" />
+
+                                                  <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick2()" type="file">
+                                                      <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                  </md-button>
+                                              </div>
+                                          </div>
+                                    </md-input-container md-no-float>
+
+                                     <div style="margin-top: 25px;">
+                                        <img  style="max-width:300px" ng-src="{{pinfo.PassportPage2.VirtualPath}}"/>
+                                        <p><a href={{pinfo.PassportPage2.VirtualPath}} download={{pinfo.PassportPage2.VirtualPath}}> {{pinfo.PassportPage2.FileName}} </a></p>
+                                   </div>
+
+
+                                   <md-input-container  md-no-float>
+                                      <p class="grantlabel">Скан 19 страницы паспорта* (о ранее выданных паспортах) (в формате .JPG или .PNG)</p>
+                                         <div ng-show="infoEdit">
+                                              <div id="upload-scan-container">
+                                                  <input id="passportScanFileInput9" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader9"  ng-show="0" />
+
+                                                  <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick9()" type="file">
+                                                      <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                  </md-button>
+                                              </div>
+                                          </div>
+                                    </md-input-container md-no-float>
+
+                                     <div style="margin-top: 25px;" ng-show="pinfo.PassportPage9">
+                                        <img  style="max-width:300px" ng-src="{{pinfo.PassportPage9.VirtualPath}}"/>
+                                        <p><a href={{pinfo.PassportPage9.VirtualPath}} download={{pinfo.PassportPage9.VirtualPath}}> {{pinfo.PassportPage9.FileName}} </a></p>
+                                   </div>
+
+                                    <md-input-container  md-no-float>
+                                      <p class="grantlabel">Скан документа о смене ФИО (только если меняли, в формате .JPG или .PNG)</p>
+                                         <div ng-show="infoEdit">
+                                              <div id="upload-scan-container">
+                                                  <input id="passportScanFileInput8" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader8"  ng-show="0" />
+
+                                                  <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick8()" type="file">
+                                                      <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                  </md-button>
+                                              </div>
+                                          </div>
+                                    </md-input-container md-no-float>
+
+                                     <div style="margin-top: 25px;" ng-show="pinfo.PassportPage8">
+                                        <img  style="max-width:300px" ng-src="{{pinfo.PassportPage8.VirtualPath}}"/>
+                                        <p><a href={{pinfo.PassportPage8.VirtualPath}} download={{pinfo.PassportPage8.VirtualPath}}> {{pinfo.PassportPage8.FileName}} </a></p>
+                                   </div>
+
+                                   <md-button ng-show="infoEdit && pinfo.PassportPage8" class="md-raised button-red"  ng-click="pinfo.PassportPage8=null; pinfo.PassportPage8Id = null;">Удалить скан</md-button>
+
+
+                            <div style="margin-top: 30px">
+                             <b> Адрес проживания</b>
+                            </div>
+
+                              <md-checkbox class="md-primary" ng-disabled="!infoEdit"   ng-model="pinfo.IsLiveAddressSame" ng-change="CopyAddress()" aria-label="Primary Checkbox">
+                              Совпадает с адресом прописки
+                            </md-checkbox>
+
+                            <div ng-hide="pinfo.IsLiveAddressSame">
+
+
+                              <div layout="row">
+
+                                 <md-input-container>
+                                    <p class="grantlabel">Субъект РФ* (Республика / Край /Область)</p>
+                                    <input id="LiveRepublic" label="LiveRepublic" class="grayborder" name="LiveRepublic" type="text" ng-readonly="!infoEdit" ng-focus="validateLiveRepublic=true;"  ng-model="pinfo.LiveRepublic" required />
+                                    <div ng-show="validateLiveRepublic && infoEdit" ng-messages="personal.LiveRepublic.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Район*</p>
+                                    <input id="LiveZone" label="LiveZone" ng-readonly="!infoEdit" class="grayborder" ng-focus="validateLiveZone=true;" name="LiveZone" type="text" ng-model="pinfo.LiveZone" />
+                                    <div ng-show="validateLiveZone && infoEdit" ng-messages="personal.LiveZone.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                              <div layout="row" style="margin-top: 20px;">
+
+                                 <md-input-container>
+                                    <p class="grantlabel">Город</p>
+                                    <input id="LiveCity" label="LiveCity" ng-readonly="!infoEdit" class="grayborder" ng-focus="validateLiveCity=true;"  name="LiveCity" ng-required="!(pinfo.LiveCity.length || pinfo.LivePlace.length)" type="text" ng-model="pinfo.LiveCity" />
+                                    <div ng-show="validateLiveCity  && infoEdit" ng-messages="personal.LiveCity.$error">
+                                        <div ng-message when="required">
+                                            {{'Необходимо заполнить Город или Нас. пункт' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Населенный пункт </p>
+                                    <input id="LivePlace" label="LivePlace"ng-readonly="!infoEdit" class="grayborder"  ng-focus="validateLivePlace=true;"   name="LivePlace" type="text" ng-required="!(pinfo.LiveCity.length || pinfo.LivePlace.length)" ng-model="pinfo.LivePlace" />
+                                    <div ng-show="validateLivePlace && infoEdit" ng-messages="personal.LivePlace.$error">
+                                        <div ng-message when="required">
+                                               {{'Необходимо заполнить Город или Нас. пункт' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                                <md-input-container style="width:500px;">
+                                    <p class="grantlabel">Улица*</p>
+                                    <input id="LiveStreet" label="LiveStreet" maxlength="50" ng-readonly="!infoEdit" class="grayborder" required ng-focus="validateLiveStreet=true;" name="LiveStreet" type="text" ng-model="pinfo.LiveStreet" />
+                                    <div  ng-show="validateLiveStreet && infoEdit" ng-messages="personal.LiveStreet.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+
+                              <div layout="row" style="margin-top: 20px;">
+
+
+                                <md-input-container>
+                                    <p class="grantlabel">Дом*</p>
+                                    <input id="LiveHouse" label="LiveHouse" ng-readonly="!infoEdit" class="grayborder" required ng-focus="validateLiveHouse=true;" name="LiveHouse" type="text" ng-model="pinfo.LiveHouse" />
+                                    <div ng-show="validateLiveHouse && infoEdit" ng-messages="personal.LiveHouse.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Корпус</p>
+                                    <input id="LiveHousing" label="LiveHousing" ng-readonly="!infoEdit" class="grayborder" name="LiveHousing" type="text" ng-model="pinfo.LiveHousing" />
+                                    <div  ng-show="infoEdit" ng-messages="personal.LiveHousing.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container style="margin-left:25px">
+                                    <p class="grantlabel">Квартира</p>
+                                    <input id="LiveFlat" label="LiveFlat"  ng-readonly="!infoEdit" class="grayborder"  ng-focus="validateLiveFlat=true;" name="LiveFlat" type="text" ng-model="pinfo.LiveFlat" />
+                                    <div  ng-show="validateLiveFlat && infoEdit" ng-messages="personal.LiveFlat.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+                                <md-input-container style="max-width:150px">
+                                    <p class="grantlabel">Почтовый индекс*</p>
+                                    <input id="LiveIndex" label="LiveIndex"  ng-readonly="!infoEdit" class="grayborder"  ng-focus="validateLiveIndex=true;" name="LiveIndex" required required minlength="4" maxlength="6" type="text" valid-number ng-model="pinfo.LiveIndex" />
+                                    <div  ng-show="validateLiveIndex && infoEdit" ng-messages="personal.LiveIndex.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            {{'Индекс должен содержать 6 цифр' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'Индекс должен содержать 6 цифр' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                            </div>
+
+                             <div style="margin-top: 30px">
+                                <b> Свидетельство о постановке на учет в налоговом органе </b>
+                            </div>
+
+                            <div layout="row" style="margin-top: 20px;">
+
+                               <md-input-container>
+                                    <p class="grantlabel">ИНН*</p>
+                                    <input id="Inn" label="Inn"  ng-readonly="!infoEdit" class="grayborder" ng-focus="validateInn=true;" name="Inn" ng-required="pinfo.Citizenship == 0" minlength="12" maxlength="12" type="text" valid-number ng-model="pinfo.Inn" />
+                                    <div  ng-show="validateInn && infoEdit" ng-messages="personal.Inn.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            {{'ИНН должен содержать 12 цифр' | translate}}
+                                        </div>
+                                        <div ng-message when="maxlength">
+                                            {{'ИНН должен содержать 12 цифр' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                              </div>
+
+
+                                     <md-input-container  md-no-float>
+                                      <p class="grantlabel">Скан свидетельства*  (в формате .JPG или .PNG)</p>
+                                       <p  ng-show="(pinfo.Citizenship == 0) && infoEdit"  class="grantlabel">Обязательно для заполнения</p>
+                                         <div ng-show="infoEdit">
+                                              <div id="upload-scan-container">
+                                                  <input id="passportScanFileInput3" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader3"  ng-show="0" />
+
+                                                  <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick3()" type="file">
+                                                      <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                  </md-button>
+                                              </div>
+                                          </div>
+                                    </md-input-container md-no-float>
+
+                                     <div style="margin-top: 25px;">
+                                        <img style="max-width:300px" ng-src="{{pinfo.PassportPage3.VirtualPath}}"/>
+                                        <p><a href={{pinfo.PassportPage3.VirtualPath}} download={{pinfo.PassportPage3.VirtualPath}}> {{pinfo.PassportPage3.FileName}} </a></p>
+                                   </div>
+
+                    </div>
+
+
+                     <div ng-if="pinfo.Citizenship==1">
+
+
+                                    <b> Для иностранцев </b>
+
+                                     <div layout="row" >
+
+                                <md-input-container>
+                                    <p class="grantlabel">Серия и номер паспорта*</p>
+                                    <input id="passportNumber" class="grayborder" label="passportNumber" ng-readonly="!infoEdit" ng-focus="validatepassportNumber=true;" name="passportNumber" required  type="text" ng-model="pinfo.PassportNumber" />
+                                    <div ng-show="validatepassportNumber && infoEdit" ng-messages="personal.passportNumber.$error">
+                                        <div ng-message when="required">
+                                            {{'Обязательно для заполнения' | translate}}
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <md-input-container style="margin-top: 25px; max-width:600px">
+                                <p class="grantlabel">Кем выдан паспорт*</p>
+                                <p ng-show="infoEdit" class="grantlabel">(макс. 50 символов, используйте сокращения)</p>
+                                <textarea id="passportIssuedBy" maxlength="50"  class="grayborder" label="passportIssuedBy" rows="2" ng-readonly="!infoEdit" ng-focus="validatepassportIssuedBy=true;"  name="passportIssuedBy" required ng-model="pinfo.PassportIssuedBy"/>
+                                <div  ng-show=" validatepassportIssuedBy && infoEdit"ng-messages="personal.passportIssuedBy.$error">
+                                    <div ng-message when="required">
+                                        {{'Это поле обязательно для заполнения' | translate}}
+                                    </div>
+                                    <div ng-message when="passportIssuedBy">
+                                        {{'Некорректный формат' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <div layout="row" layout-align="top" layout-sm="column">
+
+                            <div>
+                                  <md-input-container>
+                                      <p class="grantlabel">Дата выдачи*</p>
+                                      <input id="passportIssueDate" class="grayborder"  valid-date  label="passportIssueDate" ng-change="passportIssueDateChanged()"  ng-readonly="!infoEdit" required ng-focus="validatepassportIssueDate=true;" name="passportIssueDate" required type="text" ng-model="pinfo.PassportIssueDateText" />
+                                    <div ng-show="pinfo.PassportIssueDateInvalid && validatepassportIssueDate && infoEdit">
+                                         <div  class="validation">Введите корректную дату в формате ДД.ММ.ГГГГ</div>
+                                    </div>
+                                  </md-input-container>
+                               </div>
+
+                             </div>
+
+                             <div style="margin-top: 30px">
+                                <b>Место временного проживания в РФ</b>
+                               </div>
+
+                                 <div layout="row">
+
+                                    <md-input-container>
+                                       <p class="grantlabel">Субъект РФ* (Республика / Край /Область) </p>
+                                       <input id="republic" label="republic"  class="grayborder" name="republic" type="text" ng-readonly="!infoEdit" ng-focus="validaterepublic=true;"  ng-model="pinfo.RegistrationRepublic" required />
+                                       <div ng-show="validaterepublic && infoEdit" ng-messages="personal.republic.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                   <md-input-container style="margin-left:25px">
+                                       <p class="grantlabel">Район*</p>
+                                       <input id="RegistrationZone" label="RegistrationZone" class="grayborder" ng-readonly="!infoEdit" ng-focus="validateRegistrationZone=true;" name="RegistrationZone" type="text" ng-model="pinfo.RegistrationzZone" />
+                                       <div ng-show="validateRegistrationZone && infoEdit" ng-messages="personal.RegistrationZone.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                 </div>
+
+                                 <div layout="row" style="margin-top: 20px;">
+
+                                    <md-input-container>
+                                       <p class="grantlabel">Город</p>
+                                       <input id="RegistrationCity" label="RegistrationCity" class="grayborder" ng-readonly="!infoEdit" ng-focus="validateRegistrationCity=true;"  name="RegistrationCity" ng-required="!(pinfo.RegistrationCity.length || pinfo.RegistrationPlace.length)" type="text" ng-model="pinfo.RegistrationCity" />
+                                       <div ng-show="validateRegistrationCity  && infoEdit" ng-messages="personal.RegistrationCity.$error">
+                                           <div ng-message when="required">
+                                               {{'Необходимо заполнить только Город либо только Нас. пункт' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+
+                                   <md-input-container style="margin-left:25px">
+                                       <p class="grantlabel">Населенный пункт</p>
+                                       <input id="RegistrationPlace" label="RegistrationPlace" class="grayborder" ng-readonly="!infoEdit"  ng-focus="validateRegistrationPlace=true;"   name="RegistrationPlace" type="text" ng-required="!(pinfo.RegistrationCity.length || pinfo.RegistrationPlace.length)" ng-model="pinfo.RegistrationPlace" />
+                                       <div ng-show="validateRegistrationPlace && infoEdit" ng-messages="personal.RegistrationPlace.$error">
+                                           <div ng-message when="required">
+                                                  {{'Необходимо заполнить либо только Город либо только Нас. пункт' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                 </div>
+
+                                   <md-input-container style="width:500px;">
+                                       <p class="grantlabel">Улица*</p>
+                                       <input id="RegistrationStreet" maxlength="50" label="RegistrationStreet" class="grayborder" ng-readonly="!infoEdit" required ng-focus="validateRegistrationStreet=true;" name="RegistrationStreet" type="text" ng-model="pinfo.RegistrationStreet" />
+                                       <div  ng-show="validateRegistrationStreet && infoEdit" ng-messages="personal.RegistrationStreet.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                 <div layout="row" style="margin-top: 20px;">
+
+                                   <md-input-container>
+                                       <p class="grantlabel">Дом*</p>
+                                       <input id="RegistrationHouse" label="RegistrationHouse" class="grayborder" ng-readonly="!infoEdit"  required ng-focus="validateRegistrationHouse=true;" name="RegistrationHouse" type="text" ng-model="pinfo.RegistrationHouse" />
+                                       <div ng-show="validateRegistrationHouse && infoEdit" ng-messages="personal.RegistrationHouse.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                   <md-input-container style="margin-left:25px">
+                                       <p class="grantlabel">Корпус</p>
+                                       <input id="RegistrationHousing" label="RegistrationHousing" class="grayborder" ng-readonly="!infoEdit" name="RegistrationHousing" type="text" ng-model="pinfo.RegistrationHousing" />
+                                       <div  ng-show="infoEdit" ng-messages="personal.RegistrationHousing.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                   <md-input-container style="margin-left:25px">
+                                       <p class="grantlabel">Квартира</p>
+                                       <input id="RegistrationFlat" label="RegistrationFlat" class="grayborder"  ng-readonly="!infoEdit"  ng-focus="validateRegistrationFlat=true;" name="RegistrationFlat" type="text" ng-model="pinfo.RegistrationFlat" />
+                                       <div  ng-show="validateRegistrationFlat && infoEdit" ng-messages="personal.RegistrationFlat.$error">
+                                           <div ng-message when="required">
+                                               {{'Это поле обязательно для заполнения' | translate}}
+                                           </div>
+                                       </div>
+                                   </md-input-container>
+
+                                 </div>
+
+
+
+
+                                     <md-input-container md-no-float>
+                                     <p class="grantlabel">Скан иностранного паспорта (обязательно, в формате .JPG или .PNG)</p>
+                                         <div ng-show="infoEdit">
+                                              <div id="upload-scan-container">
+                                                  <input id="passportScanFileInput" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader" ng-model="pinfo.PassportScan" multiple ng-show="0" />
+
+                                                  <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick()" type="file">
+                                                      <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                  </md-button>
+                                              </div>
+                                          </div>
+                                    </md-input-container md-no-float>
+
+
+                                     <div style="margin-top: 25px;">
+                                          <img style="max-width:300px" ng-src="{{pinfo.PassportPage1.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage1.VirtualPath}} download={{pinfo.PassportPage1.VirtualPath}}> {{::pinfo.PassportPage1.FileName}} </a></p>
+                                     </div>
+
+
+                                     <md-input-container  md-no-float>
+                                        <p class="grantlabel">Скан регистрации  (обязательно, в формате .JPG или .PNG)</p>
+                                           <div ng-show="infoEdit">
+                                                <div id="upload-scan-container">
+                                                    <input id="passportScanFileInput4" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader4"  ng-show="0" />
+
+                                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick4()" type="file">
+                                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                      </md-input-container md-no-float>
+
+                                       <div style="margin-top: 25px;">
+                                          <img  style="max-width:300px" ng-src="{{pinfo.PassportPage4.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage4.VirtualPath}} download={{pinfo.PassportPage4.VirtualPath}}> {{pinfo.PassportPage4.FileName}} </a></p>
+                                     </div>
+
+                                      <md-input-container  md-no-float>
+                                        <p class="grantlabel">Скан миграционной карты (обязательно, в формате .JPG или .PNG)</p>
+                                           <div ng-show="infoEdit">
+                                                <div id="upload-scan-container">
+                                                    <input id="passportScanFileInput5" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader5"  ng-show="0" />
+
+                                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick5()" type="file">
+                                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                      </md-input-container md-no-float>
+
+                                       <div style="margin-top: 25px;">
+                                          <img  style="max-width:300px" ng-src="{{pinfo.PassportPage5.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage5.VirtualPath}} download={{pinfo.PassportPage5.VirtualPath}}> {{pinfo.PassportPage5.FileName}} </a></p>
+                                     </div>
+
+                                     <md-input-container  md-no-float>
+                                        <p class="grantlabel"> Скан русской страницы в иностранном паспорте ИЛИ Скан нотариально заверенного перевода паспорта</p>
+                                           <div ng-show="infoEdit">
+                                                <div id="upload-scan-container">
+                                                    <input id="passportScanFileInput7" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader7"  ng-show="0" />
+
+                                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick7()" type="file">
+                                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                      </md-input-container md-no-float>
+
+                                       <div style="margin-top: 25px;">
+                                          <img  style="max-width:300px" ng-src="{{pinfo.PassportPage7.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage7.VirtualPath}} download={{pinfo.PassportPage7.VirtualPath}}> {{pinfo.PassportPage7.FileName}} </a></p>
+                                     </div>
+
+                                     <md-input-container  md-no-float>
+                                        <p class="grantlabel">Скан вида на жительство  (в формате .JPG или .PNG, если имеется)</p>
+                                           <div ng-show="infoEdit">
+                                                <div id="upload-scan-container">
+                                                    <input id="passportScanFileInput6" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader6"  ng-show="0" />
+
+                                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick6()" type="file">
+                                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                      </md-input-container md-no-float>
+
+                                       <div style="margin-top: 25px;">
+                                          <img  style="max-width:300px" ng-src="{{pinfo.PassportPage6.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage6.VirtualPath}} download={{pinfo.PassportPage6.VirtualPath}}> {{pinfo.PassportPage6.FileName}} </a></p>
+                                     </div>
+
+                                      <md-input-container  md-no-float>
+                                        <p class="grantlabel">Скан оборотной стороны регистрации  (обязательно, в формате .JPG или .PNG)</p>
+                                           <div ng-show="infoEdit">
+                                                <div id="upload-scan-container">
+                                                    <input id="passportScanFileInput10" class="grayborder" type="file" nv-file-select="" uploader="pinfoUploader10"  ng-show="0" />
+
+                                                    <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="scanImageClick10()" type="file">
+                                                        <md-icon md-font-icon="icon-attachment"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                      </md-input-container md-no-float>
+
+                                       <div style="margin-top: 25px;">
+                                          <img  style="max-width:300px" ng-src="{{pinfo.PassportPage10.VirtualPath}}"/>
+                                          <p><a href={{pinfo.PassportPage10.VirtualPath}} download={{pinfo.PassportPage10.VirtualPath}}> {{pinfo.PassportPage10.FileName}} </a></p>
+                                     </div>
+
+                     </div>
+
+                      <md-checkbox class="md-primary" ng-disabled="!infoEdit"   ng-model="pinfo.Agreement" aria-label="Primary Checkbox">
+                              Согласие на обработку персональных данных
+                     </md-checkbox>
+
+                          <div layout="row" layout-align="end center">
+                              <div style=" width: 120px;" ng-show="infoEdit">
+
+                                     <md-button ng-if="pinfo.Citizenship==0" class="md-raised margin-left-0" style="margin-top: 13px;" ng-click="askUpdateUserPersonalInfoClick()" ng-disabled="inProgress || personal.$invalid || pinfo.BirthdayInvalid || pinfo.passportIssuedByCodeInvalid || pinfo.PassportPage3==null || pinfo.PassportPage2==null || pinfo.PassportPage1==null || pinfo.PassportPage9==null || pinfo.Agreement == false " >{{'Сохранить' | translate}}</md-button>
+
+
+                                     <md-button ng-if="pinfo.Citizenship==1" class="md-raised margin-left-0" style="margin-top: 13px;" ng-click="askUpdateUserPersonalInfoClick()" ng-disabled="inProgress || personal.$invalid || pinfo.BirthdayInvalid  || pinfo.PassportPage1==null  || pinfo.PassportPage4==null  || pinfo.PassportPage5==null  || pinfo.PassportPage7==null ||  pinfo.PassportPage10==null || pinfo.Agreement == false   ">{{'Сохранить' | translate}}</md-button>
+
+                              </div>
+                            </div>
+
+                              <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+            </form>
+            </div>
+                </md-content>
+
+
+            </md-tab>
+
+            <md-tab label="Зачетная книжка">
+             <div ng-controller="RecordBookController as ctrl">
+                <md-content class="md-padding">
+
+                      <md-toolbar ng-if="usersCantEditOption == true && user.BookValidationComment == null" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Изменение данных приостановлено</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                       <md-toolbar class="toolbar-default margin-bottom-30" ng-show="recordbook.Files && recordbook.Files.length > 0 &&  !user.BookValidationComment">
+
+                          <div layout="row" layout-align="start center">
+
+                              <div class="md-toolbar-tools">
+                                <h2> Корректность заполнения: {{user.bookValidStateName}} </h2>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                         <md-toolbar ng-show="user.BookValidationComment && user.StudentBookState==0"  class="margin-bottom-30" style="background-color: rgb(76,194,37) !important;">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Ожидает проверки: {{user.BookValidationComment}}</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                       <md-toolbar ng-show="user.BookValidationComment && user.StudentBookState!=0" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Замечания к исправлению: {{user.BookValidationComment}}</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                      <md-toolbar ng-show="!isrecordbookFilled" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Не добавлены 2 скана зачетной книжки (1ый разворот с фото / последняя закрытая сессия)</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+
+
+
+                            <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+
+                   <!--div ng-show="user.BookValidationComment"> <a href="https://vk.com/studgrant?w=wall-35540709_7661" target="_blank"> Исправления, сделанные позже 11.04.2017 23:59,  приниматься не будут <a/>    </div-->
+                   <div ng-show="user.RecordBookEditDate && user.RecordBookEditDate.length > 0">  Дата последнего изменения: {{user.RecordBookEditDate}}  </div>
+
+                    <form name="recordbook">
+                        <div padding="0px 0px 300px 0px">
+                            <div id="upload-scan-container" ng-hide="usersCantEditOption && user.BookValidationComment == null">
+                                <input id="recordBookFileInput" type="file" nv-file-select="" uploader="bookUploader" ng-model="recordbook" multiple ng-show="0" />
+                                 <p class="grantlabel">2 скана - первая страница с фото и разворот с последней сессией  (в формате .JPG или .PNG)</p>
+                                <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="bookImageClick()" type="file">
+                                    <md-tooltip md-direction="right">Загрузите разворот зачетной книжки с последней сданной сессией</md-tooltip>
+                                    <md-icon md-font-icon="icon-attachment"></md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+
+              <md-tabs md-dynamic-height  md-border-bottom>
+                   <md-tab label="Новое">
+
+                        <div ng-show="recordbook.Files">
+                            <md-card>
+                                <md-card-content>
+                                    <md-list>
+                                        <md-list-item ng-show="item.FullName.indexOf('2019') > 0" ng-repeat="item in recordbook.Files">
+                                            <img ng-src="{{::item.VirtualPath}}" class="md-avatar" />
+                                            <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                            <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(item, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                                            <md-button class="md-warn md-primary margin-left-0" ng-click="askDelete(item)" ng-hide="usersCantEditOption && user.BookValidationComment == null" ng-disabled="inProgress ">{{'Удалить' | translate}}</md-button>
+                                        </md-list-item>
+                                    </md-list>
+                            </md-card>
+                        </div>
+                    </md-tab>
+                    <md-tab label="Архив">
+                        <div ng-show="recordbook.Files">
+                            <md-card>
+                                <md-card-content>
+                                    <md-list>
+                                        <md-list-item  ng-show="item.FullName.indexOf('2019') < 0"; ng-repeat="item in recordbook.Files">
+                                            <img ng-src="{{::item.VirtualPath}}" class="md-avatar" />
+                                            <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                            <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(item, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                                            <md-button class="md-warn md-primary margin-left-0" ng-click="askDelete(item)" ng-hide="usersCantEditOption && user.BookValidationComment == null" ng-disabled="inProgress ">{{'Удалить' | translate}}</md-button>
+                                        </md-list-item>
+                                    </md-list>
+                            </md-card>
+                        </div>
+                    </md-tab>
+                </md-tabs>
+
+
+
+                    </form>
+                </md-content>
+              </div>
+            </md-tab>
+
+            <md-tab label="СПРАВКА О ДОХОДАХ">
+                <div ng-controller="IncomeController as ctrl">
+                   <md-content class="md-padding">
+   
+                         <md-toolbar ng-if="usersCantEditOption == true && user.IncomeValidationComment == null" class="md-accent margin-bottom-30">
+                           <div layout="row" layout-align="start">
+                               <div class="md-toolbar-tools">
+                                   <h2>
+                                     <span>Изменение данных приостановлено</span>
+                                   </h2>
+                               </div>
+                           </div>
+                         </md-toolbar>
+   
+                          <md-toolbar class="toolbar-default margin-bottom-30" ng-show="income.Files && income.Files.length > 0 &&  !user.IncomeValidationComment">
+   
+                             <div layout="row" layout-align="start center">
+   
+                                 <div class="md-toolbar-tools">
+                                   <h2> Корректность заполнения: {{user.IncomeValidStateName}} </h2>
+                                 </div>
+                               </div>
+                          </md-toolbar>
+   
+                            <md-toolbar ng-show="user.IncomeValidationComment && user.IncomeState==0"  class="margin-bottom-30" style="background-color: rgb(76,194,37) !important;">
+                           <div layout="row" layout-align="start">
+                               <div class="md-toolbar-tools">
+                                   <h2>
+                                     <span>Ожидает проверки: {{user.IncomeValidationComment}}</span>
+                                   </h2>
+                               </div>
+                           </div>
+                         </md-toolbar>
+   
+                          <md-toolbar ng-show="user.IncomeValidationComment && user.IncomeState!=0" class="md-accent margin-bottom-30">
+                           <div layout="row" layout-align="start">
+                               <div class="md-toolbar-tools">
+                                   <h2>
+                                     <span>Замечания к исправлению: {{user.IncomeValidationComment}}</span>
+                                   </h2>
+                               </div>
+                           </div>
+                         </md-toolbar>
+   
+                         <md-toolbar ng-show="!isincomeFilled" class="md-accent margin-bottom-30">
+                           <div layout="row" layout-align="start">
+                               <div class="md-toolbar-tools">
+                                   <h2>
+                                     <span>Не добавлена информация о доходе</span>
+                                   </h2>
+                               </div>
+                           </div>
+                         </md-toolbar>
+   
+   
+   
+                               <div>
+                                   <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                               </div>
+   
+   
+                      <!--div ng-show="user.IncomeValidationComment"> <a href="https://vk.com/studgrant?w=wall-35540709_7661" target="_blank"> Исправления, сделанные позже 11.04.2017 23:59,  приниматься не будут <a/>    </div-->
+                      <div ng-show="user.IncomeEditDate && user.IncomeEditDate.length > 0">  Дата последнего изменения: {{user.IncomeEditDate}}  </div>
+   
+                       <form name="income">
+
+                            <md-input-container style="width:300px">
+                                    <p class="grantlabel">Среднедушевой доход (руб.)</p>
+                                     <div layout="row" layout-align="bottom">
+                                        <input id="incomeValue" label="incomeValue"  class="grayborder"  name="incomeValue" type="number" ng-min="0" min="0" ng-max="20000" required ng-model="user.Income" />
+                                    </div>
+
+                                    <div style="font-size: 12px; color: rgb(255,87,34);" ng-show="!income.Files || income.Files.length == 0">
+                                            {{'Необходимо прикрепить скан справки' | translate}}
+                                    </div>
+
+                                    <div ng-messages="income.incomeValue.$error">
+                                        <div ng-message when="required">
+                                            {{'Это поле обязательно для заполнения' | translate}}
+                                        </div>
+                                        <div ng-message when="min">
+                                                {{'Минимальное значение - 0' | translate}}
+                                        </div>
+                                        <div ng-message when="max">
+                                                {{'Максимальное значение - 20000' | translate}}
+                                    </div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-button ng-disabled="!income.Files || income.Files.length == 0" style="margin-top: 13px;" class="md-raised margin-left-0" ng-click="updateIncomeClick(user.Income)" >{{'Сохранить' | translate}}</md-button>
+   
+
+                           <div padding="0px 0px 300px 0px">
+                               <div id="upload-scan-container" ng-hide="usersCantEditOption && user.IncomeValidationComment == null">
+                                   <input id="incomeFileInput" type="file" nv-file-select="" uploader="incomeUploader" ng-model="user.incomeFile" multiple ng-show="0" />
+                                    <p class="grantlabel">Cкан справки о доходах  (в формате .JPG или .PNG)</p>
+                                   <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="incomeImageClick()"   type="file">
+                                       <md-tooltip md-direction="right">Загрузите скан справки о доходах</md-tooltip>
+                                       <md-icon md-font-icon="icon-attachment"></md-icon>
+                                   </md-button>
+                               </div>
+                           </div>
+
+                        
+                 <md-tabs md-dynamic-height  md-border-bottom>
+                      <md-tab label="Новое">
+   
+                           <div ng-show="income.Files">
+                               <md-card>
+                                   <md-card-content>
+                                       <md-list>
+                                           <md-list-item ng-show="item.FullName.indexOf('2019') > 0" ng-repeat="item in income.Files">
+                                               <img ng-src="{{::item.VirtualPath}}" class="md-avatar" />
+                                               <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                               <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(item, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                                               <md-button class="md-warn md-primary margin-left-0" ng-click="askDelete(item)" ng-hide="usersCantEditOption && user.IncomeValidationComment == null" ng-disabled="inProgress ">{{'Удалить' | translate}}</md-button>
+                                           </md-list-item>
+                                       </md-list>
+                               </md-card>
+                           </div>
+                       </md-tab>
+                       <md-tab label="Архив">
+                           <div ng-show="income.Files">
+                               <md-card>
+                                   <md-card-content>
+                                       <md-list>
+                                           <md-list-item  ng-show="item.FullName.indexOf('2019') < 0"; ng-repeat="item in income.Files">
+                                               <img ng-src="{{::item.VirtualPath}}" class="md-avatar" />
+                                               <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                               <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(item, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                                               <md-button class="md-warn md-primary margin-left-0" ng-click="askDelete(item)" ng-hide="usersCantEditOption && user.IncomeValidationComment == null" ng-disabled="inProgress ">{{'Удалить' | translate}}</md-button>
+                                           </md-list-item>
+                                       </md-list>
+                               </md-card>
+                           </div>
+                       </md-tab>
+                   </md-tabs>
+   
+   
+   
+                       </form>
+                   </md-content>
+                 </div>
+               </md-tab>
+
+            <md-tab label="ПОРТФОЛИО ДОСТИЖЕНИЙ">
+                <md-content class="md-padding">
+                    <div ng-controller="StudentAchievementController as ctrl">
+
+                        <div  class="padded-content-page gray-background">
+
+                                <div id="achievementform" style="display:none">
+                                        <ng-include src="'app/grant/g-user-profile/g-user-achievement.tmpl.html'" />
+                                  </div>
+
+                      <md-toolbar class="achievementtoolbar" ng-if="usersCantEditOption == true" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Изменение данных приостановлено</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+
+                       <md-toolbar class="toolbar-default margin-bottom-30 achievementtoolbar" ng-hide="usersCantEditOption && user.Id != 6154">
+                          <div layout="row" layout-align="end center">
+
+                            <div flex="auto" style="margin-left:20px; margin-top: 13px;" ng-hide="isachievementFilled">
+                                  Заполните информацию о достижениях, нажав "Добавить"
+                            </div>
+
+                            <div style=" width: 120px;">
+                                     <md-button class="md-raised" style="margin-top: 13px;" ng-hide="usersCantEditOption && user.Id != 6154" ng-click="createAchievementClick()">{{'Добавить' | translate}}</md-button>
+                            </div>
+                            </div>
+                       </md-toolbar>
+
+                       <md-toolbar class="achievementtoolbar" ng-show="!isachievementFilled" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Не добавлены достижения!</span>
+                                </h2>
+                            </div>
+                        </div>
+                      </md-toolbar>
+
+                       <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                      </div>
+
+
+                  
+
+
+
+                      <md-tabs md-dynamic-height  md-border-bottom>
+                            <md-tab label="Новое">
+
+                                    <div ng-repeat="achieve in achievements" on-finish-render="ngRepeatFinished" ng-switch on="$index % 3">
+
+                                            <div layout="row" layout-sm="column" layout-align="start" layout-margin ng-switch-when="0" >
+           
+                                                     <md-card flex="auto" ng-style="{'float' : 'left' }">
+                                                      <div class="crop-div">
+                                                       <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(achieve)" ng-src="{{achieve.ImageLink}}" class="grantImage" alt="">
+                                                      </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::achieve.Level}}.png" alt="">
+                                                       <md-tooltip>{{::achieve.LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="achievements[$index].State" class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::achieve.State}}.png" alt="">
+                                                        <md-tooltip>{{::achieve.StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::achieve.Subject}}.png" alt="">
+                                                       <md-tooltip>{{::achieve.SubjectName}}</md-tooltip>
+                                                     </div>
+                                                     <div class="special4 badge badge-year">
+                                                         <div layout="row" layout-align="center">  <h3> {{achieve.Year}} </h3> </div>
+                                                     </div>
+
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{achieve.Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                     </div>
+
+                                                     <div class="special6 badge badge-year">
+                                                        <img  ng-src="..\ach\avalidstate{{::achieve.ValidationState}}.png" alt="">
+                                                        <md-tooltip>{{::achieve.ValidStateName}}</md-tooltip>
+                                                     </div>
+
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::achieve.Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+           
+                                                   <md-card flex="auto" ng-style="{'float' : 'left' }" ng-if="achievements[$index+1]">
+                                                      <div class="crop-div">
+                                                          <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(achievements[$index+1])" ng-src="{{achievements[$index+1].ImageLink}}" class="grantImage" alt="">
+           
+                                                     </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::achievements[$index+1].Level}}.png" alt="">
+                                                       <md-tooltip>{{::achievements[$index+1].LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="achievements[$index+1].State" class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::achievements[$index+1].State}}.png" alt="">
+                                                      <md-tooltip>{{::achievements[$index+1].StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::achievements[$index+1].Subject}}.png" alt="">
+                                                      <md-tooltip>{{::achievements[$index+1].SubjectName}}</md-tooltip>
+                                                     </div>
+                                                      <div class="special4 badge badge-year">
+                                                         <div  layout="row" layout-align="center">  <h3> {{achievements[$index+1].Year}} </h3> </div>
+                                                     </div>
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{achievements[$index+1].Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                      </div>
+                                                      <div class="special6 badge badge-year">
+                                                                <img  ng-src="..\ach\avalidstate{{::achievements[$index+1].ValidationState}}.png" alt="">
+                                                                <md-tooltip>{{::achievements[$index+1].ValidStateName}}</md-tooltip>
+                                                      </div>
+
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::achievements[$index+1].Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+           
+                                                   <md-card flex="auto" ng-style="{ 'float' : 'left' }" ng-if="achievements[$index+2]">
+                                                      <div class="crop-div">
+                                                          <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(achievements[$index+2])" ng-src="{{achievements[$index+2].ImageLink}}" class="grantImage" alt="">
+                                                      </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::achievements[$index+2].Level}}.png" alt="">
+                                                      <md-tooltip>{{::achievements[$index+2].LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="achievements[$index+2].State"  class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::achievements[$index+2].State}}.png" alt="">
+                                                      <md-tooltip>{{::achievements[$index+2].StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::achievements[$index+2].Subject}}.png" alt="">
+                                                      <md-tooltip>{{::achievements[$index+2].SubjectName}}</md-tooltip>
+                                                     </div>
+                                                      <div class="special4 badge badge-year">
+                                                         <div  layout="row" layout-align="center">  <h3> {{achievements[$index+2].Year}} </h3> </div>
+                                                     </div>
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{achievements[$index+2].Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                    </div>
+                                                     <div class="special6 badge badge-year">
+                                                                <img  ng-src="..\ach\avalidstate{{::achievements[$index+2].ValidationState}}.png" alt="">
+                                                                <md-tooltip>{{::achievements[$index+2].ValidStateName}}</md-tooltip>
+                                                      </div>
+           
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::achievements[$index+2].Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+                                               </div>
+                                         </div>
+         
+                               
+                             </md-tab>
+                             <md-tab label="Архив">
+
+                                    <div ng-repeat="achieve in oldAchievements" on-finish-render="ngRepeatFinished" ng-switch on="$index % 3">
+
+                                            <div layout="row" layout-sm="column" layout-align="start" layout-margin ng-switch-when="0" >
+           
+                                                     <md-card flex="auto" ng-style="{'float' : 'left' }">
+                                                      <div class="crop-div">
+                                                       <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(achieve)" ng-src="{{achieve.ImageLink}}" class="grantImage" alt="">
+                                                      </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::achieve.Level}}.png" alt="">
+                                                       <md-tooltip>{{::achieve.LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="oldAchievements[$index].State" class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::achieve.State}}.png" alt="">
+                                                        <md-tooltip>{{::achieve.StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::achieve.Subject}}.png" alt="">
+                                                       <md-tooltip>{{::achieve.SubjectName}}</md-tooltip>
+                                                     </div>
+                                                     <div class="special4 badge badge-year">
+                                                         <div layout="row" layout-align="center">  <h3> {{achieve.Year}} </h3> </div>
+                                                     </div>
+
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{achieve.Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                     </div>
+
+                                                     <div class="special6 badge badge-year">
+                                                        <img  ng-src="..\ach\validstate{{::achieve.ValidationState}}.png" alt="">
+                                                        <md-tooltip>{{::achieve.ValidStateName}}</md-tooltip>
+                                                     </div>
+           
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::achieve.Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+           
+                                                   <md-card flex="auto" ng-style="{'float' : 'left' }" ng-if="oldAchievements[$index+1]">
+                                                      <div class="crop-div">
+                                                          <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(oldAchievements[$index+1])" ng-src="{{oldAchievements[$index+1].ImageLink}}" class="grantImage" alt="">
+           
+                                                     </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::oldAchievements[$index+1].Level}}.png" alt="">
+                                                       <md-tooltip>{{::oldAchievements[$index+1].LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="oldAchievements[$index+1].State" class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::oldAchievements[$index+1].State}}.png" alt="">
+                                                      <md-tooltip>{{::oldAchievements[$index+1].StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::oldAchievements[$index+1].Subject}}.png" alt="">
+                                                      <md-tooltip>{{::oldAchievements[$index+1].SubjectName}}</md-tooltip>
+                                                     </div>
+                                                      <div class="special4 badge badge-year">
+                                                         <div  layout="row" layout-align="center">  <h3> {{oldAchievements[$index+1].Year}} </h3> </div>
+                                                     </div>
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{oldAchievements[$index+1].Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                     </div>
+                                                     <div class="special6 badge badge-year">
+                                                        <img  ng-src="..\ach\validstate{{::achieve.ValidationState}}.png" alt="">
+                                                        <md-tooltip>{{::achieve.ValidStateName}}</md-tooltip>
+                                                     </div>
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::oldAchievements[$index+1].Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+           
+                                                   <md-card flex="auto" ng-style="{ 'float' : 'left' }" ng-if="oldAchievements[$index+2]">
+                                                      <div class="crop-div">
+                                                          <img style="cursor: pointer; cursor: hand;" ng-click="editAchievementClick(oldAchievements[$index+2])" ng-src="{{oldAchievements[$index+2].ImageLink}}" class="grantImage" alt="">
+                                                      </div>
+           
+                                                     <div class = "special badge">
+                                                      <img  ng-src="..\ach\level{{::oldAchievements[$index+2].Level}}.png" alt="">
+                                                      <md-tooltip>{{::oldAchievements[$index+2].LevelName}}</md-tooltip>
+                                                     </div>
+                                                      <div ng-show="oldAchievements[$index+2].State"  class = "special2 badge">
+                                                      <img  ng-src="..\ach\state{{::oldAchievements[$index+2].State}}.png" alt="">
+                                                      <md-tooltip>{{::oldAchievements[$index+2].StateName}}</md-tooltip>
+                                                     </div>
+                                                      <div class = "special3 badge">
+                                                      <img  ng-src="..\ach\subject{{::oldAchievements[$index+2].Subject}}.png" alt="">
+                                                      <md-tooltip>{{::oldAchievements[$index+2].SubjectName}}</md-tooltip>
+                                                     </div>
+                                                      <div class="special4 badge badge-year">
+                                                         <div  layout="row" layout-align="center">  <h3> {{oldAchievements[$index+2].Year}} </h3> </div>
+                                                     </div>
+                                                     <div class="special5 badge badge-year">
+                                                            <div layout="row" layout-align="center">  <h3> {{oldAchievements[$index+2].Score}} </h3> </div>
+                                                            <md-tooltip>Балл за достижение</md-tooltip>
+                                                     </div>
+
+                                                     <div class="special6 badge badge-year">
+                                                        <img  ng-src="..\ach\validstate{{::achieve.ValidationState}}.png" alt="">
+                                                        <md-tooltip>{{::oldAchievements[$index+2].ValidStateName}}</md-tooltip>
+                                                     </div>
+           
+                                                       <md-card-content>
+                                                           <div class="content-padded" style="word-wrap: break-word;">
+                                                               <h2 class="md-title"><b>{{::oldAchievements[$index+2].Name}}</b></h2>
+                                                           </div>
+                                                       </md-card-content>
+                                                      </md-card>
+                                               </div>
+                                         </div>
+                               
+                             </md-tab>
+                         </md-tabs>
+
+
+
+                    </div>
+                </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Пароль">
+                <md-content class="md-padding">
+                    <div ng-controller="UserPasswordController">
+                        <form name="userpass">
+                            <md-input-container>
+                                <label for="oldPassword">{{'Текущий пароль' | translate}}</label>
+                                <input id="oldPassword" label="oldPassword" name="oldPassword" type="password" ng-model="password.OldPassword" required/>
+                                <div ng-messages="userpass.oldPassword.$error">
+
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label for="newPassword">{{'Новый пароль' | translate}}</label>
+                                <input id="newPassword" label="newPassword" name="newPassword" type="password" ng-model="password.NewPassword" required ng-minlength="8"/>
+                               <div ng-messages="userpass.newPassword.$error">
+
+                                    <div ng-message when="minlength">
+                                        {{'Минимальная длина - 8 символов' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label for="confirmNewPassword">{{'Подтверждение нового пароля' | translate}}</label>
+                                <input id="confirmNewPassword" label="confirmNewPassword" name="confirmNewPassword" type="password" ng-model="password.ConfirmPassword" required same-password="userpass.newPassword"/>
+                                <div ng-messages="userpass.confirmNewPassword.$error">
+                                    <div ng-message when="samePassword">
+                                        {{'Пароли должны совпадать' | translate}}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-button class="md-raised md-primary margin-left-0" ng-disabled="userpass.$invalid" ng-click="updatePasswordClick()">{{'Применить' | translate}}</md-button>
+                        </form>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

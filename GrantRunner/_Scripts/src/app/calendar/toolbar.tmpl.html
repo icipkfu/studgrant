@@ -1,0 +1,33 @@
+<div class="md-toolbar-tools">
+    <md-button class="md-icon-button" hide-gt-md ng-click="openSideNav('left')" aria-label="side navigation">
+        <md-icon md-font-icon="icon-menu"></md-icon>
+    </md-button>
+    <h2 flex ng-hide="currentView.viewName == 'agendaWeek'">{{currentDay | amDateFormat:currentView.dateFormat}}</h2>
+    <h2 flex ng-show="currentView.viewName == 'agendaWeek'">Week {{currentDay | amDateFormat:currentView.dateFormat}} - {{currentDay | amDateFormat:'YYYY'}}</h2>
+
+    <div class="widget-buttons">
+        <md-button class="widget-button md-icon-button" ng-click="changeMonth('prev')" aria-label="previous month">
+            <md-icon md-font-icon="icon-chevron-left"></md-icon>
+        </md-button>
+        <md-button hide show-gt-lg class="widget-button md-icon-button" ng-click="changeMonth('today')" aria-label="today">
+            <md-icon md-font-icon="icon-today"></md-icon>
+        </md-button>
+        <md-button class="widget-button md-icon-button" ng-click="changeMonth('next')" aria-label="next month">
+            <md-icon md-font-icon="icon-chevron-right"></md-icon>
+        </md-button>
+    </div>
+
+    <md-menu>
+        <md-button class="md-icon-button" aria-label="{{'CALENDAR.TOOLBAR.CHANGE-VIEW' | translate}}" ng-click="$mdOpenMenu()">
+            <md-icon md-font-icon="{{currentView.icon}}" ng-class="currentView.icon"></md-icon>
+        </md-button>
+        <md-menu-content width="2">
+            <md-menu-item ng-repeat="view in views">
+                <md-button ng-click="changeView(view)">
+                    {{view.name | translate}}
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>
+

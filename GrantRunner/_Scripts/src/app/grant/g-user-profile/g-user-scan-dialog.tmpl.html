@@ -1,0 +1,12 @@
+<md-dialog aria-label="{{currentImage.FullName}}">
+    <md-dialog-content>
+        <img ng-if="currentImage.VirtualPath" ng-src="{{currentImage.VirtualPath}}" alt="{{currentImage.FullName}}">
+         <img ng-if="currentImage.ImageLink" ng-src="{{currentImage.ImageLink}}">
+
+    </md-dialog-content>
+
+</md-dialog>
+
+  <button class="md-icon-button md-fab md-primary md-button md-cyan-theme rotatebtn" onclick="rotate();" type="file">
+            <md-icon md-font-icon="icon-rotate-right" class="ng-scope ng-isolate-scope md-cyan-theme md-font icon-attachment" aria-hidden="true"></md-icon>
+  </button>

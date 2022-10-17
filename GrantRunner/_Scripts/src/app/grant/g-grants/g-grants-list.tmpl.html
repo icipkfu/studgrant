@@ -1,0 +1,54 @@
+﻿
+<div ng-controller="GrantsController" class="padded-content-page gray-background"  style="min-width: 420px;">
+    
+    <md-toolbar class="toolbar-default margin-bottom-30">
+          <div layout="row" layout-align="end center">
+
+              <div  style=" width: 120px;" ng-if="isAdmin">
+                    <md-button class="md-raised" style="margin-top: 13px;" ng-click="goCreateGrant()">{{'Добавить' | translate}}</md-button>
+                </div>
+            </div>
+     </md-toolbar>
+
+     <div ng-repeat="item in contents" ng-switch on="{{CardSwitcher($index)}}">         
+       <div layout="row" layout-sm="column" layout-align="start" layout-margin ng-switch-when="0" >
+
+            <md-card ng-click="infoGrant(contents[$index].Id)" ng-style="{ 'width' : getCardWidth() , 'float' : 'left' }">
+               <div class="crop-div"> 
+                  <a class="grantImage" href="{{'#/grant/description/' + contents[$index].Id }}" class="grant-timeline-img">  <img ng-src="{{::contents[$index].thumb}}"></a> 
+                 </div>
+                <md-card-content>
+                    <div class="content-padded">
+                        <h2 class="md-title" style="min-height: 50px; height: 100%"><b>{{::contents[$index].Name}}</b></h2>
+                        <div  ng-bind-html="contents[$index].Status"> </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+                            
+            <md-card ng-click="infoGrant(contents[$index+1].Id)" ng-style="{ 'width' : getCardWidth() ,'float' : 'left' }" ng-show="contents[$index+1] && findColNumberPerRow()>1" >
+                <div class="crop-div">
+                  <a class="grantImage" href="{{'#/grant/description/' + contents[$index+1].Id }}" class="grant-timeline-img">  <img ng-src="{{::contents[$index+1].thumb}}"></a> 
+                  </div>
+                <md-card-content>
+                    <div class="content-padded">
+                        <h2 class="md-title" style="height: 50px;  height: 100%"><b>{{::contents[$index+1].Name}}</b></h2>
+                        <div ng-bind-html="contents[$index+1].Status"> </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <md-card ng-click="infoGrant(contents[$index+2].Id)" ng-style="{ 'width' : getCardWidth() , 'float' : 'left' }"  ng-show="contents[$index+2] && findColNumberPerRow()>2" >
+                <div class="crop-div">
+                 <a class="grantImage" href="{{'#/grant/description/' + contents[$index+2].Id }}" class="grant-timeline-img">  <img ng-src="{{::contents[$index+2].thumb}}"></a> 
+             </div>
+                <md-card-content>
+                    <div class="content-padded">
+                        <h2 class="md-title" style="height: 50px;  height: 100%"><b>{{::contents[$index+2].Name}}</b></h2>
+                         <div ng-bind-html="contents[$index+2].Status"> </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+          </div> 
+      </div>
+</div>
+

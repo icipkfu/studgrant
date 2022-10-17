@@ -1,0 +1,18 @@
+namespace Grant.Core.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class StudentUserId : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Students", "UserIdentityId", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Students", "UserIdentityId");
+        }
+    }
+}

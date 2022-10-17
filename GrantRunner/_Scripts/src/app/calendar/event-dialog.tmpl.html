@@ -1,0 +1,102 @@
+<md-dialog class="event-dialog" flex="60" flex-sm="100">
+    <md-toolbar class="toolbar-default" ng-style="{ 'background-color': selectedColor.backgroundColor, color: selectedColor.textColor }">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>{{dialogData.title | translate}}</span>
+                <span ng-show="event.title"> - {{event.title}}</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+                <md-icon md-font-icon="icon-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="sticky-container">
+        <div>
+            <form class="event-dialog-form" name="eventForm">
+                <md-input-container>
+                    <label>{{'CALENDAR.EVENT.TITLE' | translate}}</label>
+                    <input ng-model="event.title" required>
+                </md-input-container>
+                <md-list>
+                    <md-list-item layout="row" layout-align="space-between center">
+                        <p>{{'CALENDAR.EVENT.ALL-DAY' | translate}}</p>
+                        <md-switch class="md-secondary" ng-model="event.allDay" ng-change="allDayChanged()"></md-switch>
+                    </md-list-item>
+                </md-list>
+                <div class="event-dialog-input-row" layout="row" layout-align="space-between center">
+                    <p>{{'CALENDAR.EVENT.START' | translate}}</p>
+                    <md-icon md-font-icon="icon-today"></md-icon>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.YEAR-PICK' | translate}}" ng-model="start.year">
+                        <md-option ng-repeat="year in dateSelectOptions.years" ng-value="year">{{year}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.MONTH-PICK' | translate}}" ng-model="start.month">
+                        <md-option ng-repeat="month in dateSelectOptions.months" ng-value="$index">{{month | translate}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.DATE-PICK' | translate}}" ng-model="start.date">
+                        <md-option ng-repeat="date in dateSelectOptions.dates" ng-value="date">{{date}}</md-option>
+                    </md-select>
+                    <md-icon md-font-icon="icon-access-time"></md-icon>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.HOUR-PICK' | translate}}" ng-model="start.hour">
+                        <md-option ng-repeat="hour in dateSelectOptions.hours" ng-value="hour">{{hour | padding:2}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.MINUTE-PICK' | translate}}" ng-model="start.minute">
+                        <md-option ng-repeat="minute in dateSelectOptions.minutes" ng-value="minute">{{minute | padding:2}}</md-option>
+                    </md-select>
+                </div>
+                <div class="event-dialog-input-row" layout="row" layout-align="space-between center" ng-hide="event.allDay">
+                    <p>{{'CALENDAR.EVENT.END' | translate}}</p>
+                    <md-icon md-font-icon="icon-today"></md-icon>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.YEAR-PICK' | translate}}" ng-model="end.year">
+                        <md-option ng-repeat="year in dateSelectOptions.years" ng-value="year">{{year}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.MONTH-PICK' | translate}}" ng-model="end.month">
+                        <md-option ng-repeat="month in dateSelectOptions.months" ng-value="$index">{{month | translate}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.DATE-PICK' | translate}}" ng-model="end.date">
+                        <md-option ng-repeat="date in dateSelectOptions.dates" ng-value="date">{{date}}</md-option>
+                    </md-select>
+                    <md-icon md-font-icon="icon-access-time"></md-icon>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.HOUR-PICK' | translate}}" ng-model="end.hour">
+                        <md-option ng-repeat="hour in dateSelectOptions.hours" ng-value="hour">{{hour | padding:2}}</md-option>
+                    </md-select>
+                    <md-select class="padding-right-10" placeholder="{{'CALENDAR.EVENT.MINUTE-PICK' | translate}}" ng-model="end.minute">
+                        <md-option ng-repeat="minute in dateSelectOptions.minutes" ng-value="minute">{{minute | padding:2}}</md-option>
+                    </md-select>
+                </div>
+                <md-input-container>
+                    <label>{{'CALENDAR.EVENT.LOCATION' | translate}}</label>
+                    <input type="text" ng-model="event.location">
+                </md-input-container>
+                <md-input-container>
+                    <label>{{'CALENDAR.EVENT.DESCRIPTION' | translate}}</label>
+                    <textarea ng-model="event.description"></textarea>
+                </md-input-container>
+                <md-input-container>
+                    <div layout="row" layout-align="space-between center">
+                        <p flex>{{'CALENDAR.EVENT.COLOR' | translate}}</p>
+                        <md-select placeholder="{{'CALENDAR.EVENT.COLOR-PICK' | translate}}" ng-model="selectedColor" ng-change="colorChanged()">
+                            <md-option ng-value="color" ng-repeat="color in colors">{{color.name}}</md-option>
+                        </md-select>
+                    </div>
+                </md-input-container>
+            </form>
+        </div>
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row">
+        <md-button class="md-warn" ng-click="delete()" aria-label="{{'CALENDAR.CANCEL' | translate}}" ng-show="edit">
+            {{'CALENDAR.DELETE' | translate}}
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="cancel()" aria-label="{{'CALENDAR.CANCEL' | translate}}">
+            {{'CALENDAR.CANCEL' | translate}}
+        </md-button>
+        <md-button ng-click="ok()" class="md-primary" ng-disabled="eventForm.$invalid" aria-label="{{dialogData.confirmButtonText | translate}}">
+            {{dialogData.confirmButtonText | translate}}
+        </md-button>
+    </div>
+</md-dialog>

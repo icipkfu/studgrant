@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "FORMS": {
+            "FORMS": "Les formes",
+            "INPUTS": "Entrées",
+            "BINDING": "La Liaison De Données",
+            "AUTOCOMPLETE": "La saisie semi-automatique",
+            "VALIDATION": "Validation"
+        }
+    }
+}

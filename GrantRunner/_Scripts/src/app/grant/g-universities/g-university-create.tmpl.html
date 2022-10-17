@@ -1,0 +1,163 @@
+﻿§<div ng-controller="UniversitiesController as ctrl">
+<div class="padding-20 padding-top-120 overlay-gradient-30" layout="row" layout-align="start center"
+     style="background: url(../../../assets/images/backgrounds/bg-7.jpg) no-repeat; background-size: cover; ">
+    <div ng-show="university.thumb" class="margin-right-20">
+        <img  ng-src="{{university.thumb}}"  class="make-round avatar-size100" width="100" />
+    </div>
+    <div class="text-light">
+        <!--<h3 class="font-weight-600 margin-bottom-0 text-light">Редактирование</h3>-->
+        <!--<p class="font-weight-300 margin-top-0">Редактирование</p>-->
+    </div>
+
+    <div >
+        <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+    </div>
+
+</div>
+
+
+<div  class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Карточка ВУЗа">
+            <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <form name="universityForm">
+                    <md-card>
+                    <md-card-content>
+                        <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-account-balance"></md-icon>
+                            <input type="text" placeholder="Наименование Вуза" name="name" ng-model="university.Name" ng-focus="validateName=true;" required />
+
+                            <div ng-show="validateName" ng-messages="universityForm.name.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                         <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-location-city"></md-icon>
+                            <input type="text" placeholder="Зона" name="city" ng-model="university.City" ng-focus="validateCity=true" required />
+                             <div ng-show="validateCity" ng-messages="universityForm.city.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                           <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-location-city"></md-icon>
+                            <input type="text" placeholder="Город" name="town" ng-model="university.Town" ng-focus="validateTown=true" required />
+                             <div ng-show="validateTown" ng-messages="universityForm.town.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                          <md-input-container style="width:200px" md-no-float> 
+                          <md-icon md-font-icon="icon-stars"></md-icon>
+                                <md-select id="UniverType" style="margin-left:35px" placeholder="Тип" ng-model="university.UniverType" >
+                                  <md-option value="1">ВО</md-option>
+                                  <md-option value="2">СПО</md-option>
+                                </md-select>
+                          </md-input-container>
+
+                          <!-- <md-input-container style="width:350px" md-no-float> 
+                            <md-icon md-font-icon="icon-account-balance"></md-icon>
+                            <md-select id="BankFilialId"  placeholder="Филиал банка для выдачи карты" style="margin-left:35px" ng-model="university.BankFilialId"  style="width: 400px;">
+                                <md-option ng-repeat="item in FilialBankList" value="{{item.Id}}">{{item.FilialName}}</md-option>
+                            </md-select>
+                            </md-input-container> -->
+                            <div>
+                                <label for="university1">Филиал банка для выдачи карты</label>
+                               <md-autocomplete  id="BankFilialId" class="margin-bottom-20"
+                                                md-selected-item="ctrl.selectedItemBank"
+                                                ng-disabled="ctrl.isDisabledBank"
+                                                md-no-cache="ctrl.noCacheBank"
+                                                md-selected-item="ctrl.selectedItemBank"
+                                                md-search-text-change="ctrl.searchTextChangeBank(ctrl.searchTextBank)"
+                                                md-search-text="ctrl.searchTextBank"
+                                                md-selected-item-change="ctrl.selectedItemChangeBank(item)"
+                                                md-items="item in ctrl.querySearchBank(ctrl.searchTextBank)"
+                                                md-item-text="item.display"
+                                                md-min-length="0"
+                                                >
+                                    <md-item-template>
+                                     <div layout="row" layout-align="start">
+                                          <span md-highlight-text="searchTextBank">{{item.display}}</span>
+                                     </div>
+                                     </md-item-template>
+                                   <span md-highlight-text="ctrl.searchTextBank" md-highlight-flags="^i">{{item.display}}</span>
+                               </md-autocomplete>
+                           </div>
+
+                         
+
+                         <div>
+                                 <label for="university">Куратор</label>
+                                <md-autocomplete  id="curator" class="margin-bottom-20"
+                                                 md-selected-item="ctrl.selectedItem"
+                                                 ng-disabled="ctrl.isDisabled"
+                                                 md-no-cache="ctrl.noCache"
+                                                 md-selected-item="ctrl.selectedItem"
+                                                 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                                                 md-search-text="ctrl.searchText"
+                                                 md-selected-item-change="ctrl.selectedItemChange(item)"
+                                                 md-items="item in ctrl.querySearch(ctrl.searchText)"
+                                                 md-item-text="item.display"
+                                                 md-min-length="0"
+                                                 ng-blur="checkCuratorField"
+                                                 >
+                                     <md-item-template>
+                                      <div layout="row" layout-align="start">
+                                          <img ng-src="{{item.thumb}}" class="avatar-size avatar-size40"/>
+                                           <span md-highlight-text="searchText">{{item.display}}</span>
+                                      </div>
+                                      </md-item-template>
+                                    <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-autocomplete>
+                            </div>
+
+                        <md-input-container md-no-float>
+                        <md-icon md-font-icon="icon-image"> <strong>Изображениe</strong> </md-icon> 
+                        </md-input-container>
+
+                       <md-input-container md-no-float>
+                           <div id="upload-file-container">
+                             <input id="univerFileInput" type="file" nv-file-select="" uploader="uploader" ng-model="university.image" />
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="univerImageClick()" type="file">
+                                <md-tooltip md-direction="right">Загрузить изображение</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                          
+                           </div>
+                           <br>
+                            <div ng-repeat="item in uploader.queue">
+                                 <div>
+                                     <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                  </div>
+                                   <div ng-show="uploader.isHTML5" nowrap><strong>{{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                             </div>
+
+                        </md-input-container>
+
+                        <div layout="row" layout-align="end center">
+                             <md-button class="md-raised" ng-hide="university.Id" ng-class="md-accent" aria-label="raised button" ng-click="createUniversity()">Добавить</md-button>
+                             <md-button class="md-raised" ng-show="university.Id" ng-class="md-accent" aria-label="raised button" ng-click="updateUniversity()">Сохранить</md-button>
+                             <md-button class="md-raised" ng-show="university.Id" class="button-red" ng-class="md-accent" aria-label="raised button" ng-click="deleteUniversity()">Удалить</md-button>
+                        </div>
+                    </md-card-content>
+                    </md-card>
+                </form>
+            </md-content>
+        </md-tab>
+        <!--<md-tab label="Студенты">
+            <md-content>
+                <md-table class="elements-image-table-example" columns="columns" contents="contents" page-size="50"></md-table>
+            </md-content>
+        </md-tab>-->
+    </md-tabs>
+</div>
+
+</div>

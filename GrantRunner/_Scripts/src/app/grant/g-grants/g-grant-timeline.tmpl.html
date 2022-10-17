@@ -1,0 +1,109 @@
+
+
+  <div>
+
+   <md-content class="padding-40"  ng-disabled="inProgress"  style="background: rgba(0, 0, 0, 0.05) !important;" >
+     <md-card>
+       <md-card-content >
+
+               <md-input-container  md-no-float >
+                             <md-icon md-font-icon="icon-search"> </md-icon>
+                             <input name="userSearch" placeholder="Пользователь" ng-change="applyEventFilter()"  type="text" ng-model="eventSearchText">
+               </md-input-container>
+
+
+               <div layout="row" layout-sm="column" layout-align="start center">
+
+                     <md-select placeholder="Тип события" ng-model="selectedEventType"  ng-change="applyEventFilter()" style="width: 700px;">
+                          <md-option ng-repeat="item in eventTypeList" value="{{item.Id}}">{{item.Name}}</md-option>
+                     </md-select>
+
+                     <md-button aria-label="raised button" ng-click="selectedEventType=null; applyEventFilter();" >Сброс</md-button>
+
+               </div>
+
+
+            <div layout="row" layout-sm="column" layout-align="start center">
+                <md-input-container class="nomarginleft">
+                       <input id="eventStartDate" placeholder="Начиная с даты"   ng-change="eventStartDateChanged()" type="text" ng-model="eventStartDate" />
+                </md-input-container>
+
+                 <md-button aria-label="raised button" ng-click="eventStartDate=null; eventStartDateParsed=null; applyEventFilter();" >Сброс</md-button>
+            </div>
+
+            <div layout="row" layout-sm="column" layout-align="start center">
+                <md-input-container class="nomarginleft">
+                       <input id="eventEndDate" placeholder="Заканчивая датой"   ng-change="eventEndDateChanged()" type="text" ng-model="eventEndDate" />
+                </md-input-container>
+
+                 <md-button aria-label="raised button" ng-click="eventEndDate=null; eventEndDateParsed=null; applyEventFilter();" >Сброс</md-button>
+            </div>
+       </md-card-content>
+      </md-card>
+    </md-content>
+
+
+
+
+
+    <div class="overlay-5 padded-content-page" animate-elements >
+    	<div ng-show="roleInfo" class="timeline" layout="row" ng-repeat="event in events" ng-attr-layout-align="{{$odd? 'end':'start'}}"  on-finish-render="ngRepeatFinished" >
+    		<div layout="row" flex="50" flex-sm="100" ng-attr-layout-align="{{$odd? 'end':'start'}} center">
+    			<md-content class="timeline-point md-whiteframe-z1 fill">
+            <a href="{{event.link}}" class="grant-timeline-img">  <img ng-src="{{event.image}}"></a> 
+    			
+    			</md-content>
+    			<md-divider class="margin-0" flex flex-order="2"></md-divider>
+    		    <widget flex="70" flex-sm="100" class="margin-0 {{event.classes}}" title="{{event.date}} {{event.time}} <br> {{event.title}}" subtitle="{{event.subtitle}}" title-position="top" ng-attr-flex-order="{{$odd? 2:1}}" palette-background="{{event.palette}}" >
+    		     
+               <div class="button-toolbar" layout="row" layout-align="start right" ng-show="event.dateChange || event.description || event.conditions || event.quotaChanged || event.administrators">
+                 		 <md-button class="md-primary"  ng-click="showDetails1 = ! showDetails1"> Подробнее</md-button>
+                  	</div>
+                                   <div class="left10px" class="grant-details" style="word-wrap: break-word;"     ng-show="showDetails1">
+                                          <md-divider></md-divider>
+                                          <br>
+
+                                        <div ng-show="event.dateChange">  
+                                          <md-icon md-font-icon="icon-event-note"></md-icon>  <b>Срок окончания регистрации</b> 
+                                          <div class="left10px" ng-bind-html="event.dateChange"></div>
+                                        </div>
+
+                                        <div ng-show="event.description"> 
+                                          <md-icon md-font-icon="icon-description" ></md-icon>  <b>Описание гранта</b> 
+                                          <div class="left10px" ng-bind-html="event.description"></div>
+                                        </div>
+
+                                        <div ng-show="event.conditions">
+                                           <md-icon md-font-icon="icon-check"> </md-icon> <b>Условия конкурса</b>
+                                           <div class="left10px" ng-bind-html="event.conditions" ></div>
+                                        </div>
+
+                                        <div ng-show="false">
+                                            <md-icon md-font-icon="icon-attach-file" > </md-icon> <b>Приложения</b>
+                                            <br>
+                                        </div>
+                                            
+
+                                        <div ng-show="event.quotaChanged">
+                                            <md-icon md-font-icon="icon-check" > </md-icon>  <b>Квоты</b>
+                                            <div class="left10px" ng-bind-html="event.quotaChanged"></div>
+                                        </div>
+
+                                        <div  ng-show="event.administrators">
+                                            <md-icon md-font-icon="icon-check"> </md-icon>  <b>Администраторы</b>
+                                            <div class="left10px" ng-bind-html="event.administrators"></div>
+                                        </div>
+                                              <br>
+                                  <md-divider></md-divider>   
+                                     </div>
+                   
+    		    </widget>
+                 <md-divider class="timeline-y-axis"></md-divider>
+
+    		</div>
+    	</div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,67 @@
+﻿<div ng-controller="BankFilialsController as ctrl">
+<div class="padding-20 padding-top-120 overlay-gradient-30" layout="row" layout-align="start center"
+     style="background: url(../../../assets/images/backgrounds/bg-7.jpg) no-repeat; background-size: cover; ">
+    <div class="text-light">
+        <!--<h3 class="font-weight-600 margin-bottom-0 text-light">Редактирование</h3>-->
+        <!--<p class="font-weight-300 margin-top-0">Редактирование</p>-->
+    </div>
+
+    <div >
+        <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+    </div>
+
+</div>
+
+
+<div  class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Добавить филиал">
+            <md-content class="padding-40" ng-disabled="inProgress">
+                <form name="bankfilialForm">
+                    <md-card>
+                    <md-card-content>
+                        <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-stars"></md-icon>
+                            <input type="text" placeholder="Код" name="code" ng-model="bankfilial.Code" ng-focus="validateCode=true;" maxlength="10"  type="text" valid-number  required />
+
+                            <div ng-show="validateCode" ng-messages="bankfilialForm.name.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                         <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-account-balance"></md-icon>
+                            <input type="text" placeholder="Имя" name="name" ng-model="bankfilial.FilialName" ng-focus="validateFilialName=true" required />
+                             <div ng-show="validateFilialName" ng-messages="bankfilialForm.FilialName.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                           <md-input-container md-no-float>
+                            <md-icon md-font-icon="icon-location-city"></md-icon>
+                            <input type="text" placeholder="Адрес" name="Address" ng-model="bankfilial.Address" ng-focus="validateAddress=true" required />
+                             <div ng-show="validateAddress" ng-messages="bankfilialForm.Address.$error">
+                                <div ng-message when="required">
+                                     {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                           </div>
+                        </md-input-container>
+
+                        <div layout="row" layout-align="end center">
+                             <md-button class="md-raised" ng-hide="bankfilial.Id" ng-class="md-accent" aria-label="raised button" ng-click="createBankFilial()">Добавить</md-button>
+                             <!-- <md-button class="md-raised" ng-show="bankfilial.Id" ng-class="md-accent" aria-label="raised button" ng-click="updateUniversity()">Сохранить</md-button>
+                             <md-button class="md-raised" ng-show="bankfilial.Id" class="button-red" ng-class="md-accent" aria-label="raised button" ng-click="deleteUniversity()">Удалить</md-button> -->
+                        </div>
+                    </md-card-content>
+                    </md-card>
+                </form>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+
+</div>

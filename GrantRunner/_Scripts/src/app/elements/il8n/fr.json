@@ -1,0 +1,27 @@
+{
+    "MENU": {
+        "ELEMENTS": {
+            "ELEMENTS": "Éléments",
+            "BUTTONS": "Boutons",
+            "CARDS": "Cartes",
+            "ICONS": "Les icônes",
+            "CHECKBOXES": "Des cases à cocher",
+            "SWITCHES": "Les commutateurs",
+            "RADIOS": "Les Radios",
+            "DIALOGS": "Les boîtes de dialogue",
+            "GRIDS": "Grilles",
+            "TABS": "Onglets",
+            "SLIDERS": "Curseurs",
+            "SELECTS": "Sélectionne",
+            "TABLES": "Tables",
+            "PROGRESS": "Progrès",
+            "SIDEBARS": "Encadrés",
+            "TOOLBARS": "Les barres d'outils",
+            "TOOLTIPS": "Les info-bulles",
+            "WHITEFRAMES": "Whiteframes",
+            "TOASTS": "Toasts",
+            "LISTS": "Listes",
+            "CHIPS": "Jetons"
+        }
+    }
+}

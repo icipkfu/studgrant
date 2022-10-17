@@ -1,0 +1,900 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D01C267-9549-44D2-9F41-D3FA6CA323F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grant.Core</RootNamespace>
+    <AssemblyName>Grant.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.7\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.4.0.0\lib\net45\LightInject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.6\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.2.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.6\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.EntityFramework.2.2.6\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\AppConfig.cs" />
+    <Compile Include="Config\AppModuleConfig.cs" />
+    <Compile Include="Config\ConfigProvider.cs" />
+    <Compile Include="Config\IConfigProvider.cs" />
+    <Compile Include="Config\KeyValueSectionParameter.cs" />
+    <Compile Include="Config\ModuleConfig.cs" />
+    <Compile Include="Config\ModuleConfigParams.cs" />
+    <Compile Include="Config\ModulesSection.cs" />
+    <Compile Include="Config\ModulesSectionHandler.cs" />
+    <Compile Include="Config\SectionHandler.cs" />
+    <Compile Include="Context\ApplicationContext.cs" />
+    <Compile Include="Context\IAppContext.cs" />
+    <Compile Include="Context\AppContext.cs" />
+    <Compile Include="Context\WebAppContext.cs" />
+    <Compile Include="AfterInstallInterceptor.cs" />
+    <Compile Include="CoreInstaller.cs" />
+    <Compile Include="Data\DataResult.cs" />
+    <Compile Include="Data\DataFileResult.cs" />
+    <Compile Include="Data\FileStreamResult.cs" />
+    <Compile Include="DbContext\DbContextExtensions.cs" />
+    <Compile Include="DbContext\GrantDbContext.cs" />
+    <Compile Include="DbContext\ISession.cs" />
+    <Compile Include="DbContext\PostgreSQLDatabase.cs" />
+    <Compile Include="Entities\Achievement.cs" />
+    <Compile Include="Entities\BankFilial.cs" />
+    <Compile Include="Entities\Base\BaseEntity.cs" />
+    <Compile Include="Entities\CompetitionCondition.cs" />
+    <Compile Include="Entities\DataFile.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\GrantAdmin.cs" />
+    <Compile Include="Entities\GrantDbConfig.cs" />
+    <Compile Include="Entities\GrantEvent.cs" />
+    <Compile Include="Entities\GrantFileInfo.cs" />
+    <Compile Include="Entities\Grant.cs" />
+    <Compile Include="Entities\GrantStat.cs" />
+    <Compile Include="Entities\NotificationQueue.cs" />
+    <Compile Include="Entities\GrantQuota.cs" />
+    <Compile Include="Entities\GrantStudent.cs" />
+    <Compile Include="Entities\PersonalInfo.cs" />
+    <Compile Include="Entities\PersonalInfoFile.cs" />
+    <Compile Include="Entities\PersonalInfoHistory.cs" />
+    <Compile Include="Entities\Portfolio.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\RoleInfo.cs" />
+    <Compile Include="Entities\Settings.cs" />
+    <Compile Include="Entities\StudentSearch.cs" />
+    <Compile Include="Entities\TelegramUser.cs" />
+    <Compile Include="Entities\UniversityCurator.cs" />
+    <Compile Include="Entities\ValidationHistory.cs" />
+    <Compile Include="Enum\AchievementCriterion.cs" />
+    <Compile Include="Enum\AchievementSubject.cs" />
+    <Compile Include="Enum\AchievementState.cs" />
+    <Compile Include="Enum\AchievementLevel.cs" />
+    <Compile Include="Enum\Citizenship.cs" />
+    <Compile Include="Enum\EventType.cs" />
+    <Compile Include="Enum\GrantStatus.cs" />
+    <Compile Include="Enum\Sex.cs" />
+    <Compile Include="Entities\Status.cs" />
+    <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\University.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Enum\UniverType.cs" />
+    <Compile Include="Enum\ValidationState.cs" />
+    <Compile Include="Enum\ValidationTarget.cs" />
+    <Compile Include="FileManager\IFileManager.cs" />
+    <Compile Include="Install\BaseInstaller.cs" />
+    <Compile Include="Install\IAfterInstallInterceptor.cs" />
+    <Compile Include="Install\IInstaller.cs" />
+    <Compile Include="Interfaces\IBaseEntity.cs" />
+    <Compile Include="Jobs\AutoBackupJob.cs" />
+    <Compile Include="Jobs\CheckTelegramMsgJob.cs" />
+    <Compile Include="Jobs\JobFactory.cs" />
+    <Compile Include="Jobs\SendNotificationsJob.cs" />
+    <Compile Include="Logging\ILogManager.cs" />
+    <Compile Include="Logging\DefaultLogManager.cs" />
+    <Compile Include="Logging\OwinConstants.cs" />
+    <Compile Include="Migrations\201509101405222_Migrations.cs" />
+    <Compile Include="Migrations\201509101405222_Migrations.Designer.cs">
+      <DependentUpon>201509101405222_Migrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509101444435_Guid.cs" />
+    <Compile Include="Migrations\201509101444435_Guid.Designer.cs">
+      <DependentUpon>201509101444435_Guid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509181615127_GrantFiles.cs" />
+    <Compile Include="Migrations\201509181615127_GrantFiles.Designer.cs">
+      <DependentUpon>201509181615127_GrantFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509181643179_GrantAttachments.cs" />
+    <Compile Include="Migrations\201509181643179_GrantAttachments.Designer.cs">
+      <DependentUpon>201509181643179_GrantAttachments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509191300300_Conditions.cs" />
+    <Compile Include="Migrations\201509191300300_Conditions.Designer.cs">
+      <DependentUpon>201509191300300_Conditions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509191724296_grantAdministrators.cs" />
+    <Compile Include="Migrations\201509191724296_grantAdministrators.Designer.cs">
+      <DependentUpon>201509191724296_grantAdministrators.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509201015470_VirtualPath.cs" />
+    <Compile Include="Migrations\201509201015470_VirtualPath.Designer.cs">
+      <DependentUpon>201509201015470_VirtualPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509202214200_StudentPersonalInfo.cs" />
+    <Compile Include="Migrations\201509202214200_StudentPersonalInfo.Designer.cs">
+      <DependentUpon>201509202214200_StudentPersonalInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509210850040_GrantStatus.cs" />
+    <Compile Include="Migrations\201509210850040_GrantStatus.Designer.cs">
+      <DependentUpon>201509210850040_GrantStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509221406097_GrantEvent.cs" />
+    <Compile Include="Migrations\201509221406097_GrantEvent.Designer.cs">
+      <DependentUpon>201509221406097_GrantEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509221434337_Events.cs" />
+    <Compile Include="Migrations\201509221434337_Events.Designer.cs">
+      <DependentUpon>201509221434337_Events.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509221751596_StudentUserId.cs" />
+    <Compile Include="Migrations\201509221751596_StudentUserId.Designer.cs">
+      <DependentUpon>201509221751596_StudentUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509221832509_StudentUser.cs" />
+    <Compile Include="Migrations\201509221832509_StudentUser.Designer.cs">
+      <DependentUpon>201509221832509_StudentUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509230831089_StudentImage.cs" />
+    <Compile Include="Migrations\201509230831089_StudentImage.Designer.cs">
+      <DependentUpon>201509230831089_StudentImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509231152118_AchievementStudentId.cs" />
+    <Compile Include="Migrations\201509231152118_AchievementStudentId.Designer.cs">
+      <DependentUpon>201509231152118_AchievementStudentId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509231332532_StudentPersonalInfo1.cs" />
+    <Compile Include="Migrations\201509231332532_StudentPersonalInfo1.Designer.cs">
+      <DependentUpon>201509231332532_StudentPersonalInfo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509241759511_PersonalInfoPassportScan.cs" />
+    <Compile Include="Migrations\201509241759511_PersonalInfoPassportScan.Designer.cs">
+      <DependentUpon>201509241759511_PersonalInfoPassportScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509242025193_PersonalInfoPassportScans.cs" />
+    <Compile Include="Migrations\201509242025193_PersonalInfoPassportScans.Designer.cs">
+      <DependentUpon>201509242025193_PersonalInfoPassportScans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509252033271_GrantEventFullInfo.cs" />
+    <Compile Include="Migrations\201509252033271_GrantEventFullInfo.Designer.cs">
+      <DependentUpon>201509252033271_GrantEventFullInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509252058421_GrantEventDateChange.cs" />
+    <Compile Include="Migrations\201509252058421_GrantEventDateChange.Designer.cs">
+      <DependentUpon>201509252058421_GrantEventDateChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509271218194_GrantQuota.cs" />
+    <Compile Include="Migrations\201509271218194_GrantQuota.Designer.cs">
+      <DependentUpon>201509271218194_GrantQuota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509271221097_GrantQuotas.cs" />
+    <Compile Include="Migrations\201509271221097_GrantQuotas.Designer.cs">
+      <DependentUpon>201509271221097_GrantQuotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509261941386_AchievmentFiles.cs" />
+    <Compile Include="Migrations\201509261941386_AchievmentFiles.Designer.cs">
+      <DependentUpon>201509261941386_AchievmentFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509272125444_GrantEventQuotaChanged.cs" />
+    <Compile Include="Migrations\201509272125444_GrantEventQuotaChanged.Designer.cs">
+      <DependentUpon>201509272125444_GrantEventQuotaChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509271953271_RecordBookFiles.cs" />
+    <Compile Include="Migrations\201509271953271_RecordBookFiles.Designer.cs">
+      <DependentUpon>201509271953271_RecordBookFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509281920116_GrantStudents.cs" />
+    <Compile Include="Migrations\201509281920116_GrantStudents.Designer.cs">
+      <DependentUpon>201509281920116_GrantStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509291056495_StudentUniversity.cs" />
+    <Compile Include="Migrations\201509291056495_StudentUniversity.Designer.cs">
+      <DependentUpon>201509291056495_StudentUniversity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509292224308_AdditionalWinner.cs" />
+    <Compile Include="Migrations\201509292224308_AdditionalWinner.Designer.cs">
+      <DependentUpon>201509292224308_AdditionalWinner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510040831445_ChangeAdmin.cs" />
+    <Compile Include="Migrations\201510040831445_ChangeAdmin.Designer.cs">
+      <DependentUpon>201510040831445_ChangeAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510041146315_Event.cs" />
+    <Compile Include="Migrations\201510041146315_Event.Designer.cs">
+      <DependentUpon>201510041146315_Event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510041621520_Event1.cs" />
+    <Compile Include="Migrations\201510041621520_Event1.Designer.cs">
+      <DependentUpon>201510041621520_Event1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510041352212_WinnerReport.cs" />
+    <Compile Include="Migrations\201510041352212_WinnerReport.Designer.cs">
+      <DependentUpon>201510041352212_WinnerReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510051618112_UniversityCurator.cs" />
+    <Compile Include="Migrations\201510051618112_UniversityCurator.Designer.cs">
+      <DependentUpon>201510051618112_UniversityCurator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510051157315_Curator.cs" />
+    <Compile Include="Migrations\201510051157315_Curator.Designer.cs">
+      <DependentUpon>201510051157315_Curator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510051915363_GrantEvent3.cs" />
+    <Compile Include="Migrations\201510051915363_GrantEvent3.Designer.cs">
+      <DependentUpon>201510051915363_GrantEvent3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510052054342_ValidationProp.cs" />
+    <Compile Include="Migrations\201510052054342_ValidationProp.Designer.cs">
+      <DependentUpon>201510052054342_ValidationProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510052056428_ValidationMsg.cs" />
+    <Compile Include="Migrations\201510052056428_ValidationMsg.Designer.cs">
+      <DependentUpon>201510052056428_ValidationMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510052008467_GrantAdmin.cs" />
+    <Compile Include="Migrations\201510052008467_GrantAdmin.Designer.cs">
+      <DependentUpon>201510052008467_GrantAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510052010069_GrantAdmin2.cs" />
+    <Compile Include="Migrations\201510052010069_GrantAdmin2.Designer.cs">
+      <DependentUpon>201510052010069_GrantAdmin2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510070951331_UniversityCurator1.cs" />
+    <Compile Include="Migrations\201510070951331_UniversityCurator1.Designer.cs">
+      <DependentUpon>201510070951331_UniversityCurator1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510101446039_RegistrationFields.cs" />
+    <Compile Include="Migrations\201510101446039_RegistrationFields.Designer.cs">
+      <DependentUpon>201510101446039_RegistrationFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510101939413_GrantFullQuota.cs" />
+    <Compile Include="Migrations\201510101939413_GrantFullQuota.Designer.cs">
+      <DependentUpon>201510101939413_GrantFullQuota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121116454_PersonalInfoSex.cs" />
+    <Compile Include="Migrations\201510121116454_PersonalInfoSex.Designer.cs">
+      <DependentUpon>201510121116454_PersonalInfoSex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510140509544_NotificationQueue.cs" />
+    <Compile Include="Migrations\201510140509544_NotificationQueue.Designer.cs">
+      <DependentUpon>201510140509544_NotificationQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510171143474_PersonalInfoPassportFiles.cs" />
+    <Compile Include="Migrations\201510171143474_PersonalInfoPassportFiles.Designer.cs">
+      <DependentUpon>201510171143474_PersonalInfoPassportFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510171204232_PersonalInfoPassportFilesNUllable.cs" />
+    <Compile Include="Migrations\201510171204232_PersonalInfoPassportFilesNUllable.Designer.cs">
+      <DependentUpon>201510171204232_PersonalInfoPassportFilesNUllable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510171001003_city.cs" />
+    <Compile Include="Migrations\201510171001003_city.Designer.cs">
+      <DependentUpon>201510171001003_city.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510171703358_live.cs" />
+    <Compile Include="Migrations\201510171703358_live.Designer.cs">
+      <DependentUpon>201510171703358_live.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510171819449_IsLiveAddressSame.cs" />
+    <Compile Include="Migrations\201510171819449_IsLiveAddressSame.Designer.cs">
+      <DependentUpon>201510171819449_IsLiveAddressSame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510181249536_inn.cs" />
+    <Compile Include="Migrations\201510181249536_inn.Designer.cs">
+      <DependentUpon>201510181249536_inn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510182009253_Student__UniversitiId.cs" />
+    <Compile Include="Migrations\201510182009253_Student__UniversitiId.Designer.cs">
+      <DependentUpon>201510182009253_Student__UniversitiId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510212315456_personalInfoInostr.cs" />
+    <Compile Include="Migrations\201510212315456_personalInfoInostr.Designer.cs">
+      <DependentUpon>201510212315456_personalInfoInostr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510231940232_univerType.cs" />
+    <Compile Include="Migrations\201510231940232_univerType.Designer.cs">
+      <DependentUpon>201510231940232_univerType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510261816362_studentPhone.cs" />
+    <Compile Include="Migrations\201510261816362_studentPhone.Designer.cs">
+      <DependentUpon>201510261816362_studentPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510292013545_StudentScore.cs" />
+    <Compile Include="Migrations\201510292013545_StudentScore.Designer.cs">
+      <DependentUpon>201510292013545_StudentScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511031104185_studentEmail.cs" />
+    <Compile Include="Migrations\201511031104185_studentEmail.Designer.cs">
+      <DependentUpon>201511031104185_studentEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511120617541_GrantDbConf.cs" />
+    <Compile Include="Migrations\201511120617541_GrantDbConf.Designer.cs">
+      <DependentUpon>201511120617541_GrantDbConf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511172219289_ValidationHistory.cs" />
+    <Compile Include="Migrations\201511172219289_ValidationHistory.Designer.cs">
+      <DependentUpon>201511172219289_ValidationHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511180752564_USerEditDateFields.cs" />
+    <Compile Include="Migrations\201511180752564_USerEditDateFields.Designer.cs">
+      <DependentUpon>201511180752564_USerEditDateFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511202249340_EntityUserIdField.cs" />
+    <Compile Include="Migrations\201511202249340_EntityUserIdField.Designer.cs">
+      <DependentUpon>201511202249340_EntityUserIdField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512071451274_UniversityTown.cs" />
+    <Compile Include="Migrations\201512071451274_UniversityTown.Designer.cs">
+      <DependentUpon>201512071451274_UniversityTown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603181752570_PersonalInfoMoreScans.cs" />
+    <Compile Include="Migrations\201603181752570_PersonalInfoMoreScans.Designer.cs">
+      <DependentUpon>201603181752570_PersonalInfoMoreScans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604251337072_validationHistoryMessage.cs" />
+    <Compile Include="Migrations\201604251337072_validationHistoryMessage.Designer.cs">
+      <DependentUpon>201604251337072_validationHistoryMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604261104542_NotifQueueSendError.cs" />
+    <Compile Include="Migrations\201604261104542_NotifQueueSendError.Designer.cs">
+      <DependentUpon>201604261104542_NotifQueueSendError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605031147330_persInfohistory3.cs" />
+    <Compile Include="Migrations\201605031147330_persInfohistory3.Designer.cs">
+      <DependentUpon>201605031147330_persInfohistory3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605031224483_persInfohistory4.cs" />
+    <Compile Include="Migrations\201605031224483_persInfohistory4.Designer.cs">
+      <DependentUpon>201605031224483_persInfohistory4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605120816238_grantReportOption.cs" />
+    <Compile Include="Migrations\201605120816238_grantReportOption.Designer.cs">
+      <DependentUpon>201605120816238_grantReportOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803052126519_AchievementProof.cs" />
+    <Compile Include="Migrations\201803052126519_AchievementProof.Designer.cs">
+      <DependentUpon>201803052126519_AchievementProof.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261300463_MigBankFilial.cs" />
+    <Compile Include="Migrations\201803261300463_MigBankFilial.Designer.cs">
+      <DependentUpon>201803261300463_MigBankFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803270829156_MigAddFieldBankFilialId.cs" />
+    <Compile Include="Migrations\201803270829156_MigAddFieldBankFilialId.Designer.cs">
+      <DependentUpon>201803270829156_MigAddFieldBankFilialId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803270949510_MigChangeType.cs" />
+    <Compile Include="Migrations\201803270949510_MigChangeType.Designer.cs">
+      <DependentUpon>201803270949510_MigChangeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810100739097_TelegramUser.cs" />
+    <Compile Include="Migrations\201810100739097_TelegramUser.Designer.cs">
+      <DependentUpon>201810100739097_TelegramUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810110558232_SettingEntity.cs" />
+    <Compile Include="Migrations\201810110558232_SettingEntity.Designer.cs">
+      <DependentUpon>201810110558232_SettingEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903241552478_Income.cs" />
+    <Compile Include="Migrations\201903241552478_Income.Designer.cs">
+      <DependentUpon>201903241552478_Income.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903261515211_AchievementCriterion.cs" />
+    <Compile Include="Migrations\201903261515211_AchievementCriterion.Designer.cs">
+      <DependentUpon>201903261515211_AchievementCriterion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903291433228_AchievementLevelStatus.cs" />
+    <Compile Include="Migrations\201903291433228_AchievementLevelStatus.Designer.cs">
+      <DependentUpon>201903291433228_AchievementLevelStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903301936217_DataCriterion.cs" />
+    <Compile Include="Migrations\201903301936217_DataCriterion.Designer.cs">
+      <DependentUpon>201903301936217_DataCriterion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904080957527_IsSocailActive.cs" />
+    <Compile Include="Migrations\201904080957527_IsSocailActive.Designer.cs">
+      <DependentUpon>201904080957527_IsSocailActive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904111146205_AchievementValidation.cs" />
+    <Compile Include="Migrations\201904111146205_AchievementValidation.Designer.cs">
+      <DependentUpon>201904111146205_AchievementValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904111607373_AchievementValidationComment.cs" />
+    <Compile Include="Migrations\201904111607373_AchievementValidationComment.Designer.cs">
+      <DependentUpon>201904111607373_AchievementValidationComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904111948029_AchievementScore.cs" />
+    <Compile Include="Migrations\201904111948029_AchievementScore.Designer.cs">
+      <DependentUpon>201904111948029_AchievementScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904112132493_AchievementLevelNul.cs" />
+    <Compile Include="Migrations\201904112132493_AchievementLevelNul.Designer.cs">
+      <DependentUpon>201904112132493_AchievementLevelNul.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Notification\DefaultTemplateResolver.cs" />
+    <Compile Include="Notification\INotificationQueueProvider.cs" />
+    <Compile Include="Notification\INotificator.cs" />
+    <Compile Include="Notification\ITemplateResolver.cs" />
+    <Compile Include="Notification\NotificationTemplate.cs" />
+    <Compile Include="Notification\NotificationType.cs" />
+    <Compile Include="Notification\TemplateAttachment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IReport.cs" />
+    <Compile Include="Reports\IReportGenerator.cs" />
+    <Compile Include="Services\Impl\TaskService.cs" />
+    <Compile Include="Services\ITaskService.cs" />
+    <Compile Include="Services\ITelegramService.cs" />
+    <Compile Include="Smtp\IMailSender.cs" />
+    <Compile Include="TimeProvider\ITimeProvider.cs" />
+    <Compile Include="TimeProvider\TimeProvider.cs" />
+    <Compile Include="UserIdentity\IdentityConfig.cs" />
+    <Compile Include="UserIdentity\IdentityRole.cs" />
+    <Compile Include="UserIdentity\IdentityUser.cs" />
+    <Compile Include="UserIdentity\RoleStore.cs" />
+    <Compile Include="UserIdentity\RoleTable.cs" />
+    <Compile Include="UserIdentity\UserClaimsTable.cs" />
+    <Compile Include="UserIdentity\UserLoginsTable.cs" />
+    <Compile Include="UserIdentity\UserRoleTable.cs" />
+    <Compile Include="UserIdentity\UserStore.cs" />
+    <Compile Include="UserIdentity\UserTable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grant.Utils\Grant.Utils.csproj">
+      <Project>{53ebef00-18b1-4bad-bbab-3cee3c14cd2c}</Project>
+      <Name>Grant.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xNet\xNet.csproj">
+      <Project>{5d25d06e-0d35-42ef-bba2-d5de6e06cd04}</Project>
+      <Name>xNet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserIdentity\PostgreSQLIdentity.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509101405222_Migrations.resx">
+      <DependentUpon>201509101405222_Migrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509101444435_Guid.resx">
+      <DependentUpon>201509101444435_Guid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509181615127_GrantFiles.resx">
+      <DependentUpon>201509181615127_GrantFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509181643179_GrantAttachments.resx">
+      <DependentUpon>201509181643179_GrantAttachments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509191300300_Conditions.resx">
+      <DependentUpon>201509191300300_Conditions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509191724296_grantAdministrators.resx">
+      <DependentUpon>201509191724296_grantAdministrators.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509201015470_VirtualPath.resx">
+      <DependentUpon>201509201015470_VirtualPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509202214200_StudentPersonalInfo.resx">
+      <DependentUpon>201509202214200_StudentPersonalInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509210850040_GrantStatus.resx">
+      <DependentUpon>201509210850040_GrantStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509221406097_GrantEvent.resx">
+      <DependentUpon>201509221406097_GrantEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509221434337_Events.resx">
+      <DependentUpon>201509221434337_Events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509221751596_StudentUserId.resx">
+      <DependentUpon>201509221751596_StudentUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509221832509_StudentUser.resx">
+      <DependentUpon>201509221832509_StudentUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509230831089_StudentImage.resx">
+      <DependentUpon>201509230831089_StudentImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231152118_AchievementStudentId.resx">
+      <DependentUpon>201509231152118_AchievementStudentId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231332532_StudentPersonalInfo1.resx">
+      <DependentUpon>201509231332532_StudentPersonalInfo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509241759511_PersonalInfoPassportScan.resx">
+      <DependentUpon>201509241759511_PersonalInfoPassportScan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509242025193_PersonalInfoPassportScans.resx">
+      <DependentUpon>201509242025193_PersonalInfoPassportScans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509252033271_GrantEventFullInfo.resx">
+      <DependentUpon>201509252033271_GrantEventFullInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509252058421_GrantEventDateChange.resx">
+      <DependentUpon>201509252058421_GrantEventDateChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509271218194_GrantQuota.resx">
+      <DependentUpon>201509271218194_GrantQuota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509271221097_GrantQuotas.resx">
+      <DependentUpon>201509271221097_GrantQuotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509261941386_AchievmentFiles.resx">
+      <DependentUpon>201509261941386_AchievmentFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509272125444_GrantEventQuotaChanged.resx">
+      <DependentUpon>201509272125444_GrantEventQuotaChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509271953271_RecordBookFiles.resx">
+      <DependentUpon>201509271953271_RecordBookFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509281920116_GrantStudents.resx">
+      <DependentUpon>201509281920116_GrantStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509291056495_StudentUniversity.resx">
+      <DependentUpon>201509291056495_StudentUniversity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509292224308_AdditionalWinner.resx">
+      <DependentUpon>201509292224308_AdditionalWinner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510040831445_ChangeAdmin.resx">
+      <DependentUpon>201510040831445_ChangeAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510041146315_Event.resx">
+      <DependentUpon>201510041146315_Event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510041621520_Event1.resx">
+      <DependentUpon>201510041621520_Event1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510041352212_WinnerReport.resx">
+      <DependentUpon>201510041352212_WinnerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510051618112_UniversityCurator.resx">
+      <DependentUpon>201510051618112_UniversityCurator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510051157315_Curator.resx">
+      <DependentUpon>201510051157315_Curator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510051915363_GrantEvent3.resx">
+      <DependentUpon>201510051915363_GrantEvent3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510052054342_ValidationProp.resx">
+      <DependentUpon>201510052054342_ValidationProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510052056428_ValidationMsg.resx">
+      <DependentUpon>201510052056428_ValidationMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510052008467_GrantAdmin.resx">
+      <DependentUpon>201510052008467_GrantAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510052010069_GrantAdmin2.resx">
+      <DependentUpon>201510052010069_GrantAdmin2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510070951331_UniversityCurator1.resx">
+      <DependentUpon>201510070951331_UniversityCurator1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510101446039_RegistrationFields.resx">
+      <DependentUpon>201510101446039_RegistrationFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510101939413_GrantFullQuota.resx">
+      <DependentUpon>201510101939413_GrantFullQuota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121116454_PersonalInfoSex.resx">
+      <DependentUpon>201510121116454_PersonalInfoSex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510140509544_NotificationQueue.resx">
+      <DependentUpon>201510140509544_NotificationQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510171143474_PersonalInfoPassportFiles.resx">
+      <DependentUpon>201510171143474_PersonalInfoPassportFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510171204232_PersonalInfoPassportFilesNUllable.resx">
+      <DependentUpon>201510171204232_PersonalInfoPassportFilesNUllable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510171001003_city.resx">
+      <DependentUpon>201510171001003_city.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510171703358_live.resx">
+      <DependentUpon>201510171703358_live.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510171819449_IsLiveAddressSame.resx">
+      <DependentUpon>201510171819449_IsLiveAddressSame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510181249536_inn.resx">
+      <DependentUpon>201510181249536_inn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510182009253_Student__UniversitiId.resx">
+      <DependentUpon>201510182009253_Student__UniversitiId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510212315456_personalInfoInostr.resx">
+      <DependentUpon>201510212315456_personalInfoInostr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510231940232_univerType.resx">
+      <DependentUpon>201510231940232_univerType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510261816362_studentPhone.resx">
+      <DependentUpon>201510261816362_studentPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510292013545_StudentScore.resx">
+      <DependentUpon>201510292013545_StudentScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511031104185_studentEmail.resx">
+      <DependentUpon>201511031104185_studentEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511120617541_GrantDbConf.resx">
+      <DependentUpon>201511120617541_GrantDbConf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511172219289_ValidationHistory.resx">
+      <DependentUpon>201511172219289_ValidationHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511180752564_USerEditDateFields.resx">
+      <DependentUpon>201511180752564_USerEditDateFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511202249340_EntityUserIdField.resx">
+      <DependentUpon>201511202249340_EntityUserIdField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512071451274_UniversityTown.resx">
+      <DependentUpon>201512071451274_UniversityTown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181752570_PersonalInfoMoreScans.resx">
+      <DependentUpon>201603181752570_PersonalInfoMoreScans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604251337072_validationHistoryMessage.resx">
+      <DependentUpon>201604251337072_validationHistoryMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604261104542_NotifQueueSendError.resx">
+      <DependentUpon>201604261104542_NotifQueueSendError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605031147330_persInfohistory3.resx">
+      <DependentUpon>201605031147330_persInfohistory3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605031224483_persInfohistory4.resx">
+      <DependentUpon>201605031224483_persInfohistory4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605120816238_grantReportOption.resx">
+      <DependentUpon>201605120816238_grantReportOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803052126519_AchievementProof.resx">
+      <DependentUpon>201803052126519_AchievementProof.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261300463_MigBankFilial.resx">
+      <DependentUpon>201803261300463_MigBankFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270829156_MigAddFieldBankFilialId.resx">
+      <DependentUpon>201803270829156_MigAddFieldBankFilialId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270949510_MigChangeType.resx">
+      <DependentUpon>201803270949510_MigChangeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810100739097_TelegramUser.resx">
+      <DependentUpon>201810100739097_TelegramUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110558232_SettingEntity.resx">
+      <DependentUpon>201810110558232_SettingEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903241552478_Income.resx">
+      <DependentUpon>201903241552478_Income.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903261515211_AchievementCriterion.resx">
+      <DependentUpon>201903261515211_AchievementCriterion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903291433228_AchievementLevelStatus.resx">
+      <DependentUpon>201903291433228_AchievementLevelStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301936217_DataCriterion.resx">
+      <DependentUpon>201903301936217_DataCriterion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904080957527_IsSocailActive.resx">
+      <DependentUpon>201904080957527_IsSocailActive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111146205_AchievementValidation.resx">
+      <DependentUpon>201904111146205_AchievementValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111607373_AchievementValidationComment.resx">
+      <DependentUpon>201904111607373_AchievementValidationComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111948029_AchievementScore.resx">
+      <DependentUpon>201904111948029_AchievementScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904112132493_AchievementLevelNul.resx">
+      <DependentUpon>201904112132493_AchievementLevelNul.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

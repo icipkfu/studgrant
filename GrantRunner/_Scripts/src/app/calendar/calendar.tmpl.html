@@ -1,0 +1,6 @@
+<div class="calendar-page" ng-style="{ 'background-image': 'url(' + backgroundImage + ')' }" flex>
+    <div flex ui-calendar="calendarOptions" ng-model="eventSources" calendar="triangular-calendar" class="triangular-calendar"></div>
+    <md-button ng-click="addEvent($event)" class="md-fab md-accent md-fab-bottom-right" aria-label="{{'CALENDAR.ADD_EVENT' | translate}}">
+        <md-icon md-font-icon="icon-add"></md-icon>
+    </md-button>
+</div>

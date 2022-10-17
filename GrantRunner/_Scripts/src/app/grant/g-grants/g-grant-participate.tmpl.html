@@ -1,0 +1,103 @@
+<div ng-controller="GrantsController" class="padded-content-page" style="min-width: 540px;">
+  <md-progress-linear class=" margin-bottom-20" md-mode="determinate" value="{{grantParticipateProgress}}"></md-progress-linear>
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Описание гранта">
+            <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                    <md-card-content>
+
+                    <md-toolbar ng-if="!isInfoFilled || (!isachievementFilled && participantCode=='a') || !ispassportFilled || !isrecordbookFilled || (isIncomeFilled == false && participantCode=='h')" class="md-accent margin-bottom-30">
+
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Для участия в гранте необходимо заполнить информацию:</span> <br>
+                                    <span ng-if="isInfoFilled == false">- Профиль</span>
+                                    <span ng-if="ispassportFilled == false">- Персональные данные</span>
+                                    <span ng-if="isrecordbookFilled == false">- Данные зачетной книжки</span>
+                                    <span ng-if="isachievementFilled == false && participantCode=='a'">- Данные о достижениях</span>
+                                    <span ng-if="isIncomeFilled == false && participantCode=='h'">- Данные о доходе</span>
+                            </div>
+                             <div style=" width: 150px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button" ng-click="goProfile()">Заполнить</md-button>
+                             </div>
+                        </div>
+                    </md-toolbar>
+
+                     <div layout="row" layout-sm="column" layout-align="start center">
+
+                        <div flex="auto" style="margin-left:25px">
+                           <h2 class="md-title"><b>{{grant.name}}</b></h2>
+                            <div  ng-bind-html="grant.statusAndDate"> </div>
+                           
+                             <div style="word-wrap: break-word; margin-right:25px; margin-top:25px">
+                                  <md-icon md-font-icon="icon-description"> </md-icon>  <b>Описание гранта</b> 
+                                  <div ng-bind-html="grant.description"></div> 
+                             </div>
+                         </div>
+
+                        <div layout="row"  flex="auto" layout-align="end center">
+                          <img ng-src="{{grant.thumb}}" style="max-height: 100%" class="grantImage" alt="Card Image"> 
+                        </div>
+                      </div>
+
+                      <div style="margin-top: 25px"   layout="row" layout-align="end center">
+                        <md-button  class="md-raised button-red"  aria-label="raised button" ng-click="declineGrant()">Отказаться</md-button>
+                        <md-button  class="md-raised button-blue" aria-label="raised button" ng-disabled="!isInfoFilled || 
+                        (!isachievementFilled && participantCode=='a')  || !ispassportFilled 
+                        || !isrecordbookFilled || (isIncomeFilled == false && participantCode=='h')"  ng-click="agreeGrant()">Далее</md-button>
+                      </div>
+
+                      <div ng-repeat="item in userAdmins" on-finish-render="ngRepeatFinished" > </div>
+                      
+
+                </md-card>
+                 </md-card-content>
+            </md-content>
+        </md-tab>
+
+         <md-tab label="Условия проведения">
+            <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                    <md-card-content>
+
+                      <md-toolbar ng-hide="ispassportFilled" class="md-accent margin-bottom-30">
+
+                        <div layout="row" layout-align="start">
+                            <div class="md-toolbar-tools">
+                                <h2>
+                                  <span>Для участия в гранте необходимо заполнить информацию в профиле</span>
+                                </h2>
+                            </div>
+                             <div style=" width: 180px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button" ng-click="goProfile()">Заполнить</md-button>
+                             </div>
+                        </div>
+                    </md-toolbar>
+
+                           <md-icon md-font-icon="icon-check"></md-icon> <b>Условия</b> 
+                            <div style="word-wrap: break-word;"  ng-bind-html="grant.conditions"></div>
+                           <md-icon md-font-icon="icon-attach-file"> </md-icon>  <b>Приложения</b> 
+
+                             <div ng-show="grant.AttachmentsLinks" >
+                                      <md-list>
+                                          <md-list-item ng-repeat="item in grant.AttachmentsLinks">
+                                              <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                          </md-list-item>
+                                      </md-list>
+                          </div>
+
+                      <div layout="row" style="margin-top:30px" layout-align="end center">
+                         <md-button  class="md-raised button-blue" aria-label="raised button" ng-click="backToFirstTab()">Назад</md-button>
+                         <div flex="auto"> </div>
+                        <md-button  class="md-raised button-red"  aria-label="raised button" ng-click="declineGrant()">Отказаться</md-button>
+                        <md-button  class="md-raised button-blue" aria-label="raised button" ng-disabled="!isInfoFilled || (!isachievementFilled && participantCode=='a') || 
+                        !ispassportFilled || !isrecordbookFilled || (isIncomeFilled == false && participantCode=='h')"  ng-click="agreeConditions()">С условиями согласен</md-button>
+                      </div>                                 
+                </md-card>
+            </md-content>
+           
+        </md-tab>
+    </md-tabs>
+
+</div>

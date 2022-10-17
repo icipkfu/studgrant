@@ -1,0 +1,9 @@
+<div ng-controller="GrantsController" class="padded-content-page gray-background">
+     <div ng-repeat="item in contents">
+            <div layout="row" layout-sm="column" layout-align="space-around center" layout-margin>
+                <widget title="<b>{{::item.Name}}</b>" subtitle="Этап" title-position="right">
+                    <img src="{{::item.thumb}}" />
+                </widget>
+            </div>
+      </div>
+</div>

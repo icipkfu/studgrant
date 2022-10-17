@@ -1,0 +1,214 @@
+<div ng-controller="EditAchievementController as ctrl">
+    <md-content>
+        <md-toolbar md-theme="{{triSkin.elements.content}}">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span ng-hide="achieve.Id">Добавить достижение</span>
+                    <span ng-show="achieve.Id">{{achieve.Name}}</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-raised margin-left-0" ng-click="close()">
+                    {{'Закрыть' | translate}}
+                </md-button>
+            </div>
+
+            <md-toolbar class="toolbar-default margin-bottom-30" ng-show="!achieve.ValidationComment && achieve.Id">
+   
+                    <div layout="row" layout-align="start center">
+
+                        <div class="md-toolbar-tools">
+                          <h2> Корректность заполнения: {{achieve.ValidStateName}} </h2>
+                        </div>
+                      </div>
+                 </md-toolbar>
+
+                   <md-toolbar ng-show="achieve.ValidationComment && achieve.ValidationState==0"  class="margin-bottom-30" style="background-color: rgb(76,194,37) !important;">
+                  <div layout="row" layout-align="start">
+                      <div class="md-toolbar-tools">
+                          <h2>
+                            <span>Ожидает проверки: {{achieve.ValidationComment}}</span>
+                          </h2>
+                      </div>
+                  </div>
+                </md-toolbar>
+
+                 <md-toolbar ng-show="achieve.ValidationComment && achieve.ValidationState!=0" class="md-accent margin-bottom-30">
+                  <div layout="row" layout-align="start">
+                      <div class="md-toolbar-tools">
+                          <h2>
+                            <span>Замечания к исправлению: {{achieve.ValidationComment}}</span>
+                          </h2>
+                      </div>
+                  </div>
+                </md-toolbar>
+
+        </md-toolbar>
+        <div style="padding: 20px">
+            <form name="achievement">
+
+                <div style="color:rgba(0,0,0,0.26)" ng-hide="achieve.Id">
+                        <span>Заполните все поля на форме</span>
+                </div>
+
+                <img ng-if="achieve.ImageLink" style="max-height: 300px;" ng-src="{{achieve.ImageLink}}">
+
+                 <md-input-container>
+                    <label for="name">{{'Название' | translate}}</label>
+                    <textarea id="name" label="name" name="name" maxLength="213" ng-focus="validateName=true;" ng-enter="limitLines()" ng-model="achieve.Name" required/>
+                    <div ng-show="validateName" ng-messages="achievement.name.$error">
+                        <div ng-message when="required">
+                          {{'Это поле обязательно для заполнения' | translate}}
+                        </div>
+                        <div ng-message when="name">
+                          {{'Некорректный формат' | translate}}
+                        </div>
+                    </div>
+                </md-input-container> 
+                <md-input-container>
+                        <md-select placeholder="Область деятельности" ng-model="achieve.Subject" ng-change="achieve.Criterion = null; achieve.Level = null; achieve.State = null;" required >
+                            <md-option value="3">Общественная деятельность</md-option>
+                            <md-option value="2">Культурно-творческая деятельность</md-option>
+                            <md-option value="1">Спортивная деятельность</md-option>
+                            <md-option value="0">Научно-исследовательская деятельность</md-option>
+                            <md-option value="4">Государственные награды, знаки отличия и иные формы поощрения</md-option>
+                        </md-select>
+                </md-input-container>
+
+                <md-input-container ng-show="achieve.Subject != 4">
+                        <md-select placeholder="Критерий" id="Criterion" ng-model="achieve.Criterion" ng-change="achieve.Level = null; achieve.State = null;" >
+                            <md-option ng-show="achieve.Subject == 2 || achieve.Subject == 1 || achieve.Subject == 0" value="0">Получение студентом награды (приза)</md-option>
+                            <md-option ng-show="achieve.Subject == 3" value="1">Проведение публичной культурно-творческой деятельности</md-option>
+                            <md-option ng-show="achieve.Subject == 1" value="2">Проведение спортивных мероприятий</md-option>
+                            <md-option ng-show="achieve.Subject == 1" value="3">Выполнение нормативов и требований ГТО</md-option>
+                            <md-option ng-show="achieve.Subject == 0" value="4">Получение студентом патента на изобретение</md-option>
+                            <md-option ng-show="achieve.Subject == 0" value="5">Получение студентом гранта на выполнение научно-исследовательской работы</md-option>
+                            <md-option ng-show="achieve.Subject == 0" value="6">Наличие публикации в научном издании в течение года</md-option>
+                            <md-option ng-show="achieve.Subject == 0" value="7">Наличие публикации в научном издании в течение года во всероссийских изданиях (ВАК, РИНЦ)</md-option>
+                            <md-option ng-show="achieve.Subject == 0" value="8">Наличие публикации в научном издании в течение года в международных изданиях(Scopus, Web of Science, ERIH PLUS</md-option>
+                        </md-select>
+                </md-input-container>
+
+                <md-input-container ng-show="achieve.Subject!=4 && achieve.Criterion < 3">
+                    <md-select placeholder="Уровень" id="Level" ng-model="achieve.Level" ng-change="achieve.State = null;" >
+                        <md-option value="4">Образовательная организация</md-option>
+                        <md-option value="3">Муниципальный (городской)</md-option>
+                        <md-option value="2">Региональный уровень</md-option>
+                        <md-option value="1">Всероссийский уровень</md-option>
+                        <md-option value="0">Международный уровень</md-option>
+                    </md-select>
+                </md-input-container>
+                       
+
+                <md-input-container ng-show="achieve.Subject==4">
+                    <md-select placeholder="Уровень" id="Level" ng-model="achieve.Level" >
+
+                        <md-option value="5">Руководителя комитета города (муниципального образования)</md-option>
+                        <md-option value="6">Мэр города (главы муниципального образования)</md-option>
+                        <md-option value="7">Глава ведомства региона</md-option>
+                        <md-option value="8">Глава правительства региона</md-option>
+                        <md-option value="9">Председатель законодательного собрания региона</md-option>
+                        <md-option value="10">Глава региона </md-option>
+                        <md-option value="11">Президент республики</md-option>
+                        <md-option value="12">Президент</md-option>
+                    </md-select>
+                </md-input-container>
+
+
+                <md-input-container ng-hide="achieve.Criterion > 3 || achieve.Subject == 4">
+                    <md-select placeholder="Статус" id="State" ng-model="achieve.State" >
+                        <md-option value="0" ng-show="achieve.Criterion != 3">Победитель</md-option>
+                        <md-option value="3" ng-show="achieve.Criterion != 3">Призер</md-option>
+                        <md-option value="1" ng-show="achieve.Criterion != 3">Участник</md-option>
+                        <md-option value="2" ng-show="achieve.Criterion != 3">Организатор</md-option>
+
+                        <md-option value="4" ng-show="achieve.Criterion == 3 ">Золото</md-option>
+                        <md-option value="5" ng-show="achieve.Criterion == 3">Серебро</md-option>
+                        <md-option value="6" ng-show="achieve.Criterion == 3 ">Бронза</md-option>
+                    </md-select>
+                </md-input-container>
+               
+                <md-input-container>
+                    <md-select placeholder="Год" ng-model="achieve.Year" required >
+                        <md-option ng-repeat="y in years" value="{{y}}">{{y}}</md-option>
+                    </md-select>
+                </md-input-container>
+
+                <div padding="0px 0px 300px 0px" >
+                     <md-input-container>
+                    <div id="upload-scan-container">
+                        <input id="achieveFileInput" type="file" nv-file-select="" uploader="achieveUploader" ng-model="achieve.files" ng-show="0" />
+                            <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="filesUploadClick()" type="file">
+                                <md-tooltip md-direction="right">Добавить изображение</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                         <label for="achieveFileInput">{{'Добавить изображение в формате .jpg или .png (обязательно для заполнения)'}}</label>
+                    </div>
+
+                     <div ng-repeat="item in achieveUploader.queue">
+                                 <div>
+                                     <div ng-show="achieveUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                  </div>
+                                   <div ng-show="achieveUploader.isHTML5"  nowrap><strong>{{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                    </div>
+                     </md-input-container>
+                </div>
+
+
+
+
+                        <md-input-container md-no-float>
+
+                         <div id="upload-file-container">
+                               <input  id="GrantAttachementsFileUploader" type="file"   nv-file-select="" class="file-input" multiple="multiple" uploader="attachUploader">
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="attachClick()" type="file">
+                                <md-tooltip md-direction="right">Подтверждающие документы</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                             <label for="GrantAttachementsFileUploader">{{'Подтверждающие документы (файл)'}}</label>
+
+                        </div>
+
+                         <div ng-repeat="item in attachUploader.queue">
+                               <div ng-show="attachUploader.isHTML5" nowrap><strong>{{item.file.name + '  -   '}}   {{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                         </div>
+
+                            <div ng-show="achieve.ProofList" >
+                                      <md-list>
+                                          <md-list-item ng-repeat="item in achieve.ProofList">
+                                              <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                          </md-list-item>
+                                      </md-list>
+                                     <!--md-button style="color: red"  ng-click="deleteAttachments()" ng-show="grant.id">Удалить вложения</md-button-->
+                            </div>
+
+                        </md-input-container>
+
+                  <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                 </div>
+
+
+                 <div layout="row" layout-align="end">
+                    <md-button ng-show="achieve.Id && !isModerating" class="md-raised button-red" ng-click="delete(achieve)">{{'Удалить' | translate}}</md-button>
+                    <md-button class="md-raised md-primary margin-left-0" ng-click="save()" ng-disabled="achievement.$invalid || inProgress || (achieve.FilesArr.length == 0 && !achieve.Files) ||
+                         (achieve.Level == null && achieve.Criterion < 3) || (achieve.State == null && achieve.Criterion <= 3 && achieve.Subject != 4 ) || 
+                         (achieve.Criterion == null && achieve.Subject != 3 && achieve.Subject != 4)  ">{{'Сохранить' | translate}}</md-button>
+                  </div>
+
+                  <div ng-show="isModerating && (isAdmin  || isCurator)"> 
+                        <md-input-container>
+                               <label for="ValidationComment">{{'Замечания к исправлению' | translate}}</label>
+                               <textarea id="ValidationComment" rows = "{{Math.max(1,achieve.ValidationComment.split('\n').length)}}" label="ValidationComment" name="ValidationComment" ng-model="achieve.ValidationComment"/>
+                        </md-input-container>
+
+                         <div layout="row" layout-align="end center">
+                            <md-button class="md-raised button-red" ng-click="setAchievementInvalid(achieve.Id, false)" ng-disabled="achieve.ValidationComment == null || achieve.ValidationComment.length == 0" >Данные некорректны</md-button>
+                            <md-button class="md-raised button-blue" ng-click="setAchievementValid(achieve.Id)" aria-label="raised button" >Данные верны</md-button>
+                         </div>
+
+                     </div>
+</form>
+        </div>
+    </md-content>
+</div>

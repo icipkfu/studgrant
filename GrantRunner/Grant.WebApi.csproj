@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{01E3BEF0-98BE-441F-BDF3-EEC5B4770340}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grant.WebApi</RootNamespace>
+    <AssemblyName>Grant.WebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.7.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetZip.1.9.7\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.4.0.0\lib\net45\LightInject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.6\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.2.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.6\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.EntityFramework.2.2.6\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2015.2.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\sharedlib\Stimul.Soft\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2015.2.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\sharedlib\Stimul.Soft\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.0.0\lib\net45\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Config\" />
+    <Folder Include="Views\FileData\" />
+    <Folder Include="Views\FileHighResData\" />
+    <Folder Include="Views\FileHighRes\" />
+    <Folder Include="Views\Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Controllers\AchievementDataController.cs" />
+    <Compile Include="Controllers\BankFilialController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FileDataController.cs" />
+    <Compile Include="Controllers\FileHighResController.cs" />
+    <Compile Include="Controllers\FileHighResDataController.cs" />
+    <Compile Include="Controllers\FileOriginalController.cs" />
+    <Compile Include="Controllers\GrantAdminController.cs" />
+    <Compile Include="Controllers\GrantController.cs" />
+    <Compile Include="Controllers\GrantEventController.cs" />
+    <Compile Include="Controllers\GrantQuotaController.cs" />
+    <Compile Include="Controllers\GrantStudentController.cs" />
+    <Compile Include="Controllers\JoinController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\PasswordController.cs" />
+    <Compile Include="Controllers\PersonalInfoController.cs" />
+    <Compile Include="Controllers\PersonalInfoDataController.cs" />
+    <Compile Include="Controllers\RecordBookController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\Utils.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UniversityController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Request\Achievement\AchievementData.cs" />
+    <Compile Include="OwinConfiguration\ExceptionProvider.cs" />
+    <Compile Include="OwinConfiguration\Logger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Request\PersonalInfoData.cs" />
+    <Compile Include="Request\StudentData.cs" />
+    <Compile Include="Request\ValidationMassage.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="404.tmpl.html" />
+    <Content Include="500.tmpl.html" />
+    <Content Include="ach\level0.png" />
+    <Content Include="ach\level1.png" />
+    <Content Include="ach\level2.png" />
+    <Content Include="ach\level3.png" />
+    <Content Include="ach\level4.png" />
+    <Content Include="ach\state0.png" />
+    <Content Include="ach\state1.png" />
+    <Content Include="ach\state2.png" />
+    <Content Include="ach\subject0.png" />
+    <Content Include="ach\subject1.png" />
+    <Content Include="ach\subject2.png" />
+    <Content Include="ach\subject3.png" />
+    <Content Include="app\charts\examples\chartjs-bar-controller.js" />
+    <Content Include="app\charts\examples\chartjs-line-controller.js" />
+    <Content Include="app\charts\examples\chartjs-pie-controller.js" />
+    <Content Include="app\charts\examples\chartjs-ticker-controller.js" />
+    <Content Include="app\charts\examples\google-bar-controller.js" />
+    <Content Include="app\charts\examples\google-line-controller.js" />
+    <Content Include="app\charts\examples\google-scatter-controller.js" />
+    <Content Include="app\elements\examples\chips-controller.js" />
+    <Content Include="app\elements\examples\fab-speed-1-controller.js" />
+    <Content Include="app\elements\examples\grids-1-controller.js" />
+    <Content Include="app\elements\examples\table-1-controller.js" />
+    <Content Include="app\elements\examples\toast-1-controller.js" />
+    <Content Include="app\forms\examples\autocomplete-1-controller.js" />
+    <Content Include="app\forms\examples\binding-1-controller.js" />
+    <Content Include="app\maps\examples\map-label-demo-controller.js" />
+    <Content Include="app\maps\examples\map-terrain-demo-controller.js" />
+    <Content Include="assets\images\avatars\avatar-1.png" />
+    <Content Include="assets\images\avatars\avatar-2.png" />
+    <Content Include="assets\images\avatars\avatar-3.png" />
+    <Content Include="assets\images\avatars\avatar-4.png" />
+    <Content Include="assets\images\avatars\avatar-5.png" />
+    <Content Include="assets\images\avatars\avatar-6.png" />
+    <Content Include="assets\images\avatars\avatar-big.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-blue-green-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-dark.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-tanned-2.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-dark-skin-dark.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-blue-green-skin-light.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-brown-skin-light.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-brown-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-grey-eyes-dark-skin-tanned.png" />
+    <Content Include="assets\images\backgrounds\bg-1.jpg" />
+    <Content Include="assets\images\backgrounds\bg-2.jpg" />
+    <Content Include="assets\images\backgrounds\bg-3.jpg" />
+    <Content Include="assets\images\backgrounds\bg-4-small.jpg" />
+    <Content Include="assets\images\backgrounds\bg-4.jpg" />
+    <Content Include="assets\images\backgrounds\bg-5.jpg" />
+    <Content Include="assets\images\backgrounds\bg-6.jpg" />
+    <Content Include="assets\images\backgrounds\bg-7.jpg" />
+    <Content Include="assets\images\backgrounds\bg-8.jpg" />
+    <Content Include="assets\images\backgrounds\bg-toolbar.jpg" />
+    <Content Include="assets\images\backgrounds\mat-1.jpg" />
+    <Content Include="assets\images\calendar\1.jpg" />
+    <Content Include="assets\images\calendar\10.jpg" />
+    <Content Include="assets\images\calendar\11.jpg" />
+    <Content Include="assets\images\calendar\12.jpg" />
+    <Content Include="assets\images\calendar\2.jpg" />
+    <Content Include="assets\images\calendar\3.jpg" />
+    <Content Include="assets\images\calendar\4.jpg" />
+    <Content Include="assets\images\calendar\5.jpg" />
+    <Content Include="assets\images\calendar\6.jpg" />
+    <Content Include="assets\images\calendar\7.jpg" />
+    <Content Include="assets\images\calendar\8.jpg" />
+    <Content Include="assets\images\calendar\9.jpg" />
+    <Content Include="assets\images\dashboards\tweet.jpg" />
+    <Content Include="assets\images\dashboards\weather.jpg" />
+    <Content Include="assets\images\elements\fab.png" />
+    <Content Include="assets\images\font\material-font-0.png" />
+    <Content Include="assets\images\font\material-font-4.png" />
+    <Content Include="assets\images\font\material-font-5.png" />
+    <Content Include="assets\images\grant\boy.png" />
+    <Content Include="assets\images\grant\girl.png" />
+    <Content Include="assets\images\grant\university_default.png" />
+    <Content Include="assets\images\grant\unviersity_default.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\maps\blue_marker.png" />
+    <Content Include="favicon.png" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="fonts\weathericons-regular-webfont.eot" />
+    <Content Include="fonts\weathericons-regular-webfont.svg" />
+    <Content Include="fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="fonts\weathericons-regular-webfont.woff" />
+    <Content Include="fonts\WeatherIcons-Regular.otf" />
+    <Content Include="Grant.Config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="app\authentication\il8n\en.json" />
+    <Content Include="app\authentication\il8n\fr.json" />
+    <Content Include="app\calendar\il8n\en.json" />
+    <Content Include="app\charts\il8n\en.json" />
+    <Content Include="app\charts\il8n\fr.json" />
+    <Content Include="app\dashboards\data\location.json" />
+    <Content Include="app\dashboards\data\referrals.json" />
+    <Content Include="app\dashboards\data\social.json" />
+    <Content Include="app\dashboards\il8n\en.json" />
+    <Content Include="app\dashboards\il8n\fr.json" />
+    <Content Include="app\elements\examples\table-1.tmpl.scss" />
+    <Content Include="app\elements\il8n\en.json" />
+    <Content Include="app\elements\il8n\fr.json" />
+    <Content Include="app\email\il8n\en.json" />
+    <Content Include="app\email\il8n\fr.json" />
+    <Content Include="app\extras\il8n\en.json" />
+    <Content Include="app\extras\il8n\fr.json" />
+    <Content Include="app\forms\il8n\en.json" />
+    <Content Include="app\forms\il8n\fr.json" />
+    <Content Include="app\il8n\en.json" />
+    <Content Include="app\il8n\fr.json" />
+    <Content Include="app\introduction\il8n\en.json" />
+    <Content Include="app\introduction\il8n\fr.json" />
+    <Content Include="app\maps\il8n\en.json" />
+    <Content Include="app\maps\il8n\fr.json" />
+    <Content Include="app\menulevels\il8n\en.json" />
+    <Content Include="app\menulevels\il8n\fr.json" />
+    <Content Include="app\seed-module\il8n\en.json" />
+    <Content Include="app\seed-module\il8n\fr.json" />
+    <Content Include="app\todo\il8n\en.json" />
+    <Content Include="app\todo\il8n\fr.json" />
+    <Content Include="app\ui\il8n\en.json" />
+    <Content Include="app\ui\il8n\fr.json" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\123.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Grant.pubxml" />
+    <None Include="Properties\PublishProfiles\GrantWebApi.pubxml" />
+    <None Include="Properties\PublishProfiles\own.pubxml" />
+    <None Include="Properties\PublishProfiles\Арслан.pubxml" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\app-db84f6e6.js" />
+    <Content Include="Scripts\vendor-a7f3e43f.js" />
+    <Content Include="styles\app-1d9f7acb.css" />
+    <Content Include="styles\app-68ba7715.css" />
+    <Content Include="styles\app-7d040ae6.css" />
+    <Content Include="styles\app-91f56776.css" />
+    <Content Include="styles\app-b3b88f7e.css" />
+    <Content Include="styles\vendor-1a8a932a.css" />
+    <Content Include="styles\vendor-d90b0203.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grant.Core\Grant.Core.csproj">
+      <Project>{1d01c267-9549-44d2-9f41-d3fa6ca323f1}</Project>
+      <Name>Grant.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.DataAccess\Grant.DataAccess.csproj">
+      <Project>{d7722e8c-d9e2-4044-98a1-d594724f58d7}</Project>
+      <Name>Grant.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.FileStorage\Grant.FileStorage.csproj">
+      <Project>{5b61d3c2-f7a5-4a2c-bcf1-c88034f23e41}</Project>
+      <Name>Grant.FileStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.Notifications\Grant.Notifications.csproj">
+      <Project>{4bb754cf-6b21-42f7-8592-35c6e2df0499}</Project>
+      <Name>Grant.Notifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.Reports\Grant.Reports.csproj">
+      <Project>{a556629d-cbf2-43ea-9f0f-f3844ca36c92}</Project>
+      <Name>Grant.Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.Services\Grant.Services.csproj">
+      <Project>{82aaef1b-832d-4189-b061-628d52325258}</Project>
+      <Name>Grant.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grant.Utils\Grant.Utils.csproj">
+      <Project>{53ebef00-18b1-4bad-bbab-3cee3c14cd2c}</Project>
+      <Name>Grant.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>31906</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:31906/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,18 @@
+<div layout="column" layout-align="center center" style="background: url(assets/images/backgrounds/bg-2.jpg) no-repeat center; background-size: cover;" class="overlay-gradient-40 text-light">
+    <div class="margin-top-80">
+        <img src="assets/images/newlogo.png" alt="triangular">
+    </div>
+    <h1 class="font-weight-100 font-size-8">triangular <span class="md-caption">v1.0</span></h1>
+    <h2 class="font-weight-400 margin-bottom-40">a <em>real</em> material design admin template</h2>
+</div>
+
+<div layout="row" layout-align="center center" class="padded-content-page">
+    <p flex="60" flex-sm="100" class="md-headline font-weight-300 text-center">Welcome to triangular, a material design admin template built from the ground up using AngularJS & Angular Material</p>
+</div>
+
+<div layout="row" class="intro-feature-row" layout-wrap layout-margin ng-repeat="features in featureRows">
+    <div layout="column" flex flex-sm="100" layout-align="center center" class="md-whiteframe-z1" ng-repeat="feature in features">
+        <md-icon class="font-size-5 padding-10" md-font-icon="{{feature.icon}}"></md-icon>
+        <h3 class="font-weight-400 margin-top-0">{{feature.name}}</h3>
+    </div>
+</div>

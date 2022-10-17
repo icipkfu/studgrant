@@ -1,0 +1,85 @@
+  <div layout="row" ng-controller="UserProfileController" class="profile" т>
+    <div ng-show="roleInfo" flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height  md-border-bottom>    
+
+              <md-tab ng-show="isAdmin" label="Выбор модераторов системы">
+               <md-content class="padded-content-page gray-background" class="padding-40" ng-disabled="inProgress" >
+                    <md-card>
+                     <md-card-content>
+
+                     <md-toolbar class="toolbar-default margin-bottom-30" >
+                              <div ng-show="isAdmin"  layout="row" layout-align="end">
+                                  <div>
+                                      <md-button class="md-raised" aria-label="raised button" style="margin-top: 13px;"  ng-click="updateModerators()">Сохранить</md-button>
+                                  </div>
+                                </div>
+                    </md-toolbar>
+
+                    <md-input-container md-no-float>
+                           <md-list>
+                                    <md-list-item ng-repeat="item in userSelectedModerators">
+                                        <md-checkbox ng-show="isAdmin" ng-model="item.selected"></md-checkbox>
+                                        <img ng-src="{{::item.thumb}}" class="avatar-size avatar-size40"/>
+                                        {{item.name}}
+                                    </md-list-item>
+                            </md-list>
+                          </md-input-container>
+
+                     <md-input-container ng-show="isAdmin"  md-no-float >
+                             <md-icon md-font-icon="icon-search"> </md-icon>
+                              <input name="userSearch" placeholder="Поиск" ng-change="searchModerator()"  type="text" ng-model="search.name">
+                     </md-input-container>
+                  
+                        <md-input-container ng-show="isAdmin"  md-no-float>
+                           <md-list>
+                                    <md-list-item ng-repeat="item in userModerators">
+                                        <md-checkbox  ng-model="item.selected" ng-click="AddAdmin(item)" > </md-checkbox>
+                                        <img ng-src="{{::item.thumb}}" class="avatar-size avatar-size40"/>
+                                        {{item.name}}
+                                    </md-list-item>
+                            </md-list>
+                          </md-input-container>
+                       </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-tab>
+            <md-tab ng-show="isAdmin" label="Статистика">
+
+             <md-content class="padding-40" ng-disabled="inProgress"  style="background: rgba(0, 0, 0, 0.05) !important;" >
+             <md-card>
+               <md-card-content>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+                        <md-input-container class="nomarginleft">
+                               <input id="eventStartDate" placeholder="Начиная с даты"   ng-change="eventStartDateChanged()" type="text" ng-model="eventStartDate" />
+                        </md-input-container>
+
+                         <md-button aria-label="raised button" ng-click="eventStartDate=null; eventStartDateParsed=null; applyEventFilter();" >Сброс</md-button>
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+                        <md-input-container class="nomarginleft">
+                               <input id="eventEndDate" placeholder="Заканчивая датой"   ng-change="eventEndDateChanged()" type="text" ng-model="eventEndDate" />
+                        </md-input-container>
+
+                         <md-button aria-label="raised button" ng-click="eventEndDate=null; eventStartEndParsed=null; applyEventFilter();" >Сброс</md-button>
+                    </div>
+
+
+               </md-card-content>
+              </md-card>
+            </md-content>
+
+               <md-content class="padded-content-page gray-background" class="padding-40" ng-disabled="inProgress" >
+                    <md-card>
+                     <md-card-content>
+
+                       <md-table class="elements-image-table-example" columns="moderatorStatColumns" contents="moderatorStat"  page-size="50"></md-table>
+
+                       </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

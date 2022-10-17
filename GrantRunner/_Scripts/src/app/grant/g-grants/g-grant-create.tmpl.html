@@ -1,0 +1,127 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Карточка конкурса">
+            <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                    <md-card-content ng-show="roleInfo">
+                     <form name="grantForm">
+
+                        <md-input-container md-no-float>
+                            <label class="blacktext" for="name">{{'Название гранта' | translate}}</label>
+                            <input type="text" id="name" label="name" name="name" ng-model="grant.name" ng-focus="validateName=true;" required/>
+                            <div ng-show="validateName" ng-messages="grantForm.name.$error">
+                                <div ng-message when="required">
+                                  {{'Это поле обязательно для заполнения' | translate}}
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-containerflex>
+                            <label id="descripionId"  class="graytext"  for="description">{{'Описание гранта' | translate}}</label>
+                            <text-angular id="description"  label="descripionId" name="description" ng-model="grant.description" ng-focus="validateDescription=true;" ta-target-toolbars="editor-toolbar" required></text-angular>    
+                             <text-angular-toolbar name="editor-toolbar" class="email-dialog-editor-toolbar" ta-toolbar-active-button-class="active"></text-angular-toolbar>
+                              <div ng-show="validateDescription" ng-messages="grantForm.description.$error">
+                                  <div ng-message when="required" class="redText">
+                                    {{'Это поле обязательно для заполнения' | translate}}
+                                  </div>
+                              </div>
+                        </md-input-containerflex>
+
+
+                       <md-input-container style="max-width:150px">
+                            <label  class="blacktext" for="fullQuota">{{'Квота гранта' | translate}}</label>
+                            <input  id="fullQuota" name="fullQuota" min="0" type="number" ng-model="grant.fullQuota" ng-focus="validateQuota=true;" required/>
+                            <div ng-show="validateQuota" ng-messages="grantForm.fullQuota.$error">
+                                  <div ng-message when="required">
+                                    {{'Это поле обязательно для заполнения' | translate}}
+                                  </div>
+                            </div>
+                        </md-input-container>
+                       
+                        <div style="margin-top:35px" class="graytext"><p>Изображениe гранта</p> </div>
+
+                       <md-input-container md-no-float>
+                           <div id="upload-file-container">
+                             <input id="grantImageFileInput" name="grantImageFileInput" type="file" nv-file-select="" uploader="uploader" ng-model="grant.image" />
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="grantImageClick()" type="file">
+                                <md-tooltip md-direction="right">Загрузить изображение гранта</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                          
+                           </div>
+                           <br>
+                            <div ng-repeat="item in uploader.queue">
+                                 <div>
+                                     <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                  </div>
+                                   <div ng-show="uploader.isHTML5" nowrap><strong>{{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                             </div>
+
+                        </md-input-container>
+
+                       <md-input-container style="max-width:300px">
+                                <label  class="blacktext" for="expiresDate">Срок окончания регистрации</label>
+                                <input id="expiresDate" label="expiresDate" name="expiresDate" valid-date required type="text" ng-change="ExpiresDataChanged()"   ng-model="grant.expiresDateText" ng-focus="validateExpiresData=true" required /> 
+                                 <div ng-show="expiresDateInvalid && validateExpiresData">
+                                           <div  class="validation">Введите корректную дату в формате ДД.ММ.ГГГГ, не ранее {{grant.nowDate}}</div>
+                                </div>
+                        </md-input-container>
+
+                       <md-input-containerflex>
+                            <label  class="graytext"  for="grantConditions">{{'Условия гранта' | translate}}</label>
+                            <text-angular id="grantConditions" name="grantConditions"  ng-model="grant.conditions" ta-target-toolbars="cond-editor-toolbar"></text-angular>
+                            <text-angular-toolbar name="cond-editor-toolbar" class="email-dialog-editor-toolbar" ta-toolbar-active-button-class="active"></text-angular-toolbar>
+                         </md-input-container>
+
+                         <div class="graytext"> <p>Приложения (в формате pdf)</p>  </div>
+
+                        <md-input-container md-no-float>
+
+                         <div id="upload-file-container">
+                               <input  id="GrantAttachementsFileUploader" type="file"   nv-file-select="" class="file-input" multiple="multiple" uploader="attachUploader">
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="grantAttachClick()" type="file">
+                                <md-tooltip md-direction="right">Загрузить приложение</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                          
+                           </div>
+
+                       
+
+                         <div ng-repeat="item in attachUploader.queue">
+                               <div ng-show="attachUploader.isHTML5" nowrap><strong>{{item.file.name + '  -   '}}   {{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                         </div>
+
+                            <div ng-show="grant.AttachmentsLinks" >
+                                      <md-list>
+                                          <md-list-item ng-repeat="item in grant.AttachmentsLinks">
+                                              <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                                          </md-list-item>
+                                      </md-list>
+                                     <md-button style="color: red"  ng-click="deleteAttachments()" ng-show="grant.id">Удалить вложения</md-button>
+                            </div>
+
+                        </md-input-container>
+
+                          <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+
+
+                        <div layout="row" layout-align="end center">
+                           <md-button class="md-raised button-red"  ng-click="confirmDelete()" ng-show="grant.id">Удалить грант</md-button>
+                            <md-button class="md-raised button-gray" aria-label="raised button" ng-disabled="grantForm.expiresDate.$invalid || expiresDateInvalid || inProgress"  ng-click="updateGrant()" ng-show="grant.id">Сохранить</md-button>
+                            <md-button class="md-raised button-blue" aria-label="raised button" ng-click="confirmStart()" ng-show="grant.id !=null && grant.status == 1">Запуск</md-button>
+                             <md-button class="md-raised" ng-class="md-primary" ng-disabled="grantForm.expiresDate.$invalid || expiresDateInvalid" aria-label="raised button" ng-click="createGrant()" ng-hide="grant.id">Создать черновик</md-button>
+                          </div>
+
+                        </form>
+                    </md-card-content>
+                </md-card>
+            </md-content>
+           
+        </md-tab>
+    </md-tabs>
+</div>

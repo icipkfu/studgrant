@@ -1,0 +1,149 @@
+  <div layout="row" class="profile" т>
+    <div ng-show="roleInfo" flex="100" flex-gt-md="100">
+        <md-tabs class="example-tabs" md-dynamic-height  md-border-bottom>    
+             <md-tab ng-show="isAdmin" label="Пользователи системы">
+               <md-content class="padding-40" ng-disabled="inProgress" >
+                    <md-card>
+                     <md-card-content>
+
+                     <md-input-container  md-no-float >
+                             <md-icon md-font-icon="icon-search"> </md-icon>
+                              <input name="userSearch" placeholder="Поиск" ng-change="searchOtherUser()"  type="text" ng-model="searchUser.name">
+                     </md-input-container>
+
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                           <md-select placeholder="Университет" ng-model="selectedUniver"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option ng-repeat="item in univerList" value="{{item.Id}}">{{item.Name}}</md-option>
+                           </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedUniver=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                           <md-select placeholder="Участник гранта" ng-model="selectedGrant"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option ng-repeat="item in grantList" value="{{item.Id}}">{{item.Name}}</md-option>
+                           </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedGrant=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                     <div ng-show="selectedGrant" layout="row" layout-sm="column" layout-align="start center">
+
+                       <md-select placeholder="Победитель" ng-model="selectedWinnerState"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option value="true">Выбран победителем</md-option>
+                                    <md-option value="false">Не выбран победителем</md-option>
+                       </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedWinnerState=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                           <md-select placeholder="Гражданство" ng-model="selectedCitizenship"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option value="0">РФ</md-option>
+                                     <md-option value="1">Иное</md-option>
+                           </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedCitizenship=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                        <md-select placeholder="Персональные данные" ng-model="selectedPassport"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option value="3">Персональные данные не заполнены</md-option>
+                                    <md-option value="0">Персональные данные не проверены</md-option>
+                                    <md-option value="2">Персональные данные некорректны</md-option>
+                                     <md-option value="1">Персональные данные корректны</md-option>
+                        </md-select>
+
+
+                       <md-button aria-label="raised button" ng-click="selectedPassport=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                       <md-select placeholder="Зачетка" ng-model="selectedRecordbook"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option value="3">Зачетка не заполнена</md-option>
+                                    <md-option value="0">Зачетка не проверена</md-option>
+                                    <md-option value="2">Зачетка некорректна</md-option>
+                                    <md-option value="1">Зачетка корректна</md-option>
+                       </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedRecordbook=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                      <md-select placeholder="Справка о доходах" ng-model="selectedIncome"  ng-change="loadUsers()" style="width: 700px;">
+                                   <md-option value="3">Справка о доходах не заполнена</md-option>
+                                   <md-option value="0">Справка о доходах не проверена</md-option>
+                                   <md-option value="2">Справка о доходах некорректна</md-option>
+                                   <md-option value="1">Справка о доходах корректна</md-option>
+                      </md-select>
+
+                      <md-button aria-label="raised button" ng-click="selectedIncome=null; loadUsers();" >Сброс</md-button>
+
+                   </div>
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                       <md-select placeholder="Замена паспорта" ng-model="selectedPassportOutOfDate"  ng-change="loadUsers()" style="width: 700px;">
+                                    <md-option value="true">Паспорт просрочен</md-option>
+                       </md-select>
+
+                       <md-button aria-label="raised button" ng-click="selectedPassportOutOfDate=null; loadUsers();" >Сброс</md-button>
+
+                    </div>
+
+                   
+
+                               
+                     <md-table  class="elements-image-table-example" columns="peopleColumns" on-finish-render="ngRepeatFinished" contents="grantPeople"  page-size="10000000000"></md-table>
+
+                      <div ng-repeat="item in grantPeople"  on-finish-render="ngRepeatFinished"></div>
+
+                      <div>
+                           <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                       </div>
+
+                       </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-tab>
+             <md-tab label="Статистика">
+             <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                  <md-card>
+                     <md-card-content>
+
+                     <p> Всего зарегистрированных: {{userStat.allCount}} </p>
+                     <p> Не заполнены паспортные данные: {{userStat.passportNotFilledCount}} </p>
+                     <p> Не заполнена зачетная книжка: {{userStat.studentBookNotFilled}} </p>
+                     <p> Паспортные данные верны: {{userStat.validPassportCount}} </p>
+                     <p> Данные зачетной книжки верны: {{userStat.validStudentBookCount}} </p>
+                     <p> Паспортные данные и зачетка верны: {{userStat.fullValidCount}} </p>
+                     <p> Замечания к паспортным данным: {{userStat.invalidPassportCount}} </p>
+                     <p> Замечания к зачетке: {{userStat.invalidStudentBookCount}} </p>
+                     <p> Данные паспорта не проверены: {{userStat.editedPassportCount}} </p>
+                     <p> Данные зачетки не проверены: {{userStat.editedStudentBookCount}} </p>
+                     <p> Данные паспорта исправлены и не проверены: {{userStat.editedPassportCountWaitCheck}} </p>
+                     <p> Данные зачетки исправлены и не проверены: {{userStat.editedStudentBookCountWaitCheck}} </p>
+                     <p> Есть замечания к зачетке или паспортным данным:  {{userStat.invalidPassporOrBookCount}} </p>
+                     <p> Нет замечаний, не проверены паспортные данные или зачетка: {{userStat.notCheckedPassportCount}} </p>
+
+                   
+                       </md-card-content>
+                  </md-card>
+              </md-content>
+          </md-tab>
+        </md-tabs>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Выгрузка">
+           <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                   <md-card-content>
+
+                     <md-toolbar class="toolbar-default margin-bottom-30" ng-show="isAdmin || isGrantAdmin">
+                          <div layout="row" layout-align="start">
+
+                              <div style=" width: 290px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getGrantWinnersReport()">Выгрузка основных победителей</md-button>
+                              </div>
+
+                              <div style=" width: 350px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getGrantAddWinnersReport()">Выгрузка дополнительных победителей</md-button>
+                              </div>
+
+                              <div style=" width: 270px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getGrantWinnerList()">Выгрузка списка победителей</md-button>
+                              </div>
+
+                               <div style=" width: 280px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getGrantWinnersOtherReport(0)">Выгрузка иностранцев</md-button>
+                              </div>
+
+                              
+                            </div>
+                       </md-toolbar>
+
+                        <md-toolbar class="toolbar-default margin-bottom-30" ng-show="isAdmin || isGrantAdmin">
+                          <div layout="row" layout-align="start">
+
+                              <div style=" width:320px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getAllAdditionalReport()">Отчет по дополнительным победителям</md-button>
+                              </div>
+
+                              <div style=" width: 380px;margin-left:30px">
+                                <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"   ng-click="getGrantWinnersOtherReport(1)">Выгрузка иностранцев-активистов</md-button>
+                        </div>
+                            </div>
+                       </md-toolbar>
+
+                            <md-checkbox class="md-primary"  ng-model="reportFilterOnlyNewWinners" ng-change="reportFilterOnlyNewWinnersChanged()" aria-label="Primary Checkbox">
+                               Только новых победителей
+                            </md-checkbox>
+
+                             <md-checkbox class="md-primary"   ng-model="reportFilterOnlyOldWinners" ng-change="reportFilterOnlyOldWinnersChanged()" aria-label="Primary Checkbox">
+                               Только тех, кто побеждал в прошлых конкурсах
+                            </md-checkbox>
+
+                       
+      <div>
+         <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+     </div>
+
+                     </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+
+
+

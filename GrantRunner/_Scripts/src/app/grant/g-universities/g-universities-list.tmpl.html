@@ -1,0 +1,59 @@
+﻿<div >
+<div class="padding-20 padding-top-120 overlay-gradient-30" layout="row" layout-align="start center"
+     style="background: url(../../../assets/images/backgrounds/bg-7.jpg) no-repeat; background-size: cover; ">
+    <div class="margin-right-20">
+        <img src="../../../assets/images/grant/unviersity_default.png" alt="unviersity_default" class="make-round" width="100" />
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">Образовательные организации</h3>
+        <!--<p class="font-weight-300 margin-top-0">Редактирование</p>-->
+    </div>
+
+      <div>
+         <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+     </div>
+</div>
+
+
+
+<div ng-show="roleInfo" class="padded-content-page">
+
+     <md-toolbar class="toolbar-default margin-bottom-30">
+          <div layout="row" layout-align="end center">
+
+              <div style=" width: 120px;" ng-show="isAdmin">
+                    <md-button class="md-raised" style="margin-top: 13px;" ng-click="goCreateUniversity()">{{'Добавить' | translate}}</md-button>
+                </div>
+            </div>
+     </md-toolbar>
+
+
+       <md-content class="padding-40" style="background: rgba(0, 0, 0, 0.05) !important;" >
+                    <md-card>
+                     <md-card-content>
+
+                     <md-input-container  md-no-float >
+                             <md-icon md-font-icon="icon-search"> </md-icon>
+                              <input name="userSearch" placeholder="Поиск по городу и названию" ng-change="applyFilter()"  type="text" ng-model="filterCity">
+                     </md-input-container>
+
+
+                    <div layout="row" layout-sm="column" layout-align="start center">
+
+                        <md-select placeholder="Тип" ng-model="filterType" style="width:200px" ng-change="applyFilter()">
+                                    <md-option value="1">ВО</md-option>
+                                  <md-option value="2">СПО</md-option>
+                        </md-select>
+
+
+                       <md-button aria-label="raised button" ng-click="filterType=null; applyFilter();" >Сброс</md-button>
+
+                    </div>
+
+                       </md-card-content>
+                    </md-card>
+        </md-content>
+
+            <md-table class="elements-image-table-example" columns="columns" contents="contents" page-size="300"></md-table>
+</div>
+</div>

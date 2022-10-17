@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="1">
+      <GrantStudents Ref="2" type="DataTableSource" isKey="true">
+        <Alias>GrantStudents</Alias>
+        <Columns isList="true" count="7">
+          <value>FamilyName,System.String</value>
+          <value>Patronymic,System.String</value>
+          <value>TabNum,System.String</value>
+          <value>PassportSerialNo,System.String</value>
+          <value>PassportDate,System.String</value>
+          <value>PassportNo,System.String</value>
+          <value>StudentName,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>GrantStudents</Name>
+        <NameInSource>GrantStudents</NameInSource>
+      </GrantStudents>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="6">
+      <value>,UniversityName,UniversityName,System.String,,False,False</value>
+      <value>,UniversityAddress,UniversityAddress,System.String,,False,False</value>
+      <value>,RectorFIO,RectorFIO,System.String,,False,False</value>
+      <value>,ReceptionPhone,ReceptionPhone,System.String,,False,False</value>
+      <value>,ResponsibleContacts,ResponsibleContacts,System.String,,False,False</value>
+      <value>,UniversityQuote,UniversityQuote,System.Int32,,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <ReportTitleBand1 Ref="4" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,28.7,4.2</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text1 Ref="5" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2,28.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>«РЕЕСТР №__ НА ОТКРЫТИЕ БАНКОВСКИХ СЧЕТОВ СОТРУДНИКАМ</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text3 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2.6,28.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,14,Bold</Font>
+              <Guid>46e2c7b532634614800e0ef62c70931b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>ОРГАНИЗАЦИИ»</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text8 Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,3.2,28.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,14,Bold</Font>
+              <Guid>4cbf58a3ff5f410fb408e26d0f2e8aaf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>НА БУМАЖНОМ НОСИТЕЛЕ
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportTitleBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </ReportTitleBand1>
+        <HeaderGrantStudents Ref="8" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.4,28.7,2</ClientRectangle>
+          <Components isList="true" count="8">
+            <HeaderGrantStudents_FIO Ref="9" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,0,3.8,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>HeaderGrantStudents_FIO</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Фамилия</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </HeaderGrantStudents_FIO>
+            <HeaderGrantStudents_Department Ref="10" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.2,0,5,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>HeaderGrantStudents_Department</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Табельный номер сотрудника</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </HeaderGrantStudents_Department>
+            <HeaderGrantStudents_AboutSelf Ref="11" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.2,0,2.4,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>HeaderGrantStudents_AboutSelf</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Паспорт(серия)
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </HeaderGrantStudents_AboutSelf>
+            <HeaderGrantStudents_Score Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>21.6,0,3.4,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>HeaderGrantStudents_Score</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Паспорт(номер)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </HeaderGrantStudents_Score>
+            <HeaderGrantStudents_Phone Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>25,0,3.6,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>HeaderGrantStudents_Phone</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Паспорт(дата выдачи)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </HeaderGrantStudents_Phone>
+            <Text14 Ref="14" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,0.8,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <Guid>2310017367744a45983b16e398c1b47b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text14</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>№</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text14>
+            <Text2 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.6,0,4.6,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <Guid>7bbc00e7d98a40bda76f0ff391eae3de</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text2</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Имя</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text2>
+            <Text4 Ref="16" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.2,0,5,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9,Italic</Font>
+              <Guid>65082d79733347ee9aef85b086e05fae</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text4</Name>
+              <Page isRef="3" />
+              <Parent isRef="8" />
+              <Text>Отчество</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>HeaderGrantStudents</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <PrintIfEmpty>True</PrintIfEmpty>
+          <PrintOnAllPages>False</PrintOnAllPages>
+        </HeaderGrantStudents>
+        <DataGrantStudents Ref="17" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,8.2,28.7,0.8</ClientRectangle>
+          <Components isList="true" count="8">
+            <DataGrantStudents_FIO Ref="18" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.8,0,3.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>5,5,5,5</Margins>
+              <Name>DataGrantStudents_FIO</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.FamilyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+            </DataGrantStudents_FIO>
+            <DataGrantStudents_Department Ref="19" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>14.2,0,5,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>5,5,5,5</Margins>
+              <Name>DataGrantStudents_Department</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.TabNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </DataGrantStudents_Department>
+            <DataGrantStudents_AboutSelf Ref="20" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>19.2,0,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>5,5,5,5</Margins>
+              <Name>DataGrantStudents_AboutSelf</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.PassportSerialNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+            </DataGrantStudents_AboutSelf>
+            <DataGrantStudents_Score Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>21.6,0,3.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>5,5,5,5</Margins>
+              <Name>DataGrantStudents_Score</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.PassportNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </DataGrantStudents_Score>
+            <Text15 Ref="22" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,0.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>143d0ce113c14348adc115b5ca2938c8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text15</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text15>
+            <DataGrantStudents_Phone Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>25,0,3.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>5,5,5,5</Margins>
+              <Name>DataGrantStudents_Phone</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.PassportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </DataGrantStudents_Phone>
+            <Text5 Ref="24" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.6,0,4.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>529a2de515c143059b6db3b72deffd9b</Guid>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text5</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.StudentName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.2,0,5,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>63db574748544807a449d21f1c112018</Guid>
+              <Margins>5,5,5,5</Margins>
+              <Name>Text6</Name>
+              <Page isRef="3" />
+              <Parent isRef="17" />
+              <Text>{GrantStudents.Patronymic}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text6>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>GrantStudents</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataGrantStudents</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Sort isList="true" count="0" />
+        </DataGrantStudents>
+        <ReportSummaryBand1 Ref="26" type="ReportSummaryBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.8,28.7,9.2</ClientRectangle>
+          <Components isList="true" count="6">
+            <Text10 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,5.2,9.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,11</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>_________________/Э.Э. Искендеров /
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.6,5.8,8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,8,Italic</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>Подпись с печатью</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text7 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,6.8,9.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,11</Font>
+              <Guid>4d0c07600e1d494d96f67c18195f3dfe</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>Главный бухгалтер</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text13 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,3.4,9.6,1.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,11</Font>
+              <Guid>fd0aa7d4cabe4e2f9dd6dd01c790cc6f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>От Организации:
+Президент
+РМОО «Лига студентов РТ»</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text12 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,7.4,9.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,11</Font>
+              <Guid>4bc0e13767274e04914e3ae859a5cb44</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>_____________ / Г.А. Гайфуллина /  </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text12>
+            <Text9 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,8,9.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Times New Roman,11</Font>
+              <Guid>901d92813f3045ada1f2ca551b984166</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="3" />
+              <Parent isRef="26" />
+              <Text>«____» __________________20__г.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportSummaryBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </ReportSummaryBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>f0ffea0869644169922be8ce376c9501</Guid>
+      <Margins>0.5,0.5,0.5,0.5</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="33" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="34" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>12/30/2015 6:03:55 PM</ReportChanged>
+  <ReportCreated>10/6/2015 10:45:25 AM</ReportCreated>
+  <ReportFile>C:\src\grant2\Grant.Reports\Resources\GrantWinnerReport.mrt</ReportFile>
+  <ReportGuid>262f4cb5b04d41f280b6df628fe0f421</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2015.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

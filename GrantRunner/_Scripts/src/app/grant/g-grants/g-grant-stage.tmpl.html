@@ -1,0 +1,70 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        </md-tab>
+        <md-tab label="Этапы гранта">
+           <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                 <md-card-content ng-show="roleInfo">
+
+
+                      <md-toolbar class="toolbar-default margin-bottom-30">
+                        <div class="md-toolbar-tools">
+                             <h2>  Текущий статус: {{grant.statusName}} </h2>
+                        </div>
+                       </md-toolbar>
+
+                       <md-input-container md-no-float>
+                        <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.stages.Draft'   ng-click="changeStage('draft', $event)"  ng-disabled="grant.stages.Draft==null || grant.stages.Draft == true "></md-checkbox>
+                                     <p>Черновик</p>
+                               </md-list-item>
+                         </md-list>
+                         <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.stages.Registration' ng-click="changeStage('registration', $event)" ng-disabled="grant.stages.Registration == null"></md-checkbox>
+                                     <p>Регистрация участников</p>
+                               </md-list-item>
+                         </md-list>
+                         <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.stages.WinnersSelection' ng-click="changeStage('winnerselection', $event)" ng-disabled="grant.stages.WinnersSelection == null"></md-checkbox>
+                                     <p>Выбор победителей</p>
+                               </md-list-item>
+                         </md-list>
+                         <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.stages.AddtitionalSelection' ng-click="changeStage('additionalselection', $event)"   ng-disabled="grant.stages.AddtitionalSelection==null"></md-checkbox>
+                                     <p>Выбор дополнительных победителей</p>
+                               </md-list-item>
+                         </md-list>
+                         <md-list-item>
+                              <md-checkbox  class="md-primary" ng-model='grant.stages.Delivery' ng-click="changeStage('delivery', $event)" ng-disabled="grant.stages.Delivery==null"></md-checkbox>
+                                     <p>Выдача гранта победителям</p>
+                               </md-list-item>
+                         </md-list>
+                         <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.stages.Final' ng-click="changeStage('finalgrant', $event)" ng-disabled="grant.stages.Final==null"></md-checkbox>
+                                     <p>Завершение конкурса</p>
+                               </md-list-item>
+                         </md-list>
+                      </md-input-container>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+
+            <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                 <md-card-content ng-show="roleInfo">  
+                        <md-list-item>
+                              <md-checkbox class="md-primary" ng-model='grant.CanAddReport' ng-change="changeCanAddReport()"></md-checkbox>
+                                     <p>Возможность прикреплять/удалять отчеты о победителях</p>
+                               </md-list-item>
+                         </md-list>
+                      </md-input-container>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+
+
+
+

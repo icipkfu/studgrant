@@ -1,0 +1,12 @@
+﻿<md-dialog flex="300" flex-sm="1000" style="height:400px; width:500px">
+    <md-content>
+        <md-list>
+            <md-list-item ng-repeat="file in files", style="margin-left: 20px">
+                    <img ng-src="{{::file.VirtualPath}}" class="md-avatar" />
+                    <p><a href={{::file.VirtualPath}} download={{::file.VirtualPath}}> {{::file.FullName}} </a></p>
+                    <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(file, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                    <md-button class="md-warn md-primary margin-left-0" ng-click="deleteFile(file)" ng-disabled="inProgress">{{'Удалить' | translate}}</md-button>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-dialog>

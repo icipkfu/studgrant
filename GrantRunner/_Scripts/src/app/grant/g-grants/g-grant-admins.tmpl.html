@@ -1,0 +1,46 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Выбор администраторов гранта">
+           <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                 <md-card-content>
+
+                 <md-toolbar class="toolbar-default margin-bottom-30" ng-show="isAdmin">
+                          <div layout="row" layout-align="end">
+                              <div>
+                                  <md-button class="md-raised" aria-label="raised button" style="margin-top: 13px;"  ng-click="saveGrantAdmins()">Сохранить</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                <p> Администраторы гранта </p>
+                <md-input-container md-no-float>
+                       <md-list>
+                                <md-list-item ng-repeat="item in userSelectedAdmins">
+                                    <md-checkbox ng-show="isAdmin" ng-model="item.selected"></md-checkbox>
+                                    <img ng-src="{{::item.thumb}}" class="avatar-size avatar-size40"/>
+                                    <p>{{::item.name}}</p>
+                                </md-list-item>
+                        </md-list>
+                      </md-input-container>
+
+                 <md-input-container md-no-float ng-show="isAdmin">
+                         <md-icon md-font-icon="icon-search"> </md-icon>
+                          <input name="userSearch" placeholder="Поиск" ng-change="searchAdmin()"  type="text" ng-model="search.name">
+                 </md-input-container>
+              
+                    <md-input-container md-no-float ng-show="isAdmin">
+                       <md-list>
+                                <md-list-item ng-repeat="item in userAdmins">
+                                    <md-checkbox  ng-model="item.selected" ng-click="AddAdmin(item)" > </md-checkbox>
+                                    <img ng-src="{{::item.thumb}}" class="avatar-size avatar-size40"/>
+                                    <p>{{::item.name}}</p>
+                                </md-list-item>
+                        </md-list>
+                      </md-input-container>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>

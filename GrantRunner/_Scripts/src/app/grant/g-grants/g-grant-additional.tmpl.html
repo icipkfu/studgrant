@@ -1,0 +1,69 @@
+<div ng-controller="GrantsController" class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Выбор победителей">
+           <md-content class="padding-40" ng-disabled="inProgress" ng-show="roleInfo">
+                <md-card>
+                 <md-card-content>
+
+                  <div style="width: 150px;">
+                       <md-select placeholder="Университет" ng-model="selectedUniver"  ng-change="changeAdditionalSelectedUniver()" style="width: 400px;">
+                                <md-option ng-repeat="item in univerList" value="{{item.Id}}">{{item.Name}}</md-option>
+                       </md-select>
+                  </div>
+
+                   <md-toolbar class="toolbar-default margin-bottom-30">
+                          <div layout="row" layout-align="end">
+                            
+                              <div style=" width: 180px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"  ng-click="getGrantAdditionalPeopleReport()">Выгрузить отчет</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                       <md-toolbar ng-show="AdditionalWinnerReport" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                        <div class="md-toolbar-tools">
+                            <h2>
+                              <span>Приложен отчет о дополнительных победителях</span>
+                            </h2>
+                        </div>
+                          <div style=" width: 180px;">
+                                     <md-button class="md-raised" style="margin-top: 13px;" aria-label="raised button"  ng-show="AdditionalWinnerReport" ng-click="downloadAdditionalWinnerReportFile()">Скачать отчет</md-button>
+                              </div>
+                               <div style=" width: 180px;">
+                                     <md-button class="md-raised button-red" style="margin-top: 13px;" aria-label="raised button"  ng-show="AdditionalWinnerReport" ng-click="deleteAdditionalWinnerReport()">Удалить отчет</md-button>
+                              </div>
+                        </div>
+                      </md-toolbar>
+
+                      <div ></div>
+
+                     <md-table class="elements-image-table-example" columns="additionalColumns" contents="grantAdditionalPeople"  page-size="1000"></md-table>
+
+                     <md-input-container ng-hide="AdditionalWinnerReport || univerFullQuotaSum == null || univerFullQuotaSum == 0" md-no-float>
+
+                         <div id="upload-file-container">
+                               <input  id="winAdditionalReportUploader" type="file"   nv-file-select="" class="file-input" multiple="multiple" uploader="winAdditionalReportUploader">
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="grantWinAdditionalReportAttachClick()" type="file">
+                                <md-tooltip md-direction="right">Загрузить отчет о дополнительных победителях</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                          
+                           </div>                       
+
+                         <div ng-repeat="item in winAdditionalReportUploader.queue">
+                               <div ng-show="winAdditionalReportUploader.isHTML5" nowrap><strong>{{item.file.name + '  -   '}}   {{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                         </div>
+                      </md-input-container>
+
+                      <div ng-repeat="item in grantAdditionalPeople" on-finish-render="ngRepeatFinished" > </div>
+                        <div>
+                           <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                       </div>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>

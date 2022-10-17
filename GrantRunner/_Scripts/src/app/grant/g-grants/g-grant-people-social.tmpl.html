@@ -1,0 +1,121 @@
+<div   class="padded-content-page">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        <md-tab label="Выбор победителей">
+           <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                 <md-card-content ng-show="roleInfo">
+
+
+                 <div>
+                       <md-select placeholder="Университет" ng-model="selectedUniver"  ng-change="changeSelectedUniver()" >
+                                <md-option ng-repeat="item in univerList" value="{{item.Id}}">{{item.Name}}</md-option>
+                       </md-select>
+                  </div>
+
+                  <div layout="row" layout-sm="column" layout-align="start center">
+
+                      <md-select placeholder="Зачетка" ng-model="selectedRecordbook"  ng-change="loadGrantPeopleFilter()" style="width: 700px;">
+                                   <md-option value="3">Зачетка не заполнена</md-option>
+                                   <md-option value="0">Зачетка не проверена</md-option>
+                                   <md-option value="2">Зачетка некорректна</md-option>
+                                   <md-option value="1">Зачетка корректна</md-option>
+                      </md-select>
+
+                      <md-button aria-label="raised button" ng-click="selectedRecordbook=null; loadGrantPeopleFilter();" >Сброс</md-button>
+
+                   </div>
+
+                   <div layout="row" layout-sm="column" layout-align="start center">
+
+                     <md-select placeholder="Справка о доходах" ng-model="selectedIncome"  ng-change="loadGrantPeopleFilter()" style="width: 700px;">
+                                  <md-option value="3">Справка о доходах не заполнена</md-option>
+                                  <md-option value="0">Справка о доходах не проверена</md-option>
+                                  <md-option value="2">Справка о доходах некорректна</md-option>
+                                  <md-option value="1">Справка о доходах корректна</md-option>
+                     </md-select>
+
+                     <md-button aria-label="raised button" ng-click="selectedIncome=null; loadGrantPeopleFilter();" >Сброс</md-button>
+
+                  </div>
+
+                  <md-button aria-label="md-raised md-button md-cyan-theme" ng-click="selectedIncome=1; selectedRecordbook=1; loadGrantPeopleFilter()" >Показать предварительный список</md-button>
+
+
+                         <md-toolbar class="toolbar-default margin-bottom-30">
+                          <div layout="row" layout-align="start">
+
+                              <div class="md-toolbar-tools">
+                                <h2> Квота: {{univerFullQuotaSum}} </h2>
+                              </div>
+
+                              <div  class="md-toolbar-tools">
+                                <h2> Осталось: {{univerQuotaSum}} </h2>
+                              </div>
+
+                              <div style=" width: 180px;">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"  ng-hide="WinnerReport" ng-click="getGrantPeopleReport()">Выгрузить отчет</md-button>
+                              </div>
+
+                                <div style=" width: 180px;" ng-show="isAdmin || isGrantAdmin">
+                                     <md-button class="md-raised " style="margin-top: 13px;" aria-label="raised button"  ng-click="getGrantPeopleDbfReport()">Выгрузка в банк</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                       <md-toolbar ng-show="WinnerReport" class="md-accent margin-bottom-30">
+                        <div layout="row" layout-align="start">
+                        <div class="md-toolbar-tools">
+                            <h2>
+                              <span>Приложен отчет о победителях</span>
+                            </h2>
+                        </div>
+                          <div style=" width: 180px;">
+                                     <md-button class="md-raised" style="margin-top: 13px;" aria-label="raised button"  ng-show="WinnerReport" ng-click="downloadWinnerReportFile()">Скачать отчет</md-button>
+                              </div>
+                               <div  ng-show="grant.CanAddReport" style=" width: 180px;">
+                                     <md-button class="md-raised button-red" style="margin-top: 13px;" aria-label="raised button"  ng-show="WinnerReport" ng-click="deleteWinnerReport()">Удалить отчет</md-button>
+                              </div>
+                        </div>
+                      </md-toolbar>
+
+                     <div ></div>
+
+
+                        <!-- <md-checkbox class="md-primary" ng-model="showOnlyValid" ng-change="filterGrantPeople()" aria-label="Primary Checkbox">
+                              Показать только участников c корректными данными
+                        </md-checkbox> -->
+
+      <div>
+         <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+     </div>
+
+                     <md-table style="display:none"  class="elements-image-table-example" columns="peopleSocialColumns" contents="grantPeople"  page-size="10000"></md-table>
+
+                      <md-input-container ng-hide="WinnerReport || univerFullQuotaSum == null || univerFullQuotaSum == 0 || !(grant.CanAddReport==true)" md-no-float>
+
+                         <div id="upload-file-container">
+                               <input  id="winReportUploader" type="file"   nv-file-select="" class="file-input" multiple="multiple" uploader="winReportUploader">
+
+                            <p class="grantlabel">Загрузить отчет о победителях. Если несколько файлов (сканов), поместите их в архив</p>
+
+                             <md-button aria-label="insert photo" class="md-icon-button md-fab md-primary" ng-click="grantWinReportAttachClick()" type="file">
+                                <md-tooltip md-direction="right">Загрузить отчет о победителях</md-tooltip>
+                                <md-icon md-font-icon="icon-attachment"></md-icon>
+                            </md-button>
+                          
+                           </div>
+
+                       
+
+                         <div ng-repeat="item in winReportUploader.queue">
+                               <div ng-show="winReportUploader.isHTML5" nowrap><strong>{{item.file.name + '  -   '}}   {{ item.file.size/1024/1024|number:2 }} MB </strong></div>
+                         </div>
+                      </md-input-container>
+
+                      <div ng-repeat="item in grantPeople" on-finish-render="ngRepeatFinished" > </div>
+                   </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>

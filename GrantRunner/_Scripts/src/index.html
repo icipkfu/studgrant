@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" ng-app="triAngular">
+  <head>
+    <meta charset="utf-8">
+    <title>Грант 2.0</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:100,100italic,300,300italic,400,500,700,900,400italic">
+	
+    <!-- Place favicon.png in the root directory -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16x16.png">
+	<link rel="manifest" href="/fav/site.webmanifest">
+	<link rel="mask-icon" href="/fav/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/fav/favicon.ico">
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automaticaly insert here -->
+    <!-- endinject -->
+     <!--<link rel="stylesheet" href="../bower_components/highlightjs/styles/monokai.css">-->
+   <!-- endbuild -->
+
+  </head>
+  <body translate-cloak ng-class="bodyClasses">
+      <script  type="text/javascript">
+
+            function rotate(param)
+            {
+               if(window.rotateDegree){
+                        if(window.rotateDegree == 360) {
+                            window.rotateDegree = 0;
+                        } else {
+                            window.rotateDegree = window.rotateDegree+  90;
+                        }
+                }
+                else
+                {
+                    window.rotateDegree = 90;
+                }
+
+                $($(".md-dialog-container")[0]).removeClass("rotate90");
+                $($(".md-dialog-container")[0]).removeClass("rotate180");
+                $($(".md-dialog-container")[0]).removeClass("rotate270");
+                $($(".md-dialog-container")[0]).removeClass("rotate360");
+                $($(".md-dialog-container")[0]).addClass("rotate" + window.rotateDegree);
+            }
+
+    </script>
+
+    <script type="text/javascript">
+        function recaptcha_callback(param){
+            window.recaptcha_code = param;
+        }
+        </script>
+		
+		
+
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="full-height" ui-view></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+    <!-- endbower -->
+
+    <!-- enqueue all translations for calendar (remove if you dont need multilanguage) -->
+    <script src="../bower_components/fullcalendar/dist/lang-all.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automaticaly insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+	
+	<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter43829474 = new Ya.Metrika({
+                    id:43829474,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/43829474" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-96444841-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'TJfncdpZguKuEwCbj';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = (d.location.protocol === 'https:' ? 'https:': 'http:')
+        + '//call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+  </body>
+</html>

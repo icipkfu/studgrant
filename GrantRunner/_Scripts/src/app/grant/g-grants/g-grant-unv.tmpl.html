@@ -1,0 +1,49 @@
+<div  class="padded-content-page" style="min-width: 420px;">
+    <md-tabs class="example-tabs margin-bottom-40" md-dynamic-height md-border-bottom>
+        </md-tab>
+        <md-tab label="Квоты">
+           <md-content class="padding-40" ng-disabled="inProgress">
+                <md-card>
+                 <md-card-content ng-show="roleInfo">
+
+                       <md-toolbar class="toolbar-default margin-bottom-30">
+                      
+                          <div layout="row" layout-align="start">
+
+                              <div class="md-toolbar-tools">
+                                <h2> Квота: {{grant.fullQuota || 0}} </h2>
+                              </div>
+
+                              <div class="md-toolbar-tools">
+                                <h2> Распределено: {{quotaSum}} </h2>
+                              </div>
+
+                              <div  class="md-toolbar-tools" ng-show="!!grant.fullQuota">
+                                <h2> Осталось: {{grant.fullQuota - quotaSum}} </h2>
+                              </div> 
+
+                              <div style=" width: 120px;">
+                                    <md-button class="md-raised" style="margin-top: 13px;" aria-label="raised button" ng-show="isAdmin || isGrantAdmin"  ng-click="saveGrantQuotas()">Сохранить</md-button>
+                              </div>
+                            </div>
+                       </md-toolbar>
+
+                            <div>
+                                <ng-include src="'app/grant/g-progress/g-progress-linear.tmpl.html'" />
+                            </div>
+                    
+                        <md-table class="elements-image-table-example" columns="quotaColumns" contents="universityQuotas"  page-size="500"></md-table>
+
+                        <div ng-repeat="item in universityQuotas" on-finish-render="ngRepeatFinished" > </div>
+
+                        
+                   </md-card-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+
+
+
+

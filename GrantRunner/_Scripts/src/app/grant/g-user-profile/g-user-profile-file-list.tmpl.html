@@ -1,0 +1,13 @@
+﻿<div ng-show="showFiles">
+    <md-card>
+        <md-card-content>
+            <md-list>
+                <md-list-item ng-repeat="item in pinfo.PassportScanLinks">
+                    <img ng-src="{{::item.VirtualPath}}" class="md-avatar" />
+                    <p><a href={{::item.VirtualPath}} download={{::item.VirtualPath}}> {{::item.FullName}} </a></p>
+                    <md-button class="md-raised md-primary margin-left-0" ng-click="openImage(item, $event)" ng-disabled="inProgress">{{'Показать' | translate}}</md-button>
+                    <md-button class="md-warn md-primary margin-left-0" ng-click="delete(item)" ng-disabled="inProgress">{{'Удалить' | translate}}</md-button>
+                </md-list-item>
+            </md-list>
+    </md-card>
+</div>
